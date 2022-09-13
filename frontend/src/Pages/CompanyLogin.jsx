@@ -19,24 +19,26 @@ export default function CompanyLogin() {
             {/* login nav bar */}
             <Navbar bg="light" variant="light">
                 <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-                <Nav className="me-auto">
-                    <Link to="/company/signup">SignUp</Link>
-                    <Link to="/company/Login">Login</Link>
+                <Nav className="me-auto flex-grow-1 justify-content-evenly">
+                    <Link to="/company/signup" style={{ color: 'black', textDecoration: "none" }}>SignUp</Link>
+                    <Link to="/company/login" style={{ color: 'black', textDecoration: "none" }}>Login</Link>
                 </Nav>
             </Navbar>
             <h1 className='text-center'>Login</h1>
+
+
 
             <div className='row d-flex justify-content-center'>
                 {/* Login info box */}
                 <Card className="text-center" style={{ width: '18rem' }}>
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
+                        {/* <Card.Title>Card Title</Card.Title> */}
                         <div> <p>Email: </p>  <input type="text" /></div>
                         <br />
                         <div> <p>Passward: </p>  <input type="text" /></div>
                         <br />
-                        <Button variant="primary">Login</Button>
+                        <Button variant="dark">Login</Button>
 
                     </Card.Body>
                 </Card>
@@ -48,7 +50,10 @@ export default function CompanyLogin() {
                         <Card.Title>New to Bripto?</Card.Title>
                         <Card.Text>Create an account now</Card.Text>
                         <br />
-                        <Button variant="primary">Register</Button>
+
+                        <Link to="/company/signup"> 
+                        <Button variant="dark">Register</Button>
+                        </Link>
                     </Card.Body>
                 </Card>
             </div>

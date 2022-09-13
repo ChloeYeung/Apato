@@ -20,9 +20,9 @@ export default function CompanyNavbar() {
 
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto flex-grow-1 justify-content-evenly" >
-            <Link to="/customer/sales_history" style={{ color: 'black', textDecoration: "none" }}
+            <Link to="/company/sales_summary" style={{ color: 'black', textDecoration: "none" }}
             >Sales Summary</Link>
-            <Link to="/customer/sales_history" style={{ color: 'black', textDecoration: "none" }}
+            <Link to="/company/sales_history" style={{ color: 'black', textDecoration: "none" }}
             >Sales History</Link>
             <Link to="/company/product_management" style={{ color: 'black', textDecoration: "none" }}
             >Product Management</Link>

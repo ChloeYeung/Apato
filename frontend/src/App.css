@@ -1,3 +1,14 @@
-#logoutIcon{
- color: red;
+/* /Pages/CompanySalesHistory */
+#comSalesHisTable {
+  display: flex;
+}
+
+#comSalesHisThead .comSalesHisTr, #comSalesHisTbody .comSalesHisTr {
+  display: inline-flex;
+  flex-direction:column;
+}
+
+/* /Pages/CompanySalesSummary */
+#comSalesSumWelcome{
+  font-size: 13px;
 }
