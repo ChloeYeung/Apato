@@ -20,6 +20,7 @@ import CustomerOrderHistory from './Pages/CustomerOrderHistory';
 import CustomerPayment from './Pages/CustomerPayment';
 import CustomerPurchase from './Pages/CustomerPurchase';
 import CustomerShowProduct from './Pages/CustomerShowProduct';
+import CustomerShowService from './Pages/CustomerShowService';
 import CompanySalesDetail from './Pages/CompanySalesDetail';
 import Error from './Pages/Error';
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/customer/login" element={<CustomerLogin />} />
         <Route path="/customer/signup" element={<CustomerSignUp />} />
         <Route path="/customer/show_product" element={<CustomerShowProduct />} />
+        <Route path="/customer/show_service" element={<CustomerShowService />} />
         <Route path="/customer/cart" element={<CustomerCart />} />
         <Route path="/customer/purchase" element={<CustomerPurchase />} />
         <Route path="/customer/payment_status" element={<CustomerPayment />} />

@@ -1,5 +1,7 @@
 class CustomerService {
-  constructor() {}
+  constructor(knex) {
+    this.knex = knex;
+  }
 
   list() {
     console.log("listing buildings");

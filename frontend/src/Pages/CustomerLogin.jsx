@@ -12,7 +12,6 @@ import CustomerNavbar from '../Components/CompanyNavbar';
 import { Link, NavLink } from "react-router-dom";
 
 
-
 export default function CustomerLogin() {
     return (
         <div>

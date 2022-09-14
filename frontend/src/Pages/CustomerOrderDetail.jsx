@@ -1,9 +1,14 @@
 // customer/order_history/:id
 
-import React from 'react'
+import React from 'react';
+//file
+import CustomerNavbar from '../Components/CustomerNavbar';
+
 
 export default function CustomerOrderDetail() {
   return (
-    <div>CustomerOrderDetail</div>
+    <div>
+      <CustomerNavbar/>
+    </div>
   )
 }

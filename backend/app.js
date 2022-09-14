@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 
+const knexFile = require("./knexfile").development;
+const knex = require("knex")(knexFile);
+
 const app = express();
 app.use(bodyParser.json());
 app.use(morgan("combined"));
@@ -17,9 +20,8 @@ const CompanyRouter = require("./routers/company_router");
 const CustomerService = require("./services/customer_service");
 const CustomerRouter = require("./routers/customer_router");
 
-const CompanyService = new CompanyService();
-const CustomerService = new CustomerService();
-
+const CompanyService = new CompanyService(knex);
+const CustomerService = new CustomerService(knex);
 
 
 app.use("/company", new CompanyRouter(CompanyService).router());
