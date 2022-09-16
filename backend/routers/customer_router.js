@@ -8,7 +8,7 @@ class CustomerRouter {
     let router = express.Router();
 
     router.get("/", this.get_building.bind(this));
-    console.log("In the covid router");
+    console.log("In the customer router");
 
     return router;
   }

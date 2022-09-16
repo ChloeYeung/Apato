@@ -2,6 +2,8 @@
 
 //bootstrap
 import Carousel from 'react-bootstrap/Carousel';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 //file
 import CustomerNavbar from '../Components/CustomerNavbar';
@@ -9,6 +11,9 @@ import cusShowProCarousel1 from '../images/cusShowProCarousel1.png';
 import cusShowProCarousel2 from '../images/cusShowProCarousel2.png';
 import cusShowProCarousel3 from '../images/cusShowProCarousel3.jpg';
 
+//react icon
+import { BsCartPlus } from "react-icons/bs";
+import { HiOutlineInformationCircle } from "react-icons/hi";
 
 export default function CustomerShowProduct() {
   return (
@@ -16,6 +21,8 @@ export default function CustomerShowProduct() {
 
       {/* Customer Navbar */}
       <CustomerNavbar />
+
+
       {/* Carousel */}
       <Carousel>
         <Carousel.Item interval={1000}>
@@ -54,6 +61,24 @@ export default function CustomerShowProduct() {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+
+
+       {/* Product card */}
+       <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src="holder.js/100px180" />
+        <Card.Body>
+          <Card.Title>Service name</Card.Title>
+          <Card.Text>
+            Description:
+            <br />
+            Price:
+          </Card.Text>
+          <>
+          </>
+          <Button variant="primary">Add to cart <BsCartPlus /></Button>
+          <Button variant="primary">Description <HiOutlineInformationCircle /></Button>
+        </Card.Body>
+      </Card>
 
 
     </div>

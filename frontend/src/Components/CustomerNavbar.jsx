@@ -9,7 +9,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link, NavLink } from "react-router-dom";
 
 //react-icon
-import { RiLoginCircleFill } from "react-icons/ri";
+import { ImExit } from "react-icons/im";
 
 export default function CustomerNavbar() {
     return (
@@ -34,7 +34,7 @@ export default function CustomerNavbar() {
                         <Link to="/customer/show_service" style={{ color: 'black', textDecoration: "none" , position: "relative", top: "8px"}}>Service</Link> */}
                         <Link to="/customer/order_history" style={{ color: 'black', textDecoration: "none", position: "relative", top: "8px" }}>Order History</Link>
                         <Link to="/customer/cart" style={{ color: 'black', textDecoration: "none", position: "relative", top: "8px" }}>Shopping Cart</Link>
-                        <Link to="/customer/login" style={{ color: 'black', textDecoration: "none", position: "relative", top: "8px" }}>Logout <RiLoginCircleFill color='blue' /></Link>
+                        <Link to="/customer/login" style={{ color: 'black', textDecoration: "none", position: "relative", top: "8px" }}>Logout <ImExit color='blue' /></Link>
                     </Nav>
                 </Container>
             </Navbar>

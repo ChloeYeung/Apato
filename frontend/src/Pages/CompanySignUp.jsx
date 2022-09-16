@@ -1,4 +1,5 @@
 // company/signup
+import React, { useState, useEffect } from "react";
 
 //Bootstrap
 import Button from 'react-bootstrap/Button';
@@ -12,11 +13,43 @@ import { TiTickOutline } from "react-icons/ti";
 
 //react-router-dom
 import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
+//redux
+import { useDispatch, useSelector } from "react-redux";
 
+//file
+import { signupComThunk } from "../redux/company_authSlice";
 
 
 export default function CompanySignUp() {
+  const [credential, setCredential] = useState({
+    email: "",
+    password: "",
+    name: "",
+    phone_no: "",
+    cypto_no: "",
+    image: "",
+  });
+
+  const isAuthenticated = useSelector((state) => state.authCom.isAuthenticated);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    isAuthenticated && navigate("/");
+  }, [isAuthenticated, navigate]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setCredential((prevValue) => ({
+      ...prevValue,
+      [name]: value,
+    }));
+    console.log(credential);
+  };
+
   return (
     <div>
 
@@ -36,42 +69,76 @@ export default function CompanySignUp() {
           <Card.Body>
             <Card.Title>Please fill in below information</Card.Title>
             <div className='row'>
-              <label>Name </label>
-              <input type="text" />
+              <label>Email </label>
+              <input
+                type="text"
+                placeholder="email"
+                name="email"
+                onChange={handleChange}
+              />
             </div>
             <br />
             <div className='row'>
               <label >Phone no.</label>
-              <input type="text" />
+              <input
+                type="number"
+                placeholder="phone number"
+                name="phone_no"
+                onChange={handleChange}
+              />
             </div>
             <br />
             <div className='row'>
               <label >Cypto payment code </label>
-              <input type="number" />
+              <input
+                type="text"
+                placeholder="code"
+                name="cypto_no"
+                onChange={handleChange}
+              />
             </div>
             <br />
             <div className='row'>
-              <label >Email </label>
-              <input type="number" />
+              <label >Name </label>
+              <input
+                type="text"
+                placeholder="name"
+                name="name"
+                onChange={handleChange}
+              />
             </div>
             <br />
             <div className='row'>
               <label >Password </label>
-              <input type="text" />
+              <input
+                type="password"
+                placeholder="password"
+                name="password"
+                onChange={handleChange}
+              />
             </div>
             <br />
 
-            <Form.Group controlId="formFileSm" className="mb-3">
+            {/* <Form.Group controlId="formFileSm" className="mb-3">
               <Form.Label>Company image</Form.Label>
               <Form.Control type="file" />
-            </Form.Group>
+
+            </Form.Group> */}
+            <label >Image </label>
+            <input
+                type="image"
+                name="image"
+                onChange={handleChange}
+              />
 
             {/* <div className='row'>
                         <label >Image: </label>
                         <input type="file" />
                     </div> */}
             <br />
-            <Button variant="dark"><TiTickOutline /></Button>
+            <Button onClick={() =>
+              dispatch(signupComThunk(credential)).then(() => navigate("/company/login"))
+            } variant="dark"><TiTickOutline /></Button>
 
           </Card.Body>
         </Card>

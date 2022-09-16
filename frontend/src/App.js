@@ -20,9 +20,18 @@ import CustomerOrderHistory from './Pages/CustomerOrderHistory';
 import CustomerPayment from './Pages/CustomerPayment';
 import CustomerPurchase from './Pages/CustomerPurchase';
 import CustomerShowProduct from './Pages/CustomerShowProduct';
+import CustomerShowProductDetail from './Pages/CustomerShowProductDetail';
 import CustomerShowService from './Pages/CustomerShowService';
+import CustomerShowServiceDetail from './Pages/CustomerShowServiceDetail';
 import CompanySalesDetail from './Pages/CompanySalesDetail';
 import Error from './Pages/Error';
+
+
+//testing
+import Signup from "./Pages/Signup";
+import Login from "./Pages/Login";
+import Secret from "./Pages/Secret";
+import RequireAuthCom from "./Components/RequireAuthCom";
 
 
 function App() {
@@ -32,11 +41,11 @@ function App() {
         {/* company */}
         <Route path="/company/login" element={< CompanyLogin />} />
         <Route path="/company/signup" element={<CompanySignup />} />
-        <Route path="/company/sales_summary" element={<CompanySalesSummary />} />
-        <Route path="/company/sales_history" element={<CompanySalesHistory />} >
+        <Route path="/company/sales_summary" element={<RequireAuthCom> <CompanySalesSummary /> </RequireAuthCom>} />
+        <Route path="/company/sales_history" element={<RequireAuthCom> <CompanySalesHistory /> </RequireAuthCom>} >
           <Route path=":id" element={<CompanySalesDetail />} />
         </Route>
-        <Route path="/company/product_management" element={<CompanyProductManagement />} >
+        <Route path="/company/product_management" element={<RequireAuthCom> <CompanyProductManagement /></RequireAuthCom>} >
           <Route path="add" element={<CompanyProductManagementAdd />} />
           <Route path="edit" element={<CompanyProductManagementEdit />} />
         </Route>
@@ -45,7 +54,11 @@ function App() {
         <Route path="/customer/login" element={<CustomerLogin />} />
         <Route path="/customer/signup" element={<CustomerSignUp />} />
         <Route path="/customer/show_product" element={<CustomerShowProduct />} />
+        <Route path="/customer/show_product/:id" element={<CustomerShowProductDetail />} />
+
         <Route path="/customer/show_service" element={<CustomerShowService />} />
+        <Route path="/customer/show_service/:id" element={<CustomerShowServiceDetail />} />
+
         <Route path="/customer/cart" element={<CustomerCart />} />
         <Route path="/customer/purchase" element={<CustomerPurchase />} />
         <Route path="/customer/payment_status" element={<CustomerPayment />} />
@@ -53,6 +66,17 @@ function App() {
           <Route path=":id" element={<CustomerOrderDetail />} />
         </ Route >
 
+        {/* login signup logout testing */}
+        {/* <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Secret />
+            </RequireAuth>
+          }
+        /> */}
 
         {/* Error */}
         <Route path="*" element={<Error />} />

@@ -1,6 +1,4 @@
 // /company/product_management
-import React from 'react';
-
 //file
 import CompanyNavbar from '../Components/CompanyNavbar';
 
@@ -17,10 +15,25 @@ import { IoMdAdd } from "react-icons/io";
 //react-router-dom
 import { Link, Outlet } from "react-router-dom";
 
+//testing
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { todoThunk } from "../redux/todoSlice";
 
 export default function CompanyProductManagement() {
+  const todo = useSelector((state) => {
+    return state.todoReducer.todo
+  });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(todoThunk());
+  }, [dispatch]);
   return (
     <div>
+
+      {/* Navbar */}
       <CompanyNavbar />
 
       {/* table */}
@@ -47,9 +60,9 @@ export default function CompanyProductManagement() {
             <td>$6</td>
             <td><Button variant='light'><IoTrashOutline /></Button></td>
             <td>
-            <Link to="/company/product_management/edit">
-              <Button variant='light'><AiOutlineEdit /></Button>
-            </Link>
+              <Link to="/company/product_management/edit">
+                <Button variant='light'><AiOutlineEdit /></Button>
+              </Link>
             </td>
           </tr>
         </tbody>
@@ -58,11 +71,23 @@ export default function CompanyProductManagement() {
       {/* add button */}
       <div className='d-flex justify-content-center'>
         <Link to="/company/product_management/add">
-          <Button variant="dark">Add <IoMdAdd />  </Button>
+          <Button variant="dark">Add <IoMdAdd /></Button>
         </Link>
       </div>
+
       <br />
-      <Outlet className='d-flex justify-content-center'/>
+      <Outlet className='d-flex justify-content-center' />
+
+      {/* testing */}
+      <h1>Welcome to secret page</h1>
+      <p>You have logged in successfully</p>
+      {todo.map((element, index) => (
+        <p key={index}>{element}</p>
+      ))}
+
     </div >
+
+
+
   )
 }

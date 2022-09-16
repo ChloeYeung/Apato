@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from "react";
 //Bootstrap
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -7,11 +7,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link, NavLink } from "react-router-dom";
 //react-icon
 import { RiLoginCircleFill } from "react-icons/ri";
-
+//redux
+import { useDispatch, useSelector } from "react-redux";
+//file
+import { logoutComThunk } from "../redux/company_authSlice";
 
 
 export default function CompanyNavbar() {
-  const style = { color: "red" }
+  const dispatch = useDispatch();
+
   return (
     <div>
       <div className="flex-grow-1  justify-content-evenly" >
@@ -26,9 +30,11 @@ export default function CompanyNavbar() {
             >Sales History</Link>
             <Link to="/company/product_management" style={{ color: 'black', textDecoration: "none" }}
             >Product Management</Link>
-            <Link to="/company/login" style={{ color: 'black', textDecoration: "none" }}
-            >Logout <RiLoginCircleFill color='blue' />
-            </Link>
+            <button className="logoutBtn"
+            
+              onClick={() => dispatch(logoutComThunk())}>
+              Logout <RiLoginCircleFill color='blue' />
+            </button>
           </Nav>
         </Navbar>
       </div>

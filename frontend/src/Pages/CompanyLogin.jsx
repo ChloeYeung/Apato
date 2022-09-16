@@ -1,4 +1,6 @@
 // /company/login
+import React, { useState, useEffect } from "react";
+
 //Bootstrap
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,13 +9,38 @@ import Card from 'react-bootstrap/Card';
 
 //file
 import CompanyNavbar from '../Components/CompanyNavbar';
+import { loginComThunk } from "../redux/company_authSlice";
 
 //react-router-dom
 import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-
+//redux
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CompanyLogin() {
+    const [credential, setCredential] = useState({
+        email: "",
+        password: "",
+    });
+
+    const isAuthenticated = useSelector((state) => state.authCom.isAuthenticated);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        isAuthenticated && navigate("/");
+    }, [isAuthenticated, navigate]);
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setCredential((prevValue) => ({
+            ...prevValue,
+            [name]: value,
+        }));
+    };
+
     return (
         <div>
             {/* login nav bar */}
@@ -34,11 +61,25 @@ export default function CompanyLogin() {
                     {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         {/* <Card.Title>Card Title</Card.Title> */}
-                        <div> <p>Email: </p>  <input type="text" /></div>
+                        <div> <p>Email: </p>
+                            <input
+                                type="text"
+                                placeholder="email"
+                                name="email"
+                                onChange={handleChange}
+                            /></div>
                         <br />
-                        <div> <p>Passward: </p>  <input type="text" /></div>
+                        <div> <p>Passward: </p>
+                            <input
+                                type="password"
+                                placeholder="password"
+                                name="password"
+                                onChange={handleChange}
+                            /></div>
                         <br />
-                        <Button variant="dark">Login</Button>
+                        <Button onClick={() =>
+                            dispatch(loginComThunk(credential)).then(() => navigate("/company/product_management"))
+                        } variant="dark">Login</Button>
 
                     </Card.Body>
                 </Card>
@@ -51,8 +92,8 @@ export default function CompanyLogin() {
                         <Card.Text>Create an account now</Card.Text>
                         <br />
 
-                        <Link to="/company/signup"> 
-                        <Button variant="dark">Register</Button>
+                        <Link to="/company/signup">
+                            <Button variant="dark">Register</Button>
                         </Link>
                     </Card.Body>
                 </Card>
