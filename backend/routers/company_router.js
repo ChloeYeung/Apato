@@ -7,7 +7,7 @@ class CompanyRouter {
   router() {
     let router = express.Router();
     router.get("/", this.get_building.bind(this));
-    // router.post("/signup", this.companyLogin.bind(this));
+    // router.post("/signup", this.companySignup.bind(this));
     console.log("In the company router");
     return router;
   }
@@ -17,11 +17,11 @@ class CompanyRouter {
     return res.json(this.CompanyService.list());
   }
 
-  // companyLogin(req, res) {
-  //   const { username, password } = req.body;
-  //   console.log(username, password);
-  //   return res.json(this.CompanyService.companyLogin(username, password));
+  // companySignup(req,res){
+  //   return res.json(this.CompanyService.signup()); 
   // }
+
+
 }
 
 module.exports = CompanyRouter;

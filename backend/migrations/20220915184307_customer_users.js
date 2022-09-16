@@ -7,10 +7,11 @@ exports.up = function(knex) {
         table.increments();
         table.string("email");
         table.string("password");
-        // table.string("name");
-        // table.integer("phone_no");
-        // table.string("cypto_no");
-        // table.string("image")
+        table.string("name");
+        table.integer("phone_no");
+        table.string("address");
+        table.string("cypto_no");
+        table.string("image");
       });
 };
 

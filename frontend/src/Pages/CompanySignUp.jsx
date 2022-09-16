@@ -32,14 +32,14 @@ export default function CompanySignUp() {
     image: "",
   });
 
-  const isAuthenticated = useSelector((state) => state.authCom.isAuthenticated);
+  const isAuthenticatedCom = useSelector((state) => state.authCom.isAuthenticatedCom);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    isAuthenticated && navigate("/");
-  }, [isAuthenticated, navigate]);
+    isAuthenticatedCom && navigate("/");
+  }, [isAuthenticatedCom, navigate]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

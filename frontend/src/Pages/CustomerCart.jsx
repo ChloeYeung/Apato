@@ -1,6 +1,6 @@
 // /customer/cart
-
-import CustomerNavbar from '../Components/CompanyNavbar'
+//file
+import CustomerNavbar from '../Components/CustomerNavbar';
 
 
 import React from 'react'

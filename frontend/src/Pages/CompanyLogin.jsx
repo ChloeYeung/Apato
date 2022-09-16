@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 //file
-import CompanyNavbar from '../Components/CompanyNavbar';
 import { loginComThunk } from "../redux/company_authSlice";
 
 //react-router-dom
@@ -24,14 +23,14 @@ export default function CompanyLogin() {
         password: "",
     });
 
-    const isAuthenticated = useSelector((state) => state.authCom.isAuthenticated);
+    const isAuthenticatedCom = useSelector((state) => state.authCom.isAuthenticatedCom);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
-        isAuthenticated && navigate("/");
-    }, [isAuthenticated, navigate]);
+        isAuthenticatedCom && navigate("/");
+    }, [isAuthenticatedCom, navigate]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -67,7 +66,8 @@ export default function CompanyLogin() {
                                 placeholder="email"
                                 name="email"
                                 onChange={handleChange}
-                            /></div>
+                            />
+                            </div>
                         <br />
                         <div> <p>Passward: </p>
                             <input
@@ -75,7 +75,8 @@ export default function CompanyLogin() {
                                 placeholder="password"
                                 name="password"
                                 onChange={handleChange}
-                            /></div>
+                            />
+                            </div>
                         <br />
                         <Button onClick={() =>
                             dispatch(loginComThunk(credential)).then(() => navigate("/company/product_management"))

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 //Bootstrap
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 //react-router-dom
@@ -15,7 +14,6 @@ import { logoutComThunk } from "../redux/company_authSlice";
 
 export default function CompanyNavbar() {
   const dispatch = useDispatch();
-
   return (
     <div>
       <div className="flex-grow-1  justify-content-evenly" >
@@ -31,7 +29,6 @@ export default function CompanyNavbar() {
             <Link to="/company/product_management" style={{ color: 'black', textDecoration: "none" }}
             >Product Management</Link>
             <button className="logoutBtn"
-            
               onClick={() => dispatch(logoutComThunk())}>
               Logout <RiLoginCircleFill color='blue' />
             </button>

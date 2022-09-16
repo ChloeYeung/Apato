@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  isAuthenticated: false || localStorage.getItem("TOKEN") != null,
+  isAuthenticatedCom: false || localStorage.getItem("TOKEN") != null,
 };
 
 export const company_authSlice = createSlice({
@@ -10,10 +10,10 @@ export const company_authSlice = createSlice({
   initialState,
   reducers: {
     login: (state) => {
-      state.isAuthenticated = true;
+      state.isAuthenticatedCom = true;
     },
     logout: (state) => {
-      state.isAuthenticated = false;
+      state.isAuthenticatedCom = false;
     },
   },
 });
@@ -54,5 +54,5 @@ export const loginComThunk =
 export const logoutComThunk = () => async (dispatch) => {
   localStorage.removeItem("TOKEN");
   dispatch(logout());
-  console.log("logout running")
+  console.log("company logout running")
 };

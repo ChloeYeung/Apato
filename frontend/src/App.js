@@ -32,6 +32,7 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Secret from "./Pages/Secret";
 import RequireAuthCom from "./Components/RequireAuthCom";
+import RequireAuthCus from "./Components/RequireAuthCus";
 
 
 function App() {
@@ -59,10 +60,11 @@ function App() {
         <Route path="/customer/show_service" element={<CustomerShowService />} />
         <Route path="/customer/show_service/:id" element={<CustomerShowServiceDetail />} />
 
-        <Route path="/customer/cart" element={<CustomerCart />} />
-        <Route path="/customer/purchase" element={<CustomerPurchase />} />
-        <Route path="/customer/payment_status" element={<CustomerPayment />} />
-        <Route path="/customer/order_history" element={<CustomerOrderHistory />} >
+        <Route path="/customer/cart" element={<RequireAuthCus><CustomerCart /></RequireAuthCus>} />
+        <Route path="/customer/purchase" element={<RequireAuthCus><CustomerPurchase /></RequireAuthCus>} />
+        <Route path="/customer/payment_status" element={<RequireAuthCus><CustomerPayment /></RequireAuthCus>} />
+        
+        <Route path="/customer/order_history" element={<RequireAuthCus><CustomerOrderHistory /></RequireAuthCus>} >
           <Route path=":id" element={<CustomerOrderDetail />} />
         </ Route >
 
