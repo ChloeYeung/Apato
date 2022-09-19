@@ -7,9 +7,9 @@ import Card from 'react-bootstrap/Card';
 
 //file
 import CustomerNavbar from '../Components/CustomerNavbar';
-import cusShowProCarousel1 from '../images/cusShowProCarousel1.png';
+import cusShowProCarousel1 from '../images/cusShowProCarousel1.jpg';
 import cusShowProCarousel2 from '../images/cusShowProCarousel2.png';
-import cusShowProCarousel3 from '../images/cusShowProCarousel3.jpg';
+import cusShowProCarousel3 from '../images/cusShowProCarousel3.png';
 
 //react icon
 import { BsCartPlus } from "react-icons/bs";

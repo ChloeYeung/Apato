@@ -7,9 +7,9 @@ import Card from 'react-bootstrap/Card';
 
 //file
 import CustomerNavbar from '../Components/CustomerNavbar';
-import cusShowProCarousel1 from '../images/cusShowProCarousel1.png';
-import cusShowProCarousel2 from '../images/cusShowProCarousel2.png';
-import cusShowProCarousel3 from '../images/cusShowProCarousel3.jpg';
+import cusShowSerCarousel1 from '../images/cusShowSerCarousel1.jpg';
+import cusShowSerCarousel2 from '../images/cusShowSerCarousel2.jpg';
+import cusShowSerCarousel3 from '../images/cusShowSerCarousel3.jpg';
 
 //react icon
 import { BsCartPlus } from "react-icons/bs";
@@ -28,7 +28,7 @@ export default function CustomerShowProduct() {
         <Carousel.Item interval={1000}>
           <img
             className="d-block w-100 cusShowProCarousel"
-            src={cusShowProCarousel1}
+            src={cusShowSerCarousel1}
             alt="First slide"
           />
           <Carousel.Caption>
@@ -39,7 +39,7 @@ export default function CustomerShowProduct() {
         <Carousel.Item interval={500}>
           <img
             className="d-block w-100 cusShowProCarousel"
-            src={cusShowProCarousel3}
+            src={cusShowSerCarousel3}
             alt="Second slide"
           />
           <Carousel.Caption>
@@ -50,7 +50,7 @@ export default function CustomerShowProduct() {
         <Carousel.Item>
           <img
             className="d-block w-100 cusShowProCarousel"
-            src={cusShowProCarousel2}
+            src={cusShowSerCarousel2}
             alt="Third slide"
           />
           <Carousel.Caption>

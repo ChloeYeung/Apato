@@ -4,6 +4,7 @@ const cors = require("cors");
 const knexFile = require("./knexfile").development;
 const knex = require("knex")(knexFile);
 const jwt = require("jsonwebtoken");
+const jwt_decode = require("jwt-decode");
 const authCom = require("./company_jwt-strategy");
 const authCus = require("./customer_jwt-strategy");
 
@@ -29,7 +30,7 @@ const CustomerRouter = require("./routers/customer_router");
 // const CustomerService = new CustomerService(knex);
 
 
-app.use("/company", new CompanyRouter(new CompanyService(knex)).router());
+app.use("/company", new CompanyRouter(new CompanyService(knex, jwt, jwt_decode)).router());
 app.use("/customer", new CustomerRouter(new CustomerService(knex)).router());
 
 
@@ -107,12 +108,9 @@ app.post("/customer/signup", async (req, res) => {
 
 app.post("/customer/login", async (req, res) => {
   const { email, password } = req.body;
-
   let user = await knex("customer_users").where({ email }).first();
-
   if (user) {
     let result = await bcrypt.compare(password, user.password);
-
     if (result) {
       const payload = {
         id: user.id,
@@ -125,7 +123,6 @@ app.post("/customer/login", async (req, res) => {
     }
   }
 });
-
 
 
 app.listen(8000, () => console.log("Listening to port 8000"));

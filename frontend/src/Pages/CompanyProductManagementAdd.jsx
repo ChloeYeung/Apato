@@ -19,27 +19,32 @@ export default function CompanyProductManagementAdd() {
                         <Card.Title>Add Product</Card.Title>
                         <div className='row'>
                             <label>Name: </label>
-                            <input type="text" />
+                            <input type="text" placeholder='Tesla' />
                         </div>
                         <br />
                         <div className='row'>
                             <label >Description: </label>
-                            <input type="text" />
+                            <input type="text" placeholder='electric cars and SUVs' />
                         </div>
                         <br />
                         <div className='row'>
-                            <label >Quantity: </label>
-                            <input type="number" />
+                            <label>Type: </label>
+                            <input type="text" />
                         </div>
                         <br />
                         <div className='row'>
                             <label >Price: </label>
-                            <input type="number" />
+                            <input type="number" placeholder='367100' />
+                        </div>
+                        <br />
+                        <div className='row'>
+                            <label >Quantity: </label>
+                            <input type="number" placeholder='2' />
                         </div>
                         <br />
                         <div className='row'>
                             <label >Tag: </label>
-                            <input type="text" />
+                            <input type="text" placeholder='car' />
                         </div>
                         <br />
 

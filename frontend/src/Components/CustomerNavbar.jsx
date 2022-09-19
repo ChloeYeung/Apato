@@ -25,10 +25,7 @@ export default function CustomerNavbar() {
 
                         <NavDropdown title="Product/Service" id="basic-nav-dropdown" >
                             <NavDropdown.Item ><Link to="/customer/show_product" style={{ color: 'black', textDecoration: "none" }}>Product</Link> </NavDropdown.Item>
-                            <NavDropdown.Item >
-                                <Link to="/customer/show_service" style={{ color: 'black', textDecoration: "none" }}>Service</Link>
-                            </NavDropdown.Item>
-
+                            <NavDropdown.Item ><Link to="/customer/show_service" style={{ color: 'black', textDecoration: "none" }}>Service</Link></NavDropdown.Item>
                         </NavDropdown>
 
                         {/* <Link to="/customer/show_product" style={{ color: 'black', textDecoration: "none", position: "relative", top: "8px" }}>Product</Link>
