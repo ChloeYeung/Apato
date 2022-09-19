@@ -39,6 +39,25 @@ class CompanyService {
       res.sendStatus(401);
     }
   }
+
+  async addProductManagement(token, name, description, quantity, price, tag, type) {
+    let decoded = this.jwt_decode(token);
+    console.log("-----user id -----")
+    console.log(decoded);
+    console.log("------------------")
+    token = token.replace("Bearer ", "");
+    let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+    if (verify) {
+      console.log("updated PM")
+      await this.knex('company_product').insert({ company_id: decoded.id, name: name, description: description, quantity: quantity, price: price, tag: tag, type: type });
+      let product = await this.knex("company_product").where({ company_id: decoded.id }).select("id","name", "description", "quantity", "price", "tag", "type").orderBy('id');
+      console.log("++++++++")
+      console.log(product)
+      return product;
+    } else {
+      res.sendStatus(401);
+    }
+  }
 }
 
 module.exports = CompanyService;

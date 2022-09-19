@@ -16,7 +16,7 @@ import { Link, Outlet } from "react-router-dom";
 
 //testing
 import React, { useEffect } from "react";
-import { showpmThunk } from "../redux/company_pmSlice";
+import { showpmThunk, addpmThunk} from "../redux/company_pmSlice";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
@@ -28,8 +28,7 @@ export default function CompanyProductManagement() {
 
   useEffect(() => {
     dispatch(showpmThunk());
-  }, []);
-
+  }, [addpmThunk]);
 
   return (
     <div>
