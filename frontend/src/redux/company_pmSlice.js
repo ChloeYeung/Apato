@@ -37,6 +37,7 @@ export const addpmThunk =
         add, token,
       })
       console.log("in addpmThink")
+      console.log(res);
       let tmp = [];
       tmp.push(res.data)
       dispatch(showPm(tmp[0]));
@@ -44,4 +45,17 @@ export const addpmThunk =
       for (let i = 0; i < document.getElementsByClassName("addPmInput").length; i++) {
         document.getElementsByClassName("addPmInput")[i].value = "";
       }
+    };
+
+export const deletepmThunk =
+  ({ id }) =>
+    async (dispatch) => {
+      const token = localStorage.getItem("TOKEN");
+      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/deletePm`, {
+        id,
+        token
+      });
+      let tmp = [];
+      tmp.push(res.data)
+      dispatch(showPm(tmp[0]));
     };

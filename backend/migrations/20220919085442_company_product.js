@@ -12,7 +12,8 @@ exports.up = function(knex) {
         table.float("price");
         table.string("tag");
         table.enum("type",["Product", "Service"]) 
-        table.string("image");
+        table.string("image_name");
+        table.binary("image_data");
       });
 };
 

@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const jwt_decode = require("jwt-decode");
 const authCom = require("./company_jwt-strategy");
 const authCus = require("./customer_jwt-strategy");
+const fileUpload = require("express-fileupload");
 
 const bcrypt = require("bcrypt");
 require("dotenv").config();
@@ -16,6 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(fileUpload());
 authCom(knex).initialize();
 authCus(knex).initialize();
 
