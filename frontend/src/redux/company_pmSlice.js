@@ -59,3 +59,17 @@ export const deletepmThunk =
       tmp.push(res.data)
       dispatch(showPm(tmp[0]));
     };
+
+export const editpmThunk =
+  ({ id, edit }) =>
+    async (dispatch) => {
+      const token = localStorage.getItem("TOKEN");
+      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/editToDoList`, {
+        id,
+        edit,
+        token
+      });
+      let tmp = [];
+      tmp.push(res.data)
+      dispatch(showPm(tmp));
+    };
