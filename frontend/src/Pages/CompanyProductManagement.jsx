@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 export default function CompanyProductManagement() {
   const showpm = useSelector((state) => state.pmReducer.showpm);
   console.log(showpm);
+  console.log(showpm);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -144,7 +145,7 @@ export default function CompanyProductManagement() {
                   </td>
 
                   <td>
-                    image
+                    {element.image_data.data}
                   </td>
                   <td>
                     <Link to="/company/product_management/edit">

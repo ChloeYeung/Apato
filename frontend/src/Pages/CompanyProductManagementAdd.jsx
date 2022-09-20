@@ -17,6 +17,7 @@ import { useState, useEffect } from "react";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
 
 
 export default function CompanyProductManagementAdd() {
@@ -42,16 +43,6 @@ export default function CompanyProductManagementAdd() {
     };
 
 
-    const handleAddImage = (event) => {
-        console.log(event)
-        console.log(event.target.value)
-        // const { name, value } = event.target;
-        // setAddProduct((prevValue) => ({
-        //     ...prevValue,
-        //     [name]: value,
-        // }));
-        // console.log(addProduct);
-    };
 
 
     // const handleAddBtnChange = (event) => {
@@ -61,40 +52,44 @@ export default function CompanyProductManagementAdd() {
     //     dispatch(showpmThunk());
     // };
 
+
+
     return (
         <div>
+         
             <div className='d-flex justify-content-center'>
                 <Card style={{ width: '25rem' }} className="text-center">
                     <Card.Body>
+                        <Form id="pmAddForm">
                         <Card.Title>Add Product</Card.Title>
                         <div className='row'>
                             <label>Name: </label>
-                            <input type="text" placeholder='Tesla' name="name" onChange={handleAddChange} className="addPmInput" />
+                            <input type="text" placeholder='Tesla' name="name" id="pmAddFormName" onChange={handleAddChange} className="addPmInput" />
                         </div>
                         <br />
                         <div className='row'>
                             <label >Description: </label>
-                            <input type="text" placeholder='electric cars and SUVs' name="description" onChange={handleAddChange} className="addPmInput" />
+                            <input type="text" placeholder='electric cars and SUVs' name="description" id="pmAddFormdescription" onChange={handleAddChange} className="addPmInput" />
                         </div>
                         <br />
                         <div className='row'>
                             <label>Type: </label>
-                            <input type="text" name="type" onChange={handleAddChange} className="addPmInput" />
+                            <input type="text" name="type" onChange={handleAddChange} id="pmAddFormType" className="addPmInput" />
                         </div>
                         <br />
                         <div className='row'>
                             <label >Price: </label>
-                            <input type="number" placeholder='367100' name="price" onChange={handleAddChange} className="addPmInput" />
+                            <input type="number" placeholder='367100' name="price" onChange={handleAddChange} id="pmAddFormPrice" className="addPmInput" />
                         </div>
                         <br />
                         <div className='row'>
                             <label >Quantity: </label>
-                            <input type="number" placeholder='2' name="quantity" onChange={handleAddChange} className="addPmInput" />
+                            <input type="number" placeholder='2' name="quantity" onChange={handleAddChange} id="pmAddFormQuantity" className="addPmInput" />
                         </div>
                         <br />
                         <div className='row'>
                             <label >Tag: </label>
-                            <input type="text" placeholder='car' name="tag" onChange={handleAddChange} className="addPmInput" />
+                            <input type="text" placeholder='car' name="tag" onChange={handleAddChange} id="pmAddFormTag" className="addPmInput" />
                         </div>
                         <br />
 
@@ -105,11 +100,11 @@ export default function CompanyProductManagementAdd() {
 
                         <div className='row'>
                             <label >Image: </label>
-                            <input type="file" name="image" onChange={handleAddImage} />
+                            <input type="file" accept='image/png, image/gif, image/jpeg' id="pmAddFormImage" name="image"  />
                         </div>
                         <br />
                         <Button onClick={() => dispatch(addpmThunk(addProduct))} variant="dark"><TiTickOutline /></Button>
-
+                        </Form>
                     </Card.Body>
                 </Card>
             </div>

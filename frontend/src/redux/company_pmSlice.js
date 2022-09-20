@@ -33,8 +33,19 @@ export const addpmThunk =
   (add) =>
     async (dispatch) => {
       const token = localStorage.getItem("TOKEN");
-      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/addPm`, {
-        add, token,
+      console.log(add);
+      const imageFile = document.getElementById('pmAddFormImage').files[0];
+      let formData = new FormData();
+      formData.append("name", add.name);
+      formData.append("description", add.description);
+      formData.append("type", add.type);
+      formData.append("price", add.price);
+      formData.append("quantity", add.quantity);
+      formData.append("tag", add.tag);
+      formData.append("image", imageFile);
+      formData.append("token", token);
+      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/addPm`,formData, {
+      
       })
       console.log("in addpmThink")
       console.log(res);

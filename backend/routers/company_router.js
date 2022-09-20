@@ -21,20 +21,21 @@ class CompanyRouter {
   // }
 
   async showProductManagement(req, res) {
-    console.log("reached show PM backend");
+    // console.log("reached show PM backend");
     let token = req.headers.authorization;
     let response = await (this.CompanyService.showProductManagement(token))
     return res.send(response);
   }
 
   async addProductManagement(req, res) {
-    console.log("reached add PM backend");
+    console.log("add sth");
+    // console.log("reached add PM backend");
     console.log(req);
-    const image_name = "req.files.pmAddImg.name";
-    const image_data = "req.files.pmAddImg.data";
-    let {name, description, quantity, price, tag, type} = req.body.add;
+    const image_name = req.files.image.name;
+    const image_data = req.files.image.data;
+    let { name, description, quantity, price, tag, type } = req.body;
     let token = req.body.token;
-    let response = await (this.CompanyService.addProductManagement( token, name, description, quantity, price, tag, type, image_name, image_data))
+    let response = await this.CompanyService.addProductManagement(token, name, description, quantity, price, tag, type, image_name, image_data)
     return res.send(response);
   }
 
