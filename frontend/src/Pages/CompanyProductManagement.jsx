@@ -15,15 +15,15 @@ import { IoMdAdd } from "react-icons/io";
 import { Link, Outlet } from "react-router-dom";
 //testing
 import React, { useState, useEffect } from "react";
-import { showpmThunk, addpmThunk, deletepmThunk } from "../redux/company_pmSlice";
+import { showpmThunk, addpmThunk, deletepmThunk, editpmThunk } from "../redux/company_pmSlice";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-
+//jquery
+import $ from 'jquery';
 
 
 export default function CompanyProductManagement() {
   const showpm = useSelector((state) => state.pmReducer.showpm);
-  console.log(showpm);
   console.log(showpm);
   const dispatch = useDispatch();
 
@@ -32,29 +32,23 @@ export default function CompanyProductManagement() {
   }, [addpmThunk]);
 
   const handleDelBtnChange = (id) => {
-    console.log("in handleDelBtnChange")
     console.log(id);
     dispatch(deletepmThunk({ id: id }));
     // document.getElementById(event.target.id).style.textDecoration = 'line-through'
   }
 
-  const [editProduct, setEditProduct] = useState({
-    name: "",
-    description: "",
-    quantity: "",
-    price: "",
-    tag: "",
-    type: "",
-  });
+  const [editProduct, setEditProduct] = useState("");
 
   const handleEditChange = (event) => {
-    const { name, value } = event.target;
-    setEditProduct((prevValue) => ({
-      ...prevValue,
-      [name]: value,
-    }));
-    console.log(editProduct);
+    setEditProduct(event.target.value);
   };
+
+  const handleEditBtnChange = (id, column) => {
+    let send = { id: id, column: column, value: editProduct }
+    console.log(send);
+    dispatch(editpmThunk(send));
+    $(`#pmEditClosePopover${id}${column}`).hide();
+  }
 
   return (
     <div>
@@ -87,30 +81,85 @@ export default function CompanyProductManagement() {
                   </td>
 
                   <td>
-                    <input type="text" value={element.name} name="name" onChange={handleEditChange} />
-                  </td>
-
-                  <td>
-                    <input type="text" value={element.description} name="description" onChange={handleEditChange} />
-                  </td>
-
-                  <td>
-                    <input type="text" value={element.price} name="price" onChange={handleEditChange} />
+                    <OverlayTrigger
+                      trigger="click"
+                      key={element.id}
+                      placement="bottom"
+                      overlay={
+                        <Popover id={"pmEditClosePopover" + element.id + "name"}>
+                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Name ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                          <Popover.Body>
+                            <input type="text" name="name" placeholder='name' id='pmEditInput' onChange={handleEditChange} />
+                            <br />
+                            <br />
+                            <div className="d-flex justify-content-center">
+                              <Button variant="outline-secondary" onClick={() => handleEditBtnChange(element.id, "name")} className='btn-sm'>Submit</Button>
+                            </div>
+                          </Popover.Body>
+                        </Popover>
+                      }>
+                      <div>{element.name}</div>
+                    </OverlayTrigger>
                   </td>
 
                   <td>
                     <OverlayTrigger
                       trigger="click"
                       key={element.id}
+                      placement="bottom"
                       overlay={
-                        <Popover id={`popover-positioned-${element.id}`}>
-                          <Popover.Header as="h3">{`Update quantity ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                        <Popover id={"pmEditClosePopover" + element.id + "description"}>
+                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Description ${element.type.split("")[0]}${element.id}`}</Popover.Header>
                           <Popover.Body>
-                            <input type="text" name="quantity" onChange={handleEditChange}/>
+                            <input type="text" name="description" placeholder='description' id='pmEditInput' onChange={handleEditChange} />
                             <br />
                             <br />
                             <div className="d-flex justify-content-center">
-                              <Button variant="outline-secondary" className='btn-sm'>Submit</Button>
+                              <Button variant="outline-secondary" onClick={() => handleEditBtnChange(element.id, "description")} className='btn-sm'>Submit</Button>
+                            </div>
+                          </Popover.Body>
+                        </Popover>
+                      }>
+                      <div>{element.description}</div>
+                    </OverlayTrigger>
+                  </td>
+
+                  <td>
+                    <OverlayTrigger
+                      trigger="click"
+                      key={element.id}
+                      placement="bottom"
+                      overlay={
+                        <Popover id={"pmEditClosePopover" + element.id + "price"}>
+                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Price ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                          <Popover.Body>
+                            <input type="number" name="price" placeholder='price' id='pmEditInput' onChange={handleEditChange} />
+                            <br />
+                            <br />
+                            <div className="d-flex justify-content-center">
+                              <Button variant="outline-secondary" onClick={() => handleEditBtnChange(element.id, "price")} className='btn-sm'>Submit</Button>
+                            </div>
+                          </Popover.Body>
+                        </Popover>
+                      }>
+                      <div>{element.price}</div>
+                    </OverlayTrigger>
+                  </td>
+
+                  <td>
+                    <OverlayTrigger
+                      trigger="click"
+                      key={element.id}
+                      placement="bottom"
+                      overlay={
+                        <Popover id={"pmEditClosePopover" + element.id + "quantity"}>
+                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Quantity ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                          <Popover.Body>
+                            <input type="number" name="quantity" placeholder='quantity' id='pmEditInput' onChange={handleEditChange} />
+                            <br />
+                            <br />
+                            <div className="d-flex justify-content-center">
+                              <Button variant="outline-secondary" onClick={() => handleEditBtnChange(element.id, "quantity")} className='btn-sm'>Submit</Button>
                             </div>
                           </Popover.Body>
                         </Popover>
@@ -123,19 +172,22 @@ export default function CompanyProductManagement() {
                     <input type="text" value={element.tag} name="tag" onChange={handleEditChange} />
                     </td> */}
 
+
+
                   <td>
                     <OverlayTrigger
                       trigger="click"
                       key={element.id}
+                      placement="bottom"
                       overlay={
-                        <Popover id={`popover-positioned-${element.id}`}>
-                          <Popover.Header as="h3">{`Update Tag ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                        <Popover id={"pmEditClosePopover" + element.id + "tag"}>
+                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Tag ${element.type.split("")[0]}${element.id}`}</Popover.Header>
                           <Popover.Body>
-                            <input type="text" name="tag" onChange={handleEditChange}/>
+                            <input type="text" name="tag" placeholder='tag' id='pmEditInput' onChange={handleEditChange} />
                             <br />
                             <br />
                             <div className="d-flex justify-content-center">
-                              <Button variant="outline-secondary" className='btn-sm'>Submit</Button>
+                              <Button variant="outline-secondary" onClick={() => handleEditBtnChange(element.id, "tag")} className='btn-sm'>Submit</Button>
                             </div>
                           </Popover.Body>
                         </Popover>
@@ -145,7 +197,7 @@ export default function CompanyProductManagement() {
                   </td>
 
                   <td>
-                    {element.image_data.data}
+                    {/* {element.image_data.data} */}
                   </td>
                   <td>
                     <Link to="/company/product_management/edit">

@@ -28,7 +28,6 @@ class CompanyRouter {
   }
 
   async addProductManagement(req, res) {
-    console.log("add sth");
     // console.log("reached add PM backend");
     console.log(req);
     const image_name = req.files.image.name;
@@ -50,10 +49,9 @@ class CompanyRouter {
 
   async editProductManagement(req, res) {
     console.log("reached edit PM backend");
-    console.log(req.body);
     let token = req.body.token;
-    let id = req.body.id
-    let response = await (this.CompanyService.editProductManagement(token, id))
+    let{id, column, value} = req.body.update;
+    let response = await (this.CompanyService.editProductManagement(token, id, column, value ))
     return res.send(response);
   }
 }

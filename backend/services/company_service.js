@@ -27,13 +27,12 @@ class CompanyService {
 
   async showProductManagement(token) {
     let decoded = this.jwt_decode(token);
-    // console.log("-----user id -----")
-    // console.log(decoded);
-    // console.log("------------------")
     token = token.replace("Bearer ", "");
     let verify = this.jwt.verify(token, process.env.JWT_SECRET);
     if (verify) {
-      let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type", "image_data").from('company_product').where('company_id', decoded.id).orderBy('id');
+      // let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type", "image_data").from('company_product').where('company_id', decoded.id).orderBy('id');
+      let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type").from('company_product').where('company_id', decoded.id).orderBy('id');
+
       return data;
     } else {
       res.sendStatus(401);
@@ -68,12 +67,12 @@ class CompanyService {
     }
   }
 
-  async editProductManagement(token, name, description, quantity, price, tag, type) {
+  async editProductManagement(token, id, column, value) {
     let decoded = this.jwt_decode(token);
     token = token.replace("Bearer ", "");
     let verify = this.jwt.verify(token, process.env.JWT_SECRET);
     if (verify) {
-      await this.knex('company_product').where('id', id).update({ name: name, description: description, quantity: quantity, price: price, tag: tag, type: type })
+      await this.knex('company_product').where('id', id).update(`${column}`, value)
       console.log(`edit ${id}`)
       let product = await this.knex("company_product").where({ company_id: decoded.id }).select("id", "name", "description", "quantity", "price", "tag", "type").orderBy('id');
       return product;

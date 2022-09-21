@@ -44,8 +44,8 @@ export const addpmThunk =
       formData.append("tag", add.tag);
       formData.append("image", imageFile);
       formData.append("token", token);
-      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/addPm`,formData, {
-      
+      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/addPm`, formData, {
+
       })
       console.log("in addpmThink")
       console.log(res);
@@ -72,15 +72,19 @@ export const deletepmThunk =
     };
 
 export const editpmThunk =
-  ({ id, edit }) =>
+  (update) =>
     async (dispatch) => {
       const token = localStorage.getItem("TOKEN");
-      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/editToDoList`, {
-        id,
-        edit,
-        token
+      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/editPm`, {
+        update, token
       });
+      console.log(res);
       let tmp = [];
       tmp.push(res.data)
-      dispatch(showPm(tmp));
+      dispatch(showPm(tmp[0]));
+
+      for (let i = 0; i < document.getElementsByClassName("pmEditInput").length; i++) {
+        document.getElementsByClassName("pmEditInput")[i].value = "";
+      }
+      
     };

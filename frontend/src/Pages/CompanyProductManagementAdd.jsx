@@ -42,68 +42,67 @@ export default function CompanyProductManagementAdd() {
         console.log(addProduct);
     };
 
-
-
-
-    // const handleAddBtnChange = (event) => {
-    //     console.log(addProduct);
-    //     dispatch(addpmThunk(addProduct))
-    //     console.log(event)
-    //     dispatch(showpmThunk());
-    // };
-
-
-
     return (
         <div>
-         
+
             <div className='d-flex justify-content-center'>
                 <Card style={{ width: '25rem' }} className="text-center">
                     <Card.Body>
                         <Form id="pmAddForm">
-                        <Card.Title>Add Product</Card.Title>
-                        <div className='row'>
-                            <label>Name: </label>
-                            <input type="text" placeholder='Tesla' name="name" id="pmAddFormName" onChange={handleAddChange} className="addPmInput" />
-                        </div>
-                        <br />
-                        <div className='row'>
-                            <label >Description: </label>
-                            <input type="text" placeholder='electric cars and SUVs' name="description" id="pmAddFormdescription" onChange={handleAddChange} className="addPmInput" />
-                        </div>
-                        <br />
-                        <div className='row'>
-                            <label>Type: </label>
-                            <input type="text" name="type" onChange={handleAddChange} id="pmAddFormType" className="addPmInput" />
-                        </div>
-                        <br />
-                        <div className='row'>
-                            <label >Price: </label>
-                            <input type="number" placeholder='367100' name="price" onChange={handleAddChange} id="pmAddFormPrice" className="addPmInput" />
-                        </div>
-                        <br />
-                        <div className='row'>
-                            <label >Quantity: </label>
-                            <input type="number" placeholder='2' name="quantity" onChange={handleAddChange} id="pmAddFormQuantity" className="addPmInput" />
-                        </div>
-                        <br />
-                        <div className='row'>
-                            <label >Tag: </label>
-                            <input type="text" placeholder='car' name="tag" onChange={handleAddChange} id="pmAddFormTag" className="addPmInput" />
-                        </div>
-                        <br />
+                            <Card.Title>Add Product</Card.Title>
 
-                        {/* <Form.Group controlId="formFileSm" className="mb-3">
+                            <div className='row'>
+                                <label>Name: </label>
+                                <input type="text" placeholder='Tesla' name="name" id="pmAddFormName" onChange={handleAddChange} className="addPmInput" />
+                            </div>
+                            <br />
+
+                            <div className='row'>
+                                <label >Description: </label>
+                                <input type="text" placeholder='electric cars and SUVs' name="description" id="pmAddFormdescription" onChange={handleAddChange} className="addPmInput" />
+                            </div>
+                            <br />
+
+                            <div className='row'>
+                                <label >Price: </label>
+                                <input type="number" placeholder='367100' name="price" onChange={handleAddChange} id="pmAddFormPrice" className="addPmInput" />
+                            </div>
+                            <br />
+
+                            <div className='row'>
+                                <label >Quantity: </label>
+                                <input type="number" placeholder='2' name="quantity" onChange={handleAddChange} id="pmAddFormQuantity" className="addPmInput" />
+                            </div>
+                            <br />
+
+                            <div className='row'>
+                                <label >Tag: </label>
+                                <input type="text" placeholder='car' name="tag" onChange={handleAddChange} id="pmAddFormTag" className="addPmInput" />
+                            </div>
+                            <br />
+
+                            <div className='row'>
+                                <label>Type: </label>
+                                <Form.Select onChange={handleAddChange} name="type" id="pmAddFormType" className="addPmInput">
+                                    <option >Product / Service</option>
+                                    <option value="Product" >Product</option>
+                                    <option value="Service" >Service</option>
+                                </Form.Select>
+                            </div>
+                            <br />
+
+                            {/* <Form.Group controlId="formFileSm" className="mb-3">
                             <Form.Label>Image</Form.Label>
                             <Form.Control type="file" />
                         </Form.Group> */}
 
-                        <div className='row'>
-                            <label >Image: </label>
-                            <input type="file" accept='image/png, image/gif, image/jpeg' id="pmAddFormImage" name="image"  />
-                        </div>
-                        <br />
-                        <Button onClick={() => dispatch(addpmThunk(addProduct))} variant="dark"><TiTickOutline /></Button>
+                            <div className='row'>
+                                <label >Image: </label>
+                                <input type="file" accept='image/png, image/gif, image/jpeg' id="pmAddFormImage" name="image" />
+                            </div>
+                            <br />
+
+                            <Button onClick={() => dispatch(addpmThunk(addProduct))} variant="dark"><TiTickOutline /></Button>
                         </Form>
                     </Card.Body>
                 </Card>
