@@ -10,7 +10,7 @@ exports.up = function (knex) {
         table.string("name");
         table.integer("phone_no");
         table.string("cypto_no");
-        table.string("image")
+        table.string("image");
     });
 };
 

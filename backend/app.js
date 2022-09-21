@@ -45,7 +45,9 @@ app.post("/company/signup", async (req, res) => {
   let query = await knex("company_users").where({ email }).first();
   const hashed = await bcrypt.hash(password, 10);
   if (query == undefined) {
-    await knex("company_users").insert({ "email": email, "password": hashed, "name": name, "phone_no": phone_no, "cypto_no": cypto_no, "image": image });
+    // await knex("company_users").insert({ "email": email, "password": hashed, "name": name, "phone_no": phone_no, "cypto_no": cypto_no, "image": image });
+    await knex("company_users").insert({ "email": email, "password": hashed, "name": name, "phone_no": phone_no, "cypto_no": cypto_no});
+
     //same as     await knex("users").insert({ username: username, password: hashed });
     res.json("signup complete");
   } else {

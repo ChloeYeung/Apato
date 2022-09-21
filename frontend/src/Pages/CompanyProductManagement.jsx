@@ -24,7 +24,9 @@ import $ from 'jquery';
 
 export default function CompanyProductManagement() {
   const showpm = useSelector((state) => state.pmReducer.showpm);
+  const imagepm = useSelector((state) => state.pmReducer.imagepm);
   console.log(showpm);
+  console.log(imagepm)
   const dispatch = useDispatch();
 
   useEffect(() => {

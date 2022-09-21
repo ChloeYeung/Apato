@@ -7,51 +7,40 @@ class CompanyRouter {
 
   router() {
     let router = express.Router();
-    // router.post("/signup", this.companySignup.bind(this));
+    // Product Management
     router.get("/showPm", this.showProductManagement.bind(this));
     router.post("/addPm", this.addProductManagement.bind(this));
     router.post("/deletePm", this.deleteProductManagement.bind(this));
     router.post("/editPm", this.editProductManagement.bind(this));
-    console.log("In the company router");
     return router;
   }
 
-  // companySignup(req,res){
-  //   return res.json(this.CompanyService.signup()); 
-  // }
-
   async showProductManagement(req, res) {
-    // console.log("reached show PM backend");
     let token = req.headers.authorization;
-    let response = await (this.CompanyService.showProductManagement(token))
+    let response = await (this.CompanyService.showProductManagement(token));
     return res.send(response);
   }
 
   async addProductManagement(req, res) {
-    // console.log("reached add PM backend");
-    console.log(req);
     const image_name = req.files.image.name;
     const image_data = req.files.image.data;
     let { name, description, quantity, price, tag, type } = req.body;
     let token = req.body.token;
-    let response = await this.CompanyService.addProductManagement(token, name, description, quantity, price, tag, type, image_name, image_data)
+    let response = await this.CompanyService.addProductManagement(token, name, description, quantity, price, tag, type, image_name, image_data);
     return res.send(response);
   }
 
   async deleteProductManagement(req, res) {
-    console.log("reached delete PM backend");
-    console.log(req.body);
     let token = req.body.token;
-    let id = req.body.id
-    let response = await (this.CompanyService.deleteProductManagement(token, id))
+    let id = req.body.id;
+    let response = await (this.CompanyService.deleteProductManagement(token, id));
     return res.send(response);
   }
 
   async editProductManagement(req, res) {
-    console.log("reached edit PM backend");
     let token = req.body.token;
-    let{id, column, value} = req.body.update;
-    let response = await (this.CompanyService.editProductManagement(token, id, column, value ))
+    let { id, column, value } = req.body.update;
+    let response = await (this.CompanyService.editProductManagement(token, id, column, value));
     return res.send(response);
   }
 }

@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
   showpm: [],
+imagepm: [],
 };
 
 export const company_pmSlice = createSlice({
@@ -12,27 +13,35 @@ export const company_pmSlice = createSlice({
     showPm: (state, action) => {
       state.showpm = action.payload;
     },
+    imagePm: (state, action) => {
+      state.imagepm = action.payload;
+    },
   },
 });
 
-export const { showPm } = company_pmSlice.actions;
+export const { showPm, imagePm } = company_pmSlice.actions;
 
 export default company_pmSlice.reducer;
 
 export const showpmThunk = () => async (dispatch) => {
-  const token = localStorage.getItem("TOKEN");
+  const token = localStorage.getItem("TOKENCOM");
   const response = await axios.get(`${process.env.REACT_APP_BACKEND}/company/showPm`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
   dispatch(showPm(response.data));
+
+  let imageRes = [];
+  for(let i =0; i < response.data.length; i++){
+    imageRes.push(response.data[i].image_data)
+  }
+  dispatch(imagePm(imageRes));
+
 };
 
-export const addpmThunk =
-  (add) =>
-    async (dispatch) => {
-      const token = localStorage.getItem("TOKEN");
+export const addpmThunk = (add) => async (dispatch) => {
+      const token = localStorage.getItem("TOKENCOM");
       console.log(add);
       const imageFile = document.getElementById('pmAddFormImage').files[0];
       let formData = new FormData();
@@ -44,11 +53,12 @@ export const addpmThunk =
       formData.append("tag", add.tag);
       formData.append("image", imageFile);
       formData.append("token", token);
-      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/addPm`, formData, {
 
+      let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/addPm`, formData, {
       })
       console.log("in addpmThink")
       console.log(res);
+
       let tmp = [];
       tmp.push(res.data)
       dispatch(showPm(tmp[0]));
@@ -58,10 +68,8 @@ export const addpmThunk =
       }
     };
 
-export const deletepmThunk =
-  ({ id }) =>
-    async (dispatch) => {
-      const token = localStorage.getItem("TOKEN");
+export const deletepmThunk = ({ id }) => async (dispatch) => {
+      const token = localStorage.getItem("TOKENCOM");
       let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/deletePm`, {
         id,
         token
@@ -71,20 +79,15 @@ export const deletepmThunk =
       dispatch(showPm(tmp[0]));
     };
 
-export const editpmThunk =
-  (update) =>
-    async (dispatch) => {
-      const token = localStorage.getItem("TOKEN");
+export const editpmThunk = (update) => async (dispatch) => {
+      const token = localStorage.getItem("TOKENCOM");
       let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/editPm`, {
         update, token
       });
-      console.log(res);
       let tmp = [];
       tmp.push(res.data)
       dispatch(showPm(tmp[0]));
-
       for (let i = 0; i < document.getElementsByClassName("pmEditInput").length; i++) {
         document.getElementsByClassName("pmEditInput")[i].value = "";
       }
-      
     };

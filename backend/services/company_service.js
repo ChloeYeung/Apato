@@ -5,26 +5,6 @@ class CompanyService {
     this.jwt = jwt;
   }
 
-  list() {
-    console.log("listing buildings");
-    // Enter your data manipulation code here
-    // My data manipulation code takes 32 rows
-    console.log(covidData)
-    return covidData;
-  }
-
-  // async companyLogin(username, password) {
-  //   let query = await this.knex("users").where({ username }).first();
-  //   const hashed = await bcrypt.hash(password, 10);
-  //   if (query == undefined) {
-  //     await this.knex("users").insert({ username, password: hashed });
-  //     //same as     await knex("users").insert({ username: username, password: hashed });
-  //     res.json("signup complete");
-  //   } else {
-  //     res.sendStatus(401);
-  //   }
-  // }
-
   async showProductManagement(token) {
     let decoded = this.jwt_decode(token);
     token = token.replace("Bearer ", "");
@@ -32,7 +12,6 @@ class CompanyService {
     if (verify) {
       // let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type", "image_data").from('company_product').where('company_id', decoded.id).orderBy('id');
       let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type").from('company_product').where('company_id', decoded.id).orderBy('id');
-
       return data;
     } else {
       res.sendStatus(401);
@@ -59,7 +38,7 @@ class CompanyService {
     let verify = this.jwt.verify(token, process.env.JWT_SECRET);
     if (verify) {
       await this.knex('company_product').where("id", id).del();
-      console.log(`deleted ${id}`)
+      console.log(`deleted ${id}`);
       let product = await this.knex("company_product").where({ company_id: decoded.id }).select("id", "name", "description", "quantity", "price", "tag", "type").orderBy('id');
       return product;
     } else {
@@ -73,13 +52,15 @@ class CompanyService {
     let verify = this.jwt.verify(token, process.env.JWT_SECRET);
     if (verify) {
       await this.knex('company_product').where('id', id).update(`${column}`, value)
-      console.log(`edit ${id}`)
+      console.log(`edit ${id}`);
       let product = await this.knex("company_product").where({ company_id: decoded.id }).select("id", "name", "description", "quantity", "price", "tag", "type").orderBy('id');
       return product;
     } else {
       res.sendStatus(401);
     }
   }
+
+
 
 
 }
