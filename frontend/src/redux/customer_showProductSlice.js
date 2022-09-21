@@ -6,25 +6,55 @@ const initialState = {
 };
 
 export const customer_showProductSlice = createSlice({
-    name: "showProduct",
-    initialState,
-    reducers: {
-      showProduct: (state, action) => {
-        state.showproduct = action.payload;
-      },
+  name: "showProduct",
+  initialState,
+  reducers: {
+    showProduct: (state, action) => {
+      state.showproduct = action.payload;
+    },
+  },
+});
+
+export const { showProduct } = customer_showProductSlice.actions;
+
+export default customer_showProductSlice.reducer;
+
+export const showProductThunk = () => async (dispatch) => {
+  const token = localStorage.getItem("TOKENCUS");
+  console.log(token);
+  const response = await axios.get(`${process.env.REACT_APP_BACKEND}/customer/show_product`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
   });
-  
-  export const { showProduct } = customer_showProductSlice.actions;
-  
-  export default customer_showProductSlice.reducer;
-  
-  export const showProductThunk = () => async (dispatch) => {
-    const token = localStorage.getItem("TOKENCOM");
-    const response = await axios.get(`${process.env.REACT_APP_BACKEND}/customer/show_product`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },  
-    });
-    dispatch(showProduct(response.data));
-  };
+  dispatch(showProduct(response.data));
+};
+
+export const addCartThunk = (add) => async (dispatch) => {
+  const token = localStorage.getItem("TOKENCUS");
+  console.log(token)
+  const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/add_cart`, {
+    add, token
+  });
+  //   let tmp = [];
+  //   tmp.push(res.data)
+  //   dispatch(showPm(tmp[0]));
+  //   for (let i = 0; i < document.getElementsByClassName("pmEditInput").length; i++) {
+  //     document.getElementsByClassName("pmEditInput")[i].value = "";
+  //   }
+  // dispatch(showProduct(response.data));
+};
+
+
+  // export const editpmThunk = (update) => async (dispatch) => {
+  //   const token = localStorage.getItem("TOKENCOM");
+  //   let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/editPm`, {
+  //     update, token
+  //   });
+  //   let tmp = [];
+  //   tmp.push(res.data)
+  //   dispatch(showPm(tmp[0]));
+  //   for (let i = 0; i < document.getElementsByClassName("pmEditInput").length; i++) {
+  //     document.getElementsByClassName("pmEditInput")[i].value = "";
+  //   }
+  // };

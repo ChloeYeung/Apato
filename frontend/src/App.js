@@ -20,6 +20,7 @@ import CustomerOrderHistory from './Pages/CustomerOrderHistory';
 import CustomerPayment from './Pages/CustomerPayment';
 import CustomerPurchase from './Pages/CustomerPurchase';
 import CustomerShowProduct from './Pages/CustomerShowProduct';
+import CustomerShowProductPublic from './Pages/CustomerShowProductPublic';
 import CustomerShowProductDetail from './Pages/CustomerShowProductDetail';
 import CustomerShowService from './Pages/CustomerShowService';
 import CustomerShowServiceDetail from './Pages/CustomerShowServiceDetail';
@@ -58,12 +59,13 @@ function App() {
         {/* customer */}
         <Route path="/customer/login" element={<CustomerLogin />} />
         <Route path="/customer/signup" element={<CustomerSignUp />} />
-        <Route path="/customer/show_product" element={<CustomerShowProduct />} />
+        <Route path="/customer/show_product/public" element={<CustomerShowProductPublic />} />
         {/* <Route path="/customer/show_product/:id" element={<CustomerShowProductDetail />} /> */}
 
         <Route path="/customer/show_service" element={<CustomerShowService />} />
         {/* <Route path="/customer/show_service/:id" element={<CustomerShowServiceDetail />} /> */}
 
+        <Route path="/customer/show_product" element={<RequireAuthCus><CustomerShowProduct /></RequireAuthCus>} />
         <Route path="/customer/cart" element={<RequireAuthCus><CustomerCart /></RequireAuthCus>} />
         <Route path="/customer/purchase" element={<RequireAuthCus><CustomerPurchase /></RequireAuthCus>} />
         <Route path="/customer/payment_status" element={<RequireAuthCus><CustomerPayment /></RequireAuthCus>} />
