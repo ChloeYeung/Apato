@@ -24,7 +24,10 @@ class CompanyRouter {
   async addProductManagement(req, res) {
     const image_name = req.files.image.name;
     const image_data = req.files.image.data;
+    console.log(image_name);
+    console.log(image_data);
     let { name, description, quantity, price, tag, type } = req.body;
+    console.log(req.body)
     let token = req.body.token;
     let response = await this.CompanyService.addProductManagement(token, name, description, quantity, price, tag, type, image_name, image_data);
     return res.send(response);

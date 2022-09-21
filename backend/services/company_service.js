@@ -10,8 +10,8 @@ class CompanyService {
     token = token.replace("Bearer ", "");
     let verify = this.jwt.verify(token, process.env.JWT_SECRET);
     if (verify) {
-      // let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type", "image_data").from('company_product').where('company_id', decoded.id).orderBy('id');
-      let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type").from('company_product').where('company_id', decoded.id).orderBy('id');
+      let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type", "image_data").from('company_product').where('company_id', decoded.id).orderBy('id');
+      // let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type").from('company_product').where('company_id', decoded.id).orderBy('id');
       return data;
     } else {
       res.sendStatus(401);
@@ -23,8 +23,8 @@ class CompanyService {
     token = token.replace("Bearer ", "");
     let verify = this.jwt.verify(token, process.env.JWT_SECRET);
     if (verify) {
-      console.log("updated PM")
-      await this.knex('company_product').insert({ company_id: decoded.id, name: name, description: description, quantity: quantity, price: price, tag: tag, type: type, image_name: image_name, image_data: image_data });
+      console.log("added PM")
+      await this.knex.insert({ company_id: decoded.id, name: name, description: description, quantity: quantity, price: price, tag: tag, type: type, image_name: image_name, image_data: image_data }).into('company_product');
       let product = await this.knex("company_product").where({ company_id: decoded.id }).select("id", "name", "description", "quantity", "price", "tag", "type", "image_name", "image_data").orderBy('id');
       return product;
     } else {

@@ -33,7 +33,7 @@ const CustomerRouter = require("./routers/customer_router");
 
 
 app.use("/company", new CompanyRouter(new CompanyService(knex, jwt, jwt_decode)).router());
-app.use("/customer", new CustomerRouter(new CustomerService(knex)).router());
+app.use("/customer", new CustomerRouter(new CustomerService(knex, jwt, jwt_decode)).router());
 
 
 //company: login, signup, logout

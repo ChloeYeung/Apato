@@ -1,7 +1,6 @@
 // /company/product_management
 //file
 import CompanyNavbar from '../Components/CompanyNavbar';
-import CompanyProductManagementEdit from './CompanyProductManagementEdit';
 //bootstrap
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -13,11 +12,11 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { IoMdAdd } from "react-icons/io";
 //react-router-dom
 import { Link, Outlet } from "react-router-dom";
-//testing
+//state
 import React, { useState, useEffect } from "react";
-import { showpmThunk, addpmThunk, deletepmThunk, editpmThunk } from "../redux/company_pmSlice";
 //redux
 import { useDispatch, useSelector } from "react-redux";
+import { showpmThunk, addpmThunk, deletepmThunk, editpmThunk } from "../redux/company_pmSlice";
 //jquery
 import $ from 'jquery';
 
@@ -199,7 +198,7 @@ export default function CompanyProductManagement() {
                   </td>
 
                   <td>
-                    {/* {element.image_data.data} */}
+                    {/* {element.image_data} */}
                   </td>
                   <td>
                     <Link to="/company/product_management/edit">

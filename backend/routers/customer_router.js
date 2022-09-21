@@ -6,17 +6,16 @@ class CustomerRouter {
   }
   router() {
     let router = express.Router();
-
-    router.get("/", this.get_building.bind(this));
-    console.log("In the customer router");
-
+    router.get("/show_product", this.showProduct.bind(this));
     return router;
   }
 
-  get_building(req, res) {
-    console.log("reached covid backend");
-    return res.json(this.CustomerService.list());
+  async showProduct(req, res) {
+    let token = req.headers.authorization;
+    let response = await (this.CustomerService.showProduct(token));
+    return res.send(response);
   }
+
 }
 
 module.exports = CustomerRouter;

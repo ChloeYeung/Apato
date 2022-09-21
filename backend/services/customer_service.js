@@ -1,14 +1,23 @@
 class CustomerService {
-  constructor(knex) {
+  constructor(knex, jwt, jwt_decode) {
     this.knex = knex;
+    this.jwt_decode = jwt_decode;
+    this.jwt = jwt;
   }
 
-  list() {
-    console.log("listing buildings");
-    // Enter your data manipulation code here
-    // My data manipulation code takes 32 rows
-    console.log(covidData)
-    return covidData;
+  async showProduct(token) {
+    let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type", "image_data").from('company_product').where('type', "Product").orderBy('id', 'desc');
+    return data;
+    // let decoded = this.jwt_decode(token);
+    // token = token.replace("Bearer ", "");
+    // let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+    // if (verify) {
+    //   let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type", "image_data").from('company_product').where('company_id', decoded.id).orderBy('id');
+    //   // let data = await this.knex.select("id", "name", "description", "quantity", "price", "tag", "type").from('company_product').where('company_id', decoded.id).orderBy('id');
+    //   return data;
+    // } else {
+    //   res.sendStatus(401);
+    // }
   }
 }
 
