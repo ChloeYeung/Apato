@@ -8,8 +8,8 @@ exports.up = function(knex) {
     table.integer("customer_id")
     table.integer("product_id");
     table.integer("unit");
-    table.string("company_id");
-    table.string("name");
+    table.integer("company_id");
+    table.string("product_name");
     table.string("description");
     table.float("price");
     table.string("tag");

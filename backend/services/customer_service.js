@@ -21,7 +21,6 @@ class CustomerService {
       }
 
 
-
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
       let ckeckExitProduct = await this.knex.select("product_id").from('customer_cart').where('product_id', `${id}`);
       console.log(ckeckExitProduct);
@@ -58,19 +57,17 @@ class CustomerService {
       }
 
 
-
       else if (verify) {
         // 3. token is verified and selected product dose not exit
         console.log("in Service add cart -> have token, no exit product")
         let decoded = this.jwt_decode(token);
         token = token.replace("Bearer ", "");
         let company_id = await this.knex.select("company_id").from('company_product').where('id', id);
-        await this.knex.insert({ customer_id: decoded.id, product_id: id, unit: 1, company_id: company_id[0].company_id, name: name, description: description, stock: stock, price: price, tag: tag, type: type, image_data: image_data }).into('customer_cart');
+        await this.knex.insert({ customer_id: decoded.id, product_id: id, unit: 1, company_id: company_id[0].company_id, product_name: name, description: description, stock: stock, price: price, tag: tag, type: type, image_data: image_data }).into('customer_cart');
         let message = `Added ${name} to cart`
         console.log("return message " + message);
         return message;
       }
-
 
 
       else {
@@ -83,6 +80,20 @@ class CustomerService {
     }
 
   }
+
+
+  async showCart(token) {
+    let decoded = this.jwt_decode(token);
+    // let data = await this.knex.select("id", "customer_id", "product_id", "unit", "company_id", "name", "description", "price", "tag", "stock", "type", "image_name", "image_data").from('customer_cart').where('customer_id', `${decoded.id}`).orderBy('id', 'desc');
+    let data = await this.knex('customer_cart').select("customer_cart.id", "customer_cart.customer_id", "customer_cart.product_id", "customer_cart.unit", "customer_cart.company_id", "customer_cart.product_name", "customer_cart.description", "customer_cart.price", "customer_cart.tag", "customer_cart.stock", "customer_cart.type", "customer_cart.image_name", "customer_cart.image_data"
+      , "company_users.name")
+      .innerJoin('company_users', 'customer_cart.company_id', 'company_users.id')
+      .where('customer_cart.customer_id', `${decoded.id}`)
+      .orderBy('customer_cart.id', 'desc');
+      console.log(data);
+    return data;
+  }
+
 }
 
 module.exports = CustomerService;
