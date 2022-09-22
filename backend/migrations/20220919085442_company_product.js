@@ -8,7 +8,7 @@ exports.up = function(knex) {
         table.string("company_id");
         table.string("name");
         table.string("description");
-        table.integer("quantity");
+        table.integer("stock");
         table.float("price");
         table.string("tag");
         table.enum("type",["Product", "Service"]) 

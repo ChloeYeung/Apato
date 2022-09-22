@@ -65,7 +65,7 @@ export default function CompanyProductManagement() {
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Quantity</th>
+            <th>Stock</th>
             <th>Tag</th>
             <th>Image</th>
             <th>Edit</th>
@@ -153,19 +153,19 @@ export default function CompanyProductManagement() {
                       key={element.id}
                       placement="bottom"
                       overlay={
-                        <Popover id={"pmEditClosePopover" + element.id + "quantity"}>
-                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Quantity ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                        <Popover id={"pmEditClosePopover" + element.id + "stock"}>
+                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update stock ${element.type.split("")[0]}${element.id}`}</Popover.Header>
                           <Popover.Body>
-                            <input type="number" name="quantity" placeholder='quantity' id='pmEditInput' onChange={handleEditChange} />
+                            <input type="number" name="stock" placeholder='stock' id='pmEditInput' onChange={handleEditChange} />
                             <br />
                             <br />
                             <div className="d-flex justify-content-center">
-                              <Button variant="outline-secondary" onClick={() => handleEditBtnChange(element.id, "quantity")} className='btn-sm'>Submit</Button>
+                              <Button variant="outline-secondary" onClick={() => handleEditBtnChange(element.id, "stock")} className='btn-sm'>Submit</Button>
                             </div>
                           </Popover.Body>
                         </Popover>
                       }>
-                      <div>{element.quantity}</div>
+                      <div>{element.stock}</div>
                     </OverlayTrigger>
                   </td>
                   {/* 

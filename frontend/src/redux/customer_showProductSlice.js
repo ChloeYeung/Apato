@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
   showproduct: [],
+  addcartmessage: [],
 };
 
 export const customer_showProductSlice = createSlice({
@@ -12,10 +13,13 @@ export const customer_showProductSlice = createSlice({
     showProduct: (state, action) => {
       state.showproduct = action.payload;
     },
+    addCartMessage: (state, action) => {
+      state.addcartmessage = action.payload;
+    }
   },
 });
 
-export const { showProduct } = customer_showProductSlice.actions;
+export const { showProduct, addCartMessage } = customer_showProductSlice.actions;
 
 export default customer_showProductSlice.reducer;
 
@@ -36,13 +40,9 @@ export const addCartThunk = (add) => async (dispatch) => {
   const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/add_cart`, {
     add, token
   });
-  //   let tmp = [];
-  //   tmp.push(res.data)
-  //   dispatch(showPm(tmp[0]));
-  //   for (let i = 0; i < document.getElementsByClassName("pmEditInput").length; i++) {
-  //     document.getElementsByClassName("pmEditInput")[i].value = "";
-  //   }
-  // dispatch(showProduct(response.data));
+  let tmp = [];
+  tmp.push(response.data)
+  dispatch(addCartMessage(tmp[0]));
 };
 
 

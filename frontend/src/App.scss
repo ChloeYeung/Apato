@@ -1,0 +1,67 @@
+/* /Pages/CompanySalesHistory */
+#comSalesHisTable {
+  display: flex;
+}
+
+#comSalesHisThead .comSalesHisTr,
+#comSalesHisTbody .comSalesHisTr {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+/* /Pages/CompanySalesSummary */
+#comSalesSumWelcome {
+  font-size: 13px;
+}
+
+
+/* components/navbar */
+.logoutBtn {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+
+/* Customer Show Product */
+.toastNoticeShowProduct {
+  opacity: 0.8;
+  width: 200px;
+  height: 150px;
+}
+
+#addcartmessage {
+  font-size: 17px;
+  color: rgba(95, 92, 92, 0.624);
+}
+
+.addcarticon {
+  font-size: 30px;
+  color: rgba(95, 92, 92, 0.624);
+}
+
+/* making toast on the top layer */
+#cusShowProductContainer {
+  position: relative;
+}
+
+#cusShowProductBottomLayer,
+#cusShowProductTopLayer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#cusShowProductTopLayer {
+  z-index: 10;
+  position: absolute;
+  transform: translate(50%,50%);
+} 
+
+

@@ -19,10 +19,10 @@ class CustomerRouter {
   }
 
   async addCart(req, res) {
-    let token = req.headers.authorization;
-    console.log(req.body);
-    
-    let response = await (this.CustomerService.addCart(token));
+    let token = req.body.token
+    let {id, name, description, stock, price, tag, type, image_data, image_name} = req.body.add
+    console.log(req.body.add)
+    let response = await (this.CustomerService.addCart(token, id, name, description, stock, price, tag, type, image_data, image_name));
     return res.send(response);
   }
 

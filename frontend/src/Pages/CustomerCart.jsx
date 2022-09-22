@@ -14,9 +14,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrFormAdd } from "react-icons/gr";
 import { TbMinus } from "react-icons/tb";
 
-
-
-import React from 'react'
+import React from 'react';
 
 export default function CustomerCart() {
   return (
@@ -30,21 +28,25 @@ export default function CustomerCart() {
           <Card.Body>
             <div className='row'>
 
-       
-              <h3 style={{marginLeft:"30px"}} className="text-secondary">CUPCAKE COMPANY</h3>
-       
+              {/* company title */}
+              <h3 style={{ marginLeft: "30px" }} className="text-secondary">CUPCAKE COMPANY</h3>
 
+              {/* product image */}
               <div className='col'>
                 <img src={logo} style={{ height: "150px", weight: "150px" }} className="map img-resonsive" />
               </div>
 
+              {/* product info */}
               <div className='col' style={{ padding: "15px" }}>
+
+                {/* container - base info */}
                 <Card.Text>
                   <h4>Product Name</h4>
                   <p>$ </p>
                 </Card.Text>
 
 
+                {/* container - button group */}
                 <div className='row'>
                   <div className='col'>
                     <InputGroup>
@@ -63,7 +65,15 @@ export default function CustomerCart() {
                   </div>
                 </div>
 
+                {/* container - stock info */}
+                <div>
+                  <Card.Text className='text-secondary'>
+                    remaining stock:
+                  </Card.Text>
+                </div>
+
               </div>
+
             </div>
 
           </Card.Body>
@@ -93,6 +103,10 @@ export default function CustomerCart() {
           </Card>
 
         </div>
+
+
+
+
 
 
 

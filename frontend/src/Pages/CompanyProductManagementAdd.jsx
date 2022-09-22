@@ -26,7 +26,7 @@ export default function CompanyProductManagementAdd() {
     const [addProduct, setAddProduct] = useState({
         name: "",
         description: "",
-        quantity: "",
+        stock: "",
         price: "",
         tag: "",
         type: "",
@@ -70,8 +70,8 @@ export default function CompanyProductManagementAdd() {
                             <br />
 
                             <div className='row'>
-                                <label >Quantity: </label>
-                                <input type="number" placeholder='2' name="quantity" onChange={handleAddChange} id="pmAddFormQuantity" className="addPmInput" />
+                                <label >Stock: </label>
+                                <input type="number" placeholder='2' name="stock" onChange={handleAddChange} id="pmAddFormStock" className="addPmInput" />
                             </div>
                             <br />
 

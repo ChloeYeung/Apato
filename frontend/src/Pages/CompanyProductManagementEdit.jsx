@@ -22,7 +22,7 @@ export default function CompanyProductManagementEdit() {
     const [editProduct, setEditProduct] = useState({
         name: "",
         description: "",
-        quantity: "",
+        stock: "",
         price: "",
         tag: "",
         type: "",
@@ -64,8 +64,8 @@ export default function CompanyProductManagementEdit() {
                         </div>
                         <br />
                         <div className='row'>
-                            <label >Quantity: </label>
-                            <input type="number" placeholder='2' name="quantity" onChange={handleEditChange} className="addPmInput" />
+                            <label >Stock: </label>
+                            <input type="number" placeholder='2' name="stock" onChange={handleEditChange} className="addPmInput" />
                         </div>
                         <br />
                         <div className='row'>

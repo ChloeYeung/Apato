@@ -1,4 +1,5 @@
 const express = require("express");
+// const { default: CompanySalesHistory } = require("../../frontend/src/Pages/CompanySalesHistory");
 
 class CompanyRouter {
   constructor(CompanyService) {
@@ -26,10 +27,9 @@ class CompanyRouter {
     const image_data = req.files.image.data;
     console.log(image_name);
     console.log(image_data);
-    let { name, description, quantity, price, tag, type } = req.body;
+    let { name, description, stock, price, tag, type , token} = req.body;
     console.log(req.body)
-    let token = req.body.token;
-    let response = await this.CompanyService.addProductManagement(token, name, description, quantity, price, tag, type, image_name, image_data);
+    let response = await this.CompanyService.addProductManagement(token, name, description, stock, price, tag, type, image_name, image_data);
     return res.send(response);
   }
 

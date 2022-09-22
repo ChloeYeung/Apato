@@ -55,7 +55,7 @@ export const addpmThunk = (add) => async (dispatch) => {
   formData.append("description", add.description);
   formData.append("type", add.type);
   formData.append("price", add.price);
-  formData.append("quantity", add.quantity);
+  formData.append("stock", add.stock);
   formData.append("tag", add.tag);
   formData.append("image", imageFile);
   formData.append("token", token);
