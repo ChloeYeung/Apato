@@ -22,29 +22,27 @@ export const company_pmSlice = createSlice({
 export const { showPm, imagePm } = company_pmSlice.actions;
 
 export default company_pmSlice.reducer;
-
+function toBase64(arr) {
+  arr = new Uint8Array(arr)
+  return btoa(
+    arr.reduce((data, byte) => data + String.fromCharCode(byte), '')
+  );
+}
 export const showpmThunk = () => async (dispatch) => {
   const token = localStorage.getItem("TOKENCOM");
   const response = await axios.get(`${process.env.REACT_APP_BACKEND}/company/showPm`, {
     headers: {
       Authorization: `Bearer ${token}`,
-    },  
-  });
+    }});
+  // change image from Buffer to base64
+  response.data.forEach((e, i) => {
+    if (e.image_data != null)
+      response.data[i].image_data = toBase64(e.image_data.data);
+  })
+
+  // response.data['image_base64']= toBase64(response.data[3].image_data.data)
+  console.log(response.data[3].image_data)
   dispatch(showPm(response.data));
-
-  let imageRes = [];
-  let base64;
-  for (let i = 0; i < response.data.length; i++) {
-    base64 = btoa(
-      new Uint8Array(response.data[i].image_data).reduce(
-        (data, byte) => data + String.fromCharCode(byte),
-        ''
-      )
-    )
-    imageRes.push(base64)
-  }
-  dispatch(imagePm(imageRes));
-
 };
 
 export const addpmThunk = (add) => async (dispatch) => {
@@ -63,9 +61,7 @@ export const addpmThunk = (add) => async (dispatch) => {
   let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/addPm`, formData)
   console.log("in addpmThink")
 
-  let tmp = [];
-  tmp.push(res.data)
-  dispatch(showPm(tmp[0]));
+  dispatch(showpmThunk)
 
   for (let i = 0; i < document.getElementsByClassName("addPmInput").length; i++) {
     document.getElementsByClassName("addPmInput")[i].value = "";

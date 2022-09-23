@@ -198,16 +198,19 @@ export default function CompanyProductManagement() {
                   </td>
 
                   <td>
-                    {/* {element.image_data} */}
+                    <img  style={{width: "150px", height: "150px"}} src={`data:image/png;base64 ,${element.image_data}`}/>
                   </td>
+
                   <td>
                     <Link to="/company/product_management/edit">
                       <Button variant='light'><AiOutlineEdit /></Button>
                     </Link>
                   </td>
+
                   <td>
                     <Button variant='light' onClick={() => handleDelBtnChange(element.id)}><IoTrashOutline className={"pmDel" + element.id} /></Button>
                   </td>
+                  
                 </tr>
               </>
             ))
