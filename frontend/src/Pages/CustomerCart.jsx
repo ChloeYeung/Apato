@@ -4,6 +4,7 @@ import React from 'react';
 import CustomerNavbar from '../Components/CustomerNavbar';
 import logo from '../logo.svg';
 import cartEmpty from '../images/cartEmpty2.png';
+import comNavNoPic from '../images/comNavNoPic.jpg'
 //bootstrap
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -21,20 +22,24 @@ import { MdReportProblem } from "react-icons/md";
 import { useState, useEffect } from "react";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { showCartThunk, addCartUnitThunk, minusCartUnitThunk, deleteCartThunk, showOrderTotalThunk } from "../redux/customer_cartSlice";
+import { showCartThunk, addCartUnitThunk, minusCartUnitThunk, deleteCartThunk, showOrderTotalThunk, cusNavInfoThunk } from "../redux/customer_cartSlice";
 
 export default function CustomerCart() {
   const showcart = useSelector((state) => state.cartReducer.showcart);
   const showmessagechart = useSelector((state) => state.cartReducer.showmessagecart);
   const showordertotal = useSelector((state) => state.cartReducer.showordertotal);
+  const customernavinfo = useSelector((state) => state.cartReducer.customernavinfo);
+
   console.log(showcart);
   console.log(showmessagechart);
+  console.log(customernavinfo);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(showCartThunk());
     dispatch(showOrderTotalThunk());
+    dispatch(cusNavInfoThunk());
   }, []);
 
   // alert box
@@ -66,24 +71,7 @@ export default function CustomerCart() {
     dispatch(deleteCartThunk(element2.id))
   }
 
-  //cal order total
-  // const [orderTotal, setOrderTotal] = useState("");
 
-
-  // let unitPrice;
-  // let unitArray = [];
-
-  //   let calOrderTotal = function () {
-  //     for (const property in showcart) {
-  //       for (let i = 0; i < showcart[property].length; i++) {
-  //         unitPrice = ((showcart[property][i].price) * (showcart[property][i].unit));
-  //         unitArray.push(unitPrice);
-  //         return unitArray;
-  // console.log()
-  //       }
-  //       console.log(unitArray)
-  //     }
-  //   }
 
 
 
@@ -91,7 +79,10 @@ export default function CustomerCart() {
     <div>
       <>
         {/* navbar */}
-        <CustomerNavbar />
+        {/* <CustomerNavbar /> */}
+              <CustomerNavbar
+        customerImage={customernavinfo.image_data === null ? comNavNoPic  : `data:image/png;base64 ,${customernavinfo.image_data}`}
+        customerName={customernavinfo.name} />
 
 
         {/* empty cart will render */}

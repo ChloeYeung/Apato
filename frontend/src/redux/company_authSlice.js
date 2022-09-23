@@ -24,21 +24,17 @@ export const { login, logout } = company_authSlice.actions;
 export default company_authSlice.reducer;
 
 export const signupComThunk = (add) => async () => {
-      // console.log(email, password, name, phone_no, cypto_no);
-      const imageFile = document.getElementById('signUpFormImageCom').files[0];
-      let formData = new FormData();
-      formData.append("email", add.email);
-      formData.append("password", add.password);
-      formData.append("name", add.name);
-      formData.append("phone_no", add.phone_no);
-      formData.append("cypto_no", add.cypto_no);
-      formData.append("image_data", imageFile);
+  const imageFile = document.getElementById('signUpFormImageCom').files[0];
+  let formData = new FormData();
+  formData.append("email", add.email);
+  formData.append("password", add.password);
+  formData.append("name", add.name);
+  formData.append("phone_no", add.phone_no);
+  formData.append("cypto_no", add.cypto_no);
+  formData.append("image_data", imageFile);
 
-
-      await axios.post(`${process.env.REACT_APP_BACKEND}/company/signup`, formData);
-
-
-    };
+  await axios.post(`${process.env.REACT_APP_BACKEND}/company/signup`, formData);
+};
 
 export const loginComThunk =
   ({ email, password }) =>

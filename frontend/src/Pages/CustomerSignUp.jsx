@@ -141,13 +141,10 @@ export default function CustomerSignUp() {
                     </div> */}
 
             <div className='row'>
-              <label >image </label>
-              <input
-                type="file"
-                name="image"
-                onChange={handleChange}
-              />
+              <label >Image: </label>
+              <input type="file" accept='image/png, image/gif, image/jpeg' id="signUpFormImageCus" name="image" />
             </div>
+
             <br />
             <Button onClick={() =>
               dispatch(signupCusThunk(credential)).then(() => navigate("/customer/login"))

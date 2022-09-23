@@ -81,9 +81,7 @@ app.post("/company/login", async (req, res) => {
 app.post("/customer/signup", async (req, res) => {
   const image_data = req.files.image_data.data;
   console.log(image_data);
-  let { email, password, name, phone_no, cypto_no} = req.body;
-  // const { email, password, name, phone_no, address, cypto_no, image_data } = req.body;
-  // console.log(email, password);
+  let { email, password, name, phone_no, cypto_no, address} = req.body;
   let query = await knex("customer_users").where({ email }).first();
   const hashed = await bcrypt.hash(password, 10);
   if (query == undefined) {
