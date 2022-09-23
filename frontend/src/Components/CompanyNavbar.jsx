@@ -57,6 +57,7 @@ export default function CompanyNavbar(props) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
     </>
   )
 }

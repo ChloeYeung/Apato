@@ -16,7 +16,7 @@ import { TbMinus } from "react-icons/tb";
 import { useState, useEffect } from "react";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { showCartThunk } from "../redux/customer_cartSlice";
+import { showCartThunk, addCartUnitThunk } from "../redux/customer_cartSlice";
 
 export default function CustomerCart() {
   const showcart = useSelector((state) => state.cartReducer.showcart);
@@ -27,6 +27,14 @@ export default function CustomerCart() {
   useEffect(() => {
     dispatch(showCartThunk());
   }, []);
+
+  let handleAddCartUnit = function (element2) {
+    console.log(element2);
+    let cart_id = element2.id;
+    let product_id = element2.product_id;
+    let add = { cart_id: cart_id, product_id, product_id }
+    dispatch(addCartUnitThunk(add));
+  }
 
   return (
     <div>
@@ -65,7 +73,7 @@ export default function CustomerCart() {
 
                           {/* product image */}
                           <div className='col'>
-                            <img src={logo} style={{ height: "150px", weight: "150px" }} className="map img-resonsive" />
+                            <img src={`data:image/png;base64 ,${element2.image_data}`} style={{ height: "150px", weight: "150px" }} className="map img-resonsive" />
                           </div>
 
                           {/* product info */}
@@ -73,8 +81,9 @@ export default function CustomerCart() {
 
                             {/* container - base info */}
                             <Card.Text>
-                              <h4>Product Name: {element2.product_name}</h4>
-                              <p>$ </p>
+                              {/* <p>{element2.image_data}</p> */}
+                              <h4>{element2.product_name}</h4>
+                              <p>$ {element2.price}</p>
                             </Card.Text>
 
 
@@ -82,15 +91,22 @@ export default function CustomerCart() {
                             <div className='row'>
                               <div className='col'>
                                 <InputGroup>
-                                  <Button variant="outline-secondary" size="sm">+</Button>
+                                  <Button variant="outline-secondary" size="sm" onClick={() => handleAddCartUnit(element2)}>+</Button>
                                   <Form.Control
-                                    value="3"
+                                    value={element2.unit}
                                     style={{ maxWidth: "50px" }}
                                     className="text-center"
                                   />
                                   <Button variant="outline-secondary" size="sm">-</Button>
+
                                 </InputGroup>
+
+
+
+
+
                               </div>
+
 
                               <div className='col'>
                                 <Button variant='outline-secondary'><RiDeleteBin6Line /></Button>
@@ -100,7 +116,7 @@ export default function CustomerCart() {
                             {/* container - stock info */}
                             <div>
                               <Card.Text className='text-secondary'>
-                                remaining stock:
+                                remaining stock:{element2.stock}
                               </Card.Text>
                             </div>
 
@@ -111,7 +127,6 @@ export default function CustomerCart() {
 
 
                       </>
-
                     ))
                   }
 

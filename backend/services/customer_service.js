@@ -179,7 +179,7 @@ class CustomerService {
 
 
 
-  
+
 
   //Cart
   async showCart(token) {
@@ -193,6 +193,43 @@ class CustomerService {
     console.log(data);
     return data;
   }
+
+  async addCartUnit(token, cart_id, product_id) {
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      // console.log("decoded: " + decoded.id);
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        let originUnit = await this.knex("customer_cart").select("unit").where("id", `${cart_id}`);
+        console.log(originUnit[0].unit);
+        let comStock = await this.knex("company_product").select("stock").where("id", `${product_id}`);
+        console.log("comStock: " + comStock[0].stock);
+
+        let message = "";
+        // check company stock > customer wanted unit update action 
+        (comStock[0].stock > originUnit[0].unit) ?
+          await this.knex("customer_cart").update("unit", `${originUnit[0].unit + 1}`).where("id", `${cart_id}`)
+          : message = "No stock remain";
+
+        //check the message
+        (message == "No stock remain") ?
+          message = "No stock remain"
+          : message = "Added one unit"
+
+        return message;
+
+
+      }
+    } catch (error) {
+      console.log("Error in Service customer addCartUnit")
+      console.log(error);
+    }
+
+
+  }
+
+
 
 }
 

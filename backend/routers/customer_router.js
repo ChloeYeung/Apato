@@ -14,6 +14,7 @@ class CustomerRouter {
     router.post("/add_cart_ser", this.addCartService.bind(this));
     // Cart
     router.get("/show_cart", this.showCart.bind(this));
+    router.post("/add_cart_unit", this.addCartUnit.bind(this));
     return router;
   }
 
@@ -57,11 +58,21 @@ class CustomerRouter {
   async showCart(req, res) {
     let token = req.headers.authorization;
     console.log(token);
-    // let { id, customer_id, product_id, unit, company_id, name, description, price, tag, stock, type, image_name } = req.body.show
-    // console.log(req.body.show)
     let response = await (this.CustomerService.showCart(token));
     return res.send(response);
   }
+
+  async addCartUnit(req, res) {
+    let token = req.body.token
+    let {cart_id, product_id} = req.body.add;
+    let response = await (this.CustomerService.addCartUnit(token, cart_id, product_id));
+    return res.send(response);
+  }
+
+
+
+
 }
+
 
 module.exports = CustomerRouter;

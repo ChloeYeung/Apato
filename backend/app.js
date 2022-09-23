@@ -28,9 +28,6 @@ const CompanyRouter = require("./routers/company_router");
 const CustomerService = require("./services/customer_service");
 const CustomerRouter = require("./routers/customer_router");
 
-// const CompanyService = new CompanyService(knex);
-// const CustomerService = new CustomerService(knex);
-
 
 app.use("/company", new CompanyRouter(new CompanyService(knex, jwt, jwt_decode)).router());
 app.use("/customer", new CustomerRouter(new CustomerService(knex, jwt, jwt_decode)).router());
@@ -38,7 +35,6 @@ app.use("/customer", new CustomerRouter(new CustomerService(knex, jwt, jwt_decod
 
 //company: login, signup, logout
 app.post("/company/signup", async (req, res) => {
-  // const image_name = req.files.image.name;
   const image_data = req.files.image_data.data;
   console.log(image_data);
   let { email, password, name, phone_no, cypto_no} = req.body;
@@ -83,15 +79,16 @@ app.post("/company/login", async (req, res) => {
 
 //customer: login, signup, logout
 app.post("/customer/signup", async (req, res) => {
-  // const username = req.body.username;
-  // const password = req.body.password;
-  const { email, password, name, phone_no, address, cypto_no, image } = req.body;
-  console.log(email, password);
+  const image_data = req.files.image_data.data;
+  console.log(image_data);
+  let { email, password, name, phone_no, cypto_no} = req.body;
+  // const { email, password, name, phone_no, address, cypto_no, image_data } = req.body;
+  // console.log(email, password);
   let query = await knex("customer_users").where({ email }).first();
   const hashed = await bcrypt.hash(password, 10);
   if (query == undefined) {
     let data = await knex.select("id").from('customer_users').orderBy('id');
-    await knex("customer_users").insert({ "id": `${data.length + 1}`,"email": email, "password": hashed, "name": name, "phone_no": phone_no, "address": address, "cypto_no": cypto_no, "image": image });
+    await knex("customer_users").insert({ "id": `${data.length + 1}`,"email": email, "password": hashed, "name": name, "phone_no": phone_no, "address": address, "cypto_no": cypto_no, "image_data": image_data });
     //same as     await knex("users").insert({ username: username, password: hashed });
     res.json("signup complete");
   } else {

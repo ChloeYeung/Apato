@@ -13,35 +13,56 @@ import { useDispatch, useSelector } from "react-redux";
 //file
 import { logoutCusThunk } from "../redux/customer_authSlice";
 
-export default function CustomerNavbar() {
+export default function CustomerNavbar(props) {
     const dispatch = useDispatch();
     return (
-        <div>
-            <Navbar bg="light" variant="light">
+        <>
+
+            <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
                 <Container>
-                    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-                    <Nav className="me-auto flex-grow-1 justify-content-evenly">
-                        {/* <Link to="/">SeachBar</Link> */}
+                    <Navbar.Brand href="#home">Bripto</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto ">
+                            <NavDropdown title="Product / Service" id="collasible-nav-dropdown">
+                                <NavDropdown.Item as={Link} to="/customer/show_product" style={{ color: 'black', textDecoration: "none" }}>
+                                    Product
+                                </NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="/customer/show_service" style={{ color: 'black', textDecoration: "none" }}>
+                                    Service
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                            <Nav.Link as={Link} to="/customer/order_history" style={{ color: 'black', textDecoration: "none" }}>Order History</Nav.Link>
+                            <Nav.Link as={Link} to="/customer/cart" style={{ color: 'black', textDecoration: "none" }} >Shopping Cart</Nav.Link>
+                        </Nav>
+                        <Nav>
 
-                        <NavDropdown title="Product/Service" id="basic-nav-dropdown" >
-                            <NavDropdown.Item ><Link to="/customer/show_product" style={{ color: 'black', textDecoration: "none" }}>Product</Link> </NavDropdown.Item>
-                            <NavDropdown.Item ><Link to="/customer/show_service" style={{ color: 'black', textDecoration: "none" }}>Service</Link></NavDropdown.Item>
-                        </NavDropdown>
+                            {/* company image */}
+                            <Nav.Link disabled>
+                                {/* <img class="NavBarIcon" src={props.companyImage} /> */}
+                            </Nav.Link>
 
-                        {/* <Link to="/customer/show_product" style={{ color: 'black', textDecoration: "none", position: "relative", top: "8px" }}>Product</Link>
-                        <Link to="/customer/show_service" style={{ color: 'black', textDecoration: "none" , position: "relative", top: "8px"}}>Service</Link> */}
-                        <Link to="/customer/order_history" style={{ color: 'black', textDecoration: "none", position: "relative", top: "8px" }}>Order History</Link>
-                        <Link to="/customer/cart" style={{ color: 'black', textDecoration: "none", position: "relative", top: "8px" }}>Shopping Cart</Link>
+                            {/* company name */}
+                            <Nav.Link disabled>
+                                {/* Welcome Back! {props.companyName} */}
+                            </Nav.Link>
 
-
-                        <button className="logoutBtn"
-                            onClick={() => dispatch(logoutCusThunk())}>
-                            Logout <ImExit color='blue' />
-                        </button>
-                    </Nav>
+                            {/* logout btn */}
+                            <Nav.Link >
+                                <button className="logoutBtn"
+                                    onClick={() => dispatch(logoutCusThunk())}>
+                                    Logout <ImExit color='blue' />
+                                </button>
+                            </Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </div>
+
+
+
+
+        </>
     )
 }
 
