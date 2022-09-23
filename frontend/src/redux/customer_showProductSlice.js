@@ -23,6 +23,13 @@ export const { showProduct, addCartMessage } = customer_showProductSlice.actions
 
 export default customer_showProductSlice.reducer;
 
+function toBase64(arr) {
+  arr = new Uint8Array(arr)
+  return btoa(
+    arr.reduce((data, byte) => data + String.fromCharCode(byte), '')
+  );
+}
+
 export const showProductThunk = () => async (dispatch) => {
   const token = localStorage.getItem("TOKENCUS");
   console.log(token);
@@ -31,6 +38,13 @@ export const showProductThunk = () => async (dispatch) => {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  // change image from Buffer to base64
+  response.data.forEach((e, i) => {
+    if (e.image_data != null)
+      response.data[i].image_data = toBase64(e.image_data.data);
+  })
+  
   dispatch(showProduct(response.data));
 };
 

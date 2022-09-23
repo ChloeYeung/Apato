@@ -62,7 +62,7 @@ export default function CustomerShowProduct() {
 
 
           <div id="cusShowProductTopLayer" className='container'  >
-            <div className="d-flex flex-nowrap" id="cusShowProductSecondLayer" >
+            <div className="d-flex flex-nowrap"  >
 
               {/* Toast notice*/}
               <Row >
@@ -133,9 +133,9 @@ export default function CustomerShowProduct() {
                   .map((element, index) => (
                     <>
                       <div className="col-sm-6 col-md-4 col-lg-3">
-                        <Card key={index + "showProductCard"}>
-                          <Card.Img variant="top" src="holder.js/100px180" />
-                          <Card.Body>
+                        <Card key={index + "showProductCard"} className="d-flex align-items-center justify-content-center">
+                          <img style={{ width: "150px", height: "150px" }} src={`data:image/png;base64 ,${element.image_data}`} />
+                          <Card.Body className="text-center">
                             <Card.Title>{element.name}</Card.Title>
                             <Card.Text>
                               {element.description}
@@ -145,13 +145,11 @@ export default function CustomerShowProduct() {
                             <>
                             </>
 
-
-
                             {/* Add cart btn */}
-                            <Button variant="primary" onClick={() => handleAddCartBtn(element)}>Add to cart <BsCartPlus /></Button>
+                            <Button id="showProductAddCartBtn" onClick={() => handleAddCartBtn(element)}> <BsCartPlus /></Button>
 
                             {/* Descrition Btn */}
-                            <Button variant="primary">Description <HiOutlineInformationCircle /></Button>
+                            <Button variant="primary"> <HiOutlineInformationCircle /></Button>
                           </Card.Body>
                         </Card>
                       </div>

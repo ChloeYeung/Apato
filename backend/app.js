@@ -46,7 +46,8 @@ app.post("/company/signup", async (req, res) => {
   const hashed = await bcrypt.hash(password, 10);
   if (query == undefined) {
     // await knex("company_users").insert({ "email": email, "password": hashed, "name": name, "phone_no": phone_no, "cypto_no": cypto_no, "image": image });
-    await knex("company_users").insert({ "email": email, "password": hashed, "name": name, "phone_no": phone_no, "cypto_no": cypto_no});
+    let data = await knex.select("id").from('company_users').orderBy('id');
+    await knex("company_users").insert({ "id": `${data.length + 1}`, "email": email, "password": hashed, "name": name, "phone_no": phone_no, "cypto_no": cypto_no });
 
     //same as     await knex("users").insert({ username: username, password: hashed });
     res.json("signup complete");
@@ -76,22 +77,6 @@ app.post("/company/login", async (req, res) => {
   }
 });
 
-app.get("/todo", async (req, res) => {
-  let token = req.headers.authorization;
-  token = token.replace("Bearer ", "");
-  let verify = jwt.verify(token, process.env.JWT_SECRET);
-  console.log(verify);
-  if (verify) {
-    res.json({
-      todo: ["get bottle of water", "water plants", "eat breakfast"],
-    });
-    console.log("hhhh")
-  } else {
-    res.sendStatus(401);
-  }
-});
-
-
 
 //customer: login, signup, logout
 app.post("/customer/signup", async (req, res) => {
@@ -102,7 +87,8 @@ app.post("/customer/signup", async (req, res) => {
   let query = await knex("customer_users").where({ email }).first();
   const hashed = await bcrypt.hash(password, 10);
   if (query == undefined) {
-    await knex("customer_users").insert({ "email": email, "password": hashed, "name": name, "phone_no": phone_no, "address": address, "cypto_no": cypto_no, "image": image });
+    let data = await knex.select("id").from('customer_users').orderBy('id');
+    await knex("customer_users").insert({ "id": `${data.length + 1}`,"email": email, "password": hashed, "name": name, "phone_no": phone_no, "address": address, "cypto_no": cypto_no, "image": image });
     //same as     await knex("users").insert({ username: username, password: hashed });
     res.json("signup complete");
   } else {

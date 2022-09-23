@@ -22,18 +22,21 @@ export const company_pmSlice = createSlice({
 export const { showPm, imagePm } = company_pmSlice.actions;
 
 export default company_pmSlice.reducer;
+
 function toBase64(arr) {
   arr = new Uint8Array(arr)
   return btoa(
     arr.reduce((data, byte) => data + String.fromCharCode(byte), '')
   );
 }
+
 export const showpmThunk = () => async (dispatch) => {
   const token = localStorage.getItem("TOKENCOM");
   const response = await axios.get(`${process.env.REACT_APP_BACKEND}/company/showPm`, {
     headers: {
       Authorization: `Bearer ${token}`,
     }});
+    
   // change image from Buffer to base64
   response.data.forEach((e, i) => {
     if (e.image_data != null)
