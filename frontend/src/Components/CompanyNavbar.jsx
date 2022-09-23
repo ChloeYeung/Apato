@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 //Bootstrap
+import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 //react-router-dom
 import { Link, NavLink } from "react-router-dom";
 //react-icon
@@ -12,29 +14,49 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutComThunk } from "../redux/company_authSlice";
 
 
-export default function CompanyNavbar() {
+export default function CompanyNavbar(props) {
   const dispatch = useDispatch();
   return (
-    <div>
-      <div className="flex-grow-1  justify-content-evenly" >
+    <>
+      {/*  nav bar */}
+      <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Container>
+          <Navbar.Brand>Bripto</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            {/* content */}
+            <Nav className="me-auto">
+              <Nav.Link > <Link to="/company/sales_summary" style={{ color: 'black', textDecoration: "none" }}
+              >Sales Summary</Link></Nav.Link>
+              <Nav.Link> <Link to="/company/sales_history" style={{ color: 'black', textDecoration: "none" }}
+              >Sales History</Link></Nav.Link>
+              <Nav.Link> <Link to="/company/product_management" style={{ color: 'black', textDecoration: "none" }}
+              >Product Management</Link></Nav.Link>
+            </Nav>
 
-        <Navbar bg="light" variant="light">
+            <Nav>
+              {/* company image */}
+              <Nav.Link disabled>
+                <img class="NavBarIcon" src={props.companyImage} />
+              </Nav.Link>
 
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto flex-grow-1 justify-content-evenly" >
-            <Link to="/company/sales_summary" style={{ color: 'black', textDecoration: "none" }}
-            >Sales Summary</Link>
-            <Link to="/company/sales_history" style={{ color: 'black', textDecoration: "none" }}
-            >Sales History</Link>
-            <Link to="/company/product_management" style={{ color: 'black', textDecoration: "none" }}
-            >Product Management</Link>
-            <button className="logoutBtn"
-              onClick={() => dispatch(logoutComThunk())}>
-              Logout <RiLoginCircleFill color='blue' />
-            </button>
-          </Nav>
-        </Navbar>
-      </div>
-    </div>
+              {/* company name */}
+              <Nav.Link disabled>
+                Welcome Back! {props.companyName}
+              </Nav.Link>
+
+              {/* logout */}
+              <Nav.Link>
+                <button className="logoutBtn"
+                  onClick={() => dispatch(logoutComThunk())}>
+                  Logout <RiLoginCircleFill color='blue' />
+                </button>
+              </Nav.Link>
+            </Nav>
+
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
   )
 }

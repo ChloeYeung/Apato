@@ -38,17 +38,20 @@ app.use("/customer", new CustomerRouter(new CustomerService(knex, jwt, jwt_decod
 
 //company: login, signup, logout
 app.post("/company/signup", async (req, res) => {
+  // const image_name = req.files.image.name;
+  const image_data = req.files.image_data.data;
+  console.log(image_data);
+  let { email, password, name, phone_no, cypto_no} = req.body;
   // const username = req.body.username;
   // const password = req.body.password;
-  const { email, password, name, phone_no, cypto_no, image } = req.body;
-  console.log(email, password);
+  console.log(email);
+  console.log(password)
   let query = await knex("company_users").where({ email }).first();
   const hashed = await bcrypt.hash(password, 10);
   if (query == undefined) {
     // await knex("company_users").insert({ "email": email, "password": hashed, "name": name, "phone_no": phone_no, "cypto_no": cypto_no, "image": image });
     let data = await knex.select("id").from('company_users').orderBy('id');
-    await knex("company_users").insert({ "id": `${data.length + 1}`, "email": email, "password": hashed, "name": name, "phone_no": phone_no, "cypto_no": cypto_no });
-
+    await knex("company_users").insert({ "id": `${data.length + 1}`, "email": email, "password": hashed, "name": name, "phone_no": phone_no, "cypto_no": cypto_no, "image_data": image_data });
     //same as     await knex("users").insert({ username: username, password: hashed });
     res.json("signup complete");
   } else {

@@ -8,11 +8,26 @@ class CompanyService {
   async showProductManagement(token) {
     let decoded = this.jwt_decode(token);
     token = token.replace("Bearer ", "");
+    console.log("decoded: " + decoded.id);
     let verify = this.jwt.verify(token, process.env.JWT_SECRET);
     if (verify) {
       let data = await this.knex.select("id", "name", "description", "stock", "price", "tag", "type", "image_data").from('company_product').where('company_id', decoded.id).orderBy('id');
+      let data2 = await this.knex.select("name", "image_data").from("company_users").where("id", decoded.id).first();
+      // let data = await this.knex
+      //   .select("company_product.id", "company_product.name", "company_product.description", "company_product.stock", "company_product.price", "company_product.tag", "company_product.type", "company_product.image_data")
+      //   .from('company_product')
+      //   .innerJoin('company_users', 'company_product.company_id', 'company_users.id')
+      //   .where('company_product.company_id', decoded.id).orderBy('company_product.id');
       // let data = await this.knex.select("id", "name", "description", "stock", "price", "tag", "type").from('company_product').where('company_id', decoded.id).orderBy('id');
-      
+
+      console.log(data2.name);
+      console.log(data2.image_data);
+      let company_name = data2.name;
+      let company_image = data2.image_data;
+      let array = [company_name, company_image];
+      console.log(array);
+      data.push(array);
+      console.log(data)
       return data;
     } else {
       res.sendStatus(401);

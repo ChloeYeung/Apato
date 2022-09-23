@@ -11,7 +11,7 @@ exports.up = function(knex) {
         table.integer("phone_no");
         table.string("address");
         table.string("cypto_no");
-        table.string("image");
+        table.binary("image_data");
       });
 };
 

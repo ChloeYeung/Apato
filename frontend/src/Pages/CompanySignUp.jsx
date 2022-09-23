@@ -124,12 +124,11 @@ export default function CompanySignUp() {
               <Form.Control type="file" />
 
             </Form.Group> */}
-            <label >Image </label>
-            <input
-                type="image"
-                name="image"
-                onChange={handleChange}
-              />
+
+            <div className='row'>
+              <label >Image: </label>
+              <input type="file" accept='image/png, image/gif, image/jpeg' id="signUpFormImageCom" name="image" />
+            </div>
 
             {/* <div className='row'>
                         <label >Image: </label>

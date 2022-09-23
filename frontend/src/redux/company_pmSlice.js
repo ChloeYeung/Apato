@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   showpm: [],
-  imagepm: [],
+  companyinfopm: [],
 };
 
 export const company_pmSlice = createSlice({
@@ -13,13 +13,13 @@ export const company_pmSlice = createSlice({
     showPm: (state, action) => {
       state.showpm = action.payload;
     },
-    imagePm: (state, action) => {
-      state.imagepm = action.payload;
+    companyInFoPm: (state, action) => {
+      state.companyinfopm = action.payload;
     },
   },
 });
 
-export const { showPm, imagePm } = company_pmSlice.actions;
+export const { showPm, companyInFoPm } = company_pmSlice.actions;
 
 export default company_pmSlice.reducer;
 
@@ -35,8 +35,20 @@ export const showpmThunk = () => async (dispatch) => {
   const response = await axios.get(`${process.env.REACT_APP_BACKEND}/company/showPm`, {
     headers: {
       Authorization: `Bearer ${token}`,
-    }});
-    
+    }
+  });
+
+  let company_image = response.data[response.data.length - 1][1];
+  let company_name = response.data[response.data.length - 1][0];
+  if (company_image != null) {
+    company_image = toBase64(company_image.data);
+  }
+
+  let arrayCom = { company_name: company_name, company_image: company_image }
+  dispatch(companyInFoPm(arrayCom));
+
+
+  response.data.pop();
   // change image from Buffer to base64
   response.data.forEach((e, i) => {
     if (e.image_data != null)
@@ -44,7 +56,7 @@ export const showpmThunk = () => async (dispatch) => {
   })
 
   // response.data['image_base64']= toBase64(response.data[3].image_data.data)
-  console.log(response.data[3].image_data)
+  // console.log(response.data[3].image_data)
   dispatch(showPm(response.data));
 };
 
@@ -64,7 +76,7 @@ export const addpmThunk = (add) => async (dispatch) => {
   let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/addPm`, formData)
   console.log("in addpmThink")
 
-  dispatch(showpmThunk)
+  dispatch((showpmThunk()))
 
   for (let i = 0; i < document.getElementsByClassName("addPmInput").length; i++) {
     document.getElementsByClassName("addPmInput")[i].value = "";

@@ -1,6 +1,7 @@
 // /company/product_management
 //file
 import CompanyNavbar from '../Components/CompanyNavbar';
+import cusNavNoPic from '../images/cusNavNoPic.jpg'
 //bootstrap
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -23,9 +24,9 @@ import $ from 'jquery';
 
 export default function CompanyProductManagement() {
   const showpm = useSelector((state) => state.pmReducer.showpm);
-  const imagepm = useSelector((state) => state.pmReducer.imagepm);
+  const companyinfopm = useSelector((state) => state.pmReducer.companyinfopm);
   console.log(showpm);
-  console.log(imagepm)
+  console.log(companyinfopm);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,7 +56,10 @@ export default function CompanyProductManagement() {
     <div>
 
       {/* Navbar */}
-      <CompanyNavbar />
+      <CompanyNavbar
+        companyImage={companyinfopm.company_image === null ? cusNavNoPic  : `data:image/png;base64 ,${companyinfopm.company_image}`}
+        companyName={companyinfopm.company_name} />
+
 
       {/* table */}
       <Table striped bordered hover variant="dark">
@@ -198,7 +202,7 @@ export default function CompanyProductManagement() {
                   </td>
 
                   <td>
-                    <img  style={{width: "150px", height: "150px"}} src={`data:image/png;base64 ,${element.image_data}`}/>
+                    <img style={{ width: "150px", height: "150px" }} src={`data:image/png;base64 ,${element.image_data}`} />
                   </td>
 
                   <td>
@@ -210,7 +214,7 @@ export default function CompanyProductManagement() {
                   <td>
                     <Button variant='light' onClick={() => handleDelBtnChange(element.id)}><IoTrashOutline className={"pmDel" + element.id} /></Button>
                   </td>
-                  
+
                 </tr>
               </>
             ))
