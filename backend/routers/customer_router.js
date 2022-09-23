@@ -15,6 +15,9 @@ class CustomerRouter {
     // Cart
     router.get("/show_cart", this.showCart.bind(this));
     router.post("/add_cart_unit", this.addCartUnit.bind(this));
+    router.post("/minus_cart_unit", this.minusCartUnit.bind(this));
+    router.post("/del_cart_unit", this.delCart.bind(this));
+    router.post("/show_order_total", this.showOrderTotal.bind(this));
     return router;
   }
 
@@ -57,17 +60,37 @@ class CustomerRouter {
   //Cart
   async showCart(req, res) {
     let token = req.headers.authorization;
-    console.log(token);
     let response = await (this.CustomerService.showCart(token));
     return res.send(response);
   }
 
   async addCartUnit(req, res) {
     let token = req.body.token
-    let {cart_id, product_id} = req.body.add;
+    let { cart_id, product_id } = req.body.add;
     let response = await (this.CustomerService.addCartUnit(token, cart_id, product_id));
     return res.send(response);
   }
+
+  async minusCartUnit(req, res) {
+    let token = req.body.token
+    let { cart_id, product_id } = req.body.minus;
+    let response = await (this.CustomerService.minusCartUnit(token, cart_id, product_id));
+    return res.send(response);
+  }
+
+  async delCart(req, res) {
+    let token = req.body.token;
+    let product_id = req.body.del;
+    let response = await (this.CustomerService.delCart(token, product_id));
+    return res.send(response);
+  }
+
+  async showOrderTotal(req, res) {
+    let token = req.body.token;
+    let response = await (this.CustomerService.showOrderTotal(token));
+    return res.send(response.toString());
+  }
+
 
 
 

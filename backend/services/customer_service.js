@@ -190,7 +190,6 @@ class CustomerService {
       .innerJoin('company_users', 'customer_cart.company_id', 'company_users.id')
       .where('customer_cart.customer_id', `${decoded.id}`)
       .orderBy('customer_cart.id', 'desc');
-    console.log(data);
     return data;
   }
 
@@ -198,7 +197,6 @@ class CustomerService {
     try {
       let decoded = this.jwt_decode(token);
       token = token.replace("Bearer ", "");
-      // console.log("decoded: " + decoded.id);
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
       if (verify) {
         let originUnit = await this.knex("customer_cart").select("unit").where("id", `${cart_id}`);
@@ -220,15 +218,92 @@ class CustomerService {
         return message;
 
 
+      } else {
+        res.sendStatus(401);
       }
     } catch (error) {
       console.log("Error in Service customer addCartUnit")
       console.log(error);
     }
-
-
   }
 
+  async minusCartUnit(token, cart_id, product_id) {
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        let originUnit = await this.knex("customer_cart").select("unit").where("id", `${cart_id}`);
+        console.log(originUnit[0].unit);
+
+        let message = "";
+        // check company stock > customer wanted unit update action 
+        (originUnit[0].unit == 1) ?
+          (message = "Cannot be reduced")
+          : (await this.knex("customer_cart").update("unit", `${originUnit[0].unit - 1}`).where("id", `${cart_id}`));
+
+        //check the message
+        (message == "Cannot be reduced") ?
+          message = "Cannot be reduced"
+          : message = "Minus one unit"
+        console.log(message)
+        return message;
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error in Service customer minusCartUnit")
+      console.log(error);
+    }
+  }
+
+
+  async delCart(token, product_id) {
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        await this.knex("customer_cart").where("id", `${product_id}`).del();
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error Service customer delCart ");
+      console.log(error);
+    }
+  }
+
+
+  async showOrderTotal(token) {
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        let data = await this.knex.select("price", "unit").where("customer_id", `${decoded.id}`).from("customer_cart");
+
+        let priceArray = [];
+        for (let i = 0; i < data.length; i++) {
+          priceArray.push((data[i].price) * (data[i].unit))
+        }
+
+        let orderTotal = priceArray.reduce(
+          (previousValue, currentValue) => previousValue + currentValue,
+          0,
+        );
+        console.log("orderTotal: " + orderTotal);
+
+        return orderTotal;
+
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error Service customer showOrderTotal ");
+      console.log(error);
+    }
+  }
 
 
 }

@@ -38,6 +38,7 @@ export const showProductThunk = () => async (dispatch) => {
       Authorization: `Bearer ${token}`,
     },
   });
+  console.log(response.data);
 
   // change image from Buffer to base64
   response.data.forEach((e, i) => {

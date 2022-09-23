@@ -4,6 +4,8 @@ import axios from "axios";
 const initialState = {
     showcart: [],
     customerinfocart: [],
+    showmessagecart: [],
+    showordertotal: [],
 };
 
 export const customer_cartSlice = createSlice({
@@ -16,10 +18,16 @@ export const customer_cartSlice = createSlice({
         customerInfoCart: (state, action) => {
             state.customerinfocart = action.payload;
         },
+        showMessageChart: (state, action) => {
+            state.showmessagecart = action.payload;
+        },
+        showOrderTotal: (state, action) => {
+            state.showordertotal = action.payload;
+        }
     },
 });
 
-export const { showCart, customerInfoCart } = customer_cartSlice.actions;
+export const { showCart, customerInfoCart, showMessageChart, showOrderTotal } = customer_cartSlice.actions;
 
 export default customer_cartSlice.reducer;
 
@@ -33,7 +41,6 @@ function toBase64(arr) {
 
 export const showCartThunk = () => async (dispatch) => {
     const token = localStorage.getItem("TOKENCUS");
-    console.log(token);
     const response = await axios.get(`${process.env.REACT_APP_BACKEND}/customer/show_cart`, {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -47,51 +54,68 @@ export const showCartThunk = () => async (dispatch) => {
             arr.push(ele1)
             tmp_showChart[ele1.company_id] = arr;
         }
-
         else {
             tmp_showChart[ele1.company_id].push(ele1);
         }
-
     })
 
-    for (const property in tmp_showChart) {
-        for (let i = 0; i < tmp_showChart[property].length; i++) {
-            if (tmp_showChart[property][i].image_data != null) {
-                tmp_showChart[property][i].image_data = toBase64(tmp_showChart[property][i].image_data.data)
-                // console.log(tmp_showChart[property][i].image_data);
-            }
-        }
+    // for (const property in tmp_showChart) {
+    //     for (let i = 0; i < tmp_showChart[property].length; i++) {
+    //         if (tmp_showChart[property][i].image_data != null) {
+    //             tmp_showChart[property][i].image_data = toBase64(tmp_showChart[property][i].image_data.data)
+    //         }
+    //     }
+    // }
 
+    for (const property in tmp_showChart) {
+        tmp_showChart[property].forEach((e, i) => {
+            if (e.image_data != null)
+                tmp_showChart[property][i].image_data = toBase64(e.image_data.data);
+        })
     }
 
+    console.log(tmp_showChart);
     dispatch(showCart(tmp_showChart));
 };
 
 
 export const addCartUnitThunk = (add) => async (dispatch) => {
     const token = localStorage.getItem("TOKENCUS");
-    console.log(add);
-    console.log(token);
     const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/add_cart_unit`, {
         add, token
     })
 
     dispatch(showCartThunk());
-    console.log(response.data);
+    dispatch(showMessageChart(response.data));
 };
 
 
+export const minusCartUnitThunk = (minus) => async (dispatch) => {
+    const token = localStorage.getItem("TOKENCUS");
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/minus_cart_unit`, {
+        minus, token
+    })
+
+    dispatch(showCartThunk());
+    dispatch(showMessageChart(response.data));
+};
+
+export const deleteCartThunk = (del) => async (dispatch) => {
+    const token = localStorage.getItem("TOKENCUS");
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/del_cart_unit`, {
+        del, token
+    })
+
+    dispatch(showCartThunk());
+};
 
 
-
-
-// export const addCartThunk = (add) => async (dispatch) => {
-//   const token = localStorage.getItem("TOKENCUS");
-//   console.log(token)
-//   const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/add_cart`, {
-//     add, token
-//   });
-//   let tmp = [];
-//   tmp.push(response.data)
-//   dispatch(addCartMessage(tmp[0]));
-// };
+export const showOrderTotalThunk = () => async (dispatch) => {
+    const token = localStorage.getItem("TOKENCUS");
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/show_order_total`, {
+        token
+    })
+    console.log(response);
+    console.log(response.data);
+    dispatch(showOrderTotal(response.data));
+};
