@@ -113,4 +113,37 @@ app.post("/customer/login", async (req, res) => {
 });
 
 
+//Customer Facebook Login
+app.post("/auth/facebook", async (req, res) => {
+  console.log("body", req.body);
+  let userInfo = req.body.userInfo;
+
+  let user = await knex("customer_users").where({ facebook_id: userInfo.id }).first();
+
+  if (!user) {
+    let id = await knex("customer_users")
+      .insert({
+        facebook_id: userInfo.id,
+        name: userInfo.name,
+      })
+      .returning("id");
+
+    const payload = {
+      id: id[0].id,
+      name: userInfo.name,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
+    res.json({ token });
+  } else {
+    const payload = {
+      id: user.id,
+      name: user.username,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
+    res.json({ token });
+  }
+});
+
 app.listen(8000, () => console.log("Listening to port 8000"));

@@ -1,5 +1,18 @@
 @import "./styles/partials";
 
+
+
+//remove all link style
+.rmLinkStyle {
+  @include rmLinkStyle
+}
+
+.rmLinkStyle:hover {
+  color: white;
+}
+
+
+
 /* /Pages/CompanySalesHistory */
 #comSalesHisTable {
   display: flex;
@@ -63,8 +76,8 @@
 #cusShowProductTopLayer {
   z-index: 10;
   position: absolute;
-  transform: translate(50%,50%);
-} 
+  transform: translate(50%, 50%);
+}
 
 
 
@@ -102,8 +115,8 @@
 #cusShowServiceTopLayer {
   z-index: 10;
   position: absolute;
-  transform: translate(50%,50%);
-} 
+  transform: translate(50%, 50%);
+}
 
 
 // Company Navbar
@@ -116,7 +129,7 @@
 
 
 //customer cart
-.overlayCartMessage{
+.overlayCartMessage {
   position: fixed;
   top: 30%;
   left: 35%;
@@ -128,18 +141,34 @@
   border-bottom-right-radius: 10%;
   border-top-left-radius: 10%;
   border-top-right-radius: 10%;
-   /*dim the background*/
+  /*dim the background*/
 }
 
-#overlayCartMessageText{
+#overlayCartMessageText {
   font-size: 20px;
 }
 
-.overlayCartMessageIcon{
-font-size: 28px;
+.overlayCartMessageIcon {
+  font-size: 28px;
 }
 
-#emptyCartPic{
+#emptyCartPic {
   height: 200px;
   width: 200px;
+}
+
+
+
+//customer payment status
+.paymentStatusImg {
+  height: 250px;
+  width: 250px;
+}
+
+.paymentRedirect {
+  color: rgb(78, 105, 172)
+}
+
+.paymentRedirect:hover {
+  color: rgb(93, 79, 108)
 }

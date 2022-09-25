@@ -3,27 +3,53 @@
 import React from 'react';
 //file
 import CustomerNavbar from '../Components/CustomerNavbar';
-
+import logo from '../logo.svg';
+//bootstrap
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 export default function CustomerOrderHistory() {
   return (
     <div>
-      
-      <CustomerNavbar/>
+      {/* Navbar */}
+      <CustomerNavbar />
+
+      {/* Title */}
+      <br />
+      <h3 className='text-center'>Order History</h3>
+      <br />
+
+      {/* order card */}
+      <div className='container'>
+        <div className='d-flex text-center justify-content-center align-items-center'>
+
+        <Card style={{ width: '25rem' }}>
+          <Card.Body>
+            <Card.Title> Order number #  </Card.Title>
+            <Card.Text>
+              Date
+              Status
+            </Card.Text>
+            <hr />
+
+            <div className='row'>
+
+              <div className='col'><img src={logo} alt="" /></div>
+              <div className='col'>
+                <p>Name</p> 
+                
+                <p>Unit</p> <p>Price</p>
+                </div>
+
+            </div>
+          </Card.Body>
 
 
-      {/* <div
-              style={{ display: "flex", margin: "4px", padding: "13px", border: "solid", borderRadius: '11px' }}>
-              <p >
-                {element.list}
-              </p>
-              <BsPencil
-                penid={element.id}
-                style={{ border: "solid black 1px", margin: "5px" }}
-                onClick={handleEditList}
-              />
-            </div> */}
-    
+
+        </Card>
+        </div>
+      </div>
+
     </div>
   )
 }

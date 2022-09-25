@@ -17,12 +17,13 @@ import { TbMinus } from "react-icons/tb";
 import { AiOutlineConsoleSql, AiOutlineMinusCircle } from "react-icons/ai";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { MdReportProblem } from "react-icons/md";
-
 //state
 import { useState, useEffect } from "react";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { showCartThunk, addCartUnitThunk, minusCartUnitThunk, deleteCartThunk, showOrderTotalThunk, cusNavInfoThunk } from "../redux/customer_cartSlice";
+import { Link } from "react-router-dom";
+
 
 export default function CustomerCart() {
   const showcart = useSelector((state) => state.cartReducer.showcart);
@@ -80,9 +81,9 @@ export default function CustomerCart() {
       <>
         {/* navbar */}
         {/* <CustomerNavbar /> */}
-              <CustomerNavbar
-        customerImage={customernavinfo.image_data === null ? comNavNoPic  : `data:image/png;base64 ,${customernavinfo.image_data}`}
-        customerName={customernavinfo.name} />
+        <CustomerNavbar
+          customerImage={customernavinfo.image_data === null ? comNavNoPic : `data:image/png;base64 ,${customernavinfo.image_data}`}
+          customerName={customernavinfo.name} />
 
 
         {/* empty cart will render */}
@@ -128,7 +129,7 @@ export default function CustomerCart() {
 
                           {/* product image */}
                           <div className='col'>
-                            <img src={`data:image/png;base64 ,${element2.image_data}`} style={{height:"150px", width:"150px"}}/>
+                            <img src={`data:image/png;base64 ,${element2.image_data}`} style={{ height: "150px", width: "150px" }} />
 
                           </div>
 
@@ -223,7 +224,9 @@ export default function CustomerCart() {
               </div>
 
               <div style={{ float: "right" }}>
-                <Button variant='outline-secondary'>Purchase</Button>
+                <Button variant='outline-secondary'>
+                  <Link to="/customer/purchase" className='rmLinkStyle'>Purchase</Link>
+                </Button>
               </div>
 
             </div>

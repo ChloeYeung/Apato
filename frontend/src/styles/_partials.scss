@@ -5,3 +5,9 @@ $color3: #a0eee1;
 $color4: #bee7e9;
 $color5: #beedc7;
 
+
+//remove link style
+@mixin rmLinkStyle {
+    color: grey;
+    text-decoration: none;
+}

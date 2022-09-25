@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 //file
-import { loginCusThunk } from "../redux/customer_authSlice";
+import { loginCusThunk, FacebookLoginThunk } from "../redux/customer_authSlice";
 //react-router-dom
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -41,8 +41,8 @@ export default function CustomerLogin() {
 
     const responseFacebook = (userInfo) => {
         console.log("facebook response userInfo")
-        // console.log("facebook response", userInfo);
-        // dispatch(FacebookLoginThunk(userInfo));
+        console.log("facebook response", userInfo);
+        dispatch(FacebookLoginThunk(userInfo));
     };
 
     return (

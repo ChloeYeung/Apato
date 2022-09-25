@@ -41,8 +41,8 @@ export const signupCusThunk = (add) => async () => {
 
   for (var key of formData.entries()) {
     console.log(key[0] + ', ' + key[1]);
-}
-  await axios.post(`${process.env.REACT_APP_BACKEND}/customer/signup`, 
+  }
+  await axios.post(`${process.env.REACT_APP_BACKEND}/customer/signup`,
     formData
   );
   console.log("customer signup running")
@@ -67,4 +67,17 @@ export const logoutCusThunk = () => async (dispatch) => {
   localStorage.removeItem("TOKENCUS");
   dispatch(logout());
   console.log("customer logout running")
+};
+
+
+//Facebook Login Thunk
+export const FacebookLoginThunk = (userInfo) => async (dispatch) => {
+  let response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/auth/facebook`,
+    {
+      userInfo,
+    }
+  );
+  localStorage.setItem("TOKEN", response.data.token);
+  dispatch(login());
 };
