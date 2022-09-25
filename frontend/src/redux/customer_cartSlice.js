@@ -63,22 +63,30 @@ export const showCartThunk = () => async (dispatch) => {
         }
     })
 
-    // for (const property in tmp_showChart) {
-    //     for (let i = 0; i < tmp_showChart[property].length; i++) {
-    //         if (tmp_showChart[property][i].image_data != null) {
-    //             tmp_showChart[property][i].image_data = toBase64(tmp_showChart[property][i].image_data.data)
-    //         }
-    //     }
-    // }
-
     for (const property in tmp_showChart) {
-        tmp_showChart[property].forEach((e, i) => {
-            if (e.image_data != null)
-                tmp_showChart[property][i].image_data = toBase64(e.image_data.data);
-        })
+        for (let i = 0; i < tmp_showChart[property].length; i++) {
+            if (tmp_showChart[property][i].image_data != null) {
+                tmp_showChart[property][i].image_data = toBase64(tmp_showChart[property][i].image_data.data)
+            }
+        }
     }
 
-    console.log(tmp_showChart);
+      // response.data.forEach((e, i) => {
+    //     if (e.image_data != null)
+    //       response.data[i].image_data = toBase64(e.image_data.data);
+    //   })
+
+    // for (const property in tmp_showChart) {
+    //     tmp_showChart[property].forEach((e, i) => {
+    //         if (e.image_data != null)
+    //             tmp_showChart[property][i].image_data = toBase64(e.image_data.data);
+    //     console.log("===================================")
+    //     console.log(tmp_showChart[property][i])
+    //     console.log("===================================")
+
+    //         })
+    // }
+
     dispatch(showCart(tmp_showChart));
 };
 
@@ -119,8 +127,6 @@ export const showOrderTotalThunk = () => async (dispatch) => {
     const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/show_order_total`, {
         token
     })
-    console.log(response);
-    console.log(response.data);
     dispatch(showOrderTotal(response.data));
 };
 
@@ -129,10 +135,6 @@ export const cusNavInfoThunk = () => async (dispatch) => {
     const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/cart_nav_info`, {
         token
     })
-    console.log(response);
-    console.log(response.data);
-
-
 
     if (response.data.image_data != null) {
         response.data.image_data = toBase64(response.data.image_data.data);

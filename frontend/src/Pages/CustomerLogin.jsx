@@ -1,22 +1,20 @@
 // /company/login
+//state
 import React, { useState, useEffect } from "react";
-
 //Bootstrap
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
 //file
 import { loginCusThunk } from "../redux/customer_authSlice";
-
 //react-router-dom
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 //redux
 import { useDispatch, useSelector } from "react-redux";
-
+//facebook
+import FacebookLogin from "react-facebook-login";
 
 export default function CustomerLogin() {
     const [credential, setCredential] = useState({
@@ -39,6 +37,12 @@ export default function CustomerLogin() {
             ...prevValue,
             [name]: value,
         }));
+    };
+
+    const responseFacebook = (userInfo) => {
+        console.log("facebook response userInfo")
+        // console.log("facebook response", userInfo);
+        // dispatch(FacebookLoginThunk(userInfo));
     };
 
     return (
@@ -82,6 +86,14 @@ export default function CustomerLogin() {
                         <Button onClick={() =>
                             dispatch(loginCusThunk(credential)).then(() => navigate("/customer/cart"))
                         } variant="dark">Login</Button>
+
+                        <FacebookLogin
+                            appId={process.env.REACT_APP_FACEBOOK_ID}
+                            autoLoad={false}
+                            fields="name,email"
+                            callback={responseFacebook}
+                        // cssClass="my-facebook-button-class"
+                        />
 
                     </Card.Body>
                 </Card>

@@ -128,7 +128,8 @@ export default function CustomerCart() {
 
                           {/* product image */}
                           <div className='col'>
-                            <img src={`data:image/png;base64 ,${element2.image_data}`} style={{ height: "150px", weight: "150px" }} className="map img-resonsive" />
+                            <img src={`data:image/png;base64 ,${element2.image_data}`} style={{height:"150px", width:"150px"}}/>
+
                           </div>
 
                           {/* product info */}
