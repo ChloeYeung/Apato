@@ -5,7 +5,6 @@
 exports.up = function (knex) {
     return knex.schema.createTable("company_users", (table) => {
         table.increments();
-        table.string("facebook_id");
         table.string("email");
         table.string("password");
         table.string("name");

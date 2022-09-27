@@ -4,6 +4,7 @@ import React from 'react'
 //file
 import CustomerNavbar from '../Components/CustomerNavbar';
 import { showOrderTotalThunk } from "../redux/customer_cartSlice";
+import paymentQRcode from '../images/paymentQRcode.png'
 //bootstrap
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -38,8 +39,8 @@ export default function CustomerPurchase() {
 
           <Card style={{ width: '25rem' }}>
             <Card.Body>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Title> <u> Payment Link </u>  </Card.Title>
+              <Card.Img variant="top" src={paymentQRcode} />
+              <Card.Title> <u> Payment Link: 0x0a65c3660771279FeDE36cc8AD304c3E9AD150e3 </u>  </Card.Title>
               <Card.Text>
                 <InputGroup className="mb-3">
                   <Form.Control

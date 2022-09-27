@@ -7,6 +7,7 @@ const initialState = {
     showmessagecart: [],
     showordertotal: [],
     customernavinfo: [],
+    temptest:[],
 };
 
 export const customer_cartSlice = createSlice({
@@ -27,7 +28,10 @@ export const customer_cartSlice = createSlice({
         },
         customerNavInfo: (state, action) => {
             state.customernavinfo = action.payload;
-        }
+        },
+        // tempTest:(state, action) => {
+        //     state.temptest = action.payload;
+        // }
     },
 });
 
@@ -132,6 +136,7 @@ export const showOrderTotalThunk = () => async (dispatch) => {
 
 export const cusNavInfoThunk = () => async (dispatch) => {
     const token = localStorage.getItem("TOKENCUS");
+
     const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/cart_nav_info`, {
         token
     })

@@ -78,6 +78,35 @@ export const FacebookLoginThunk = (userInfo) => async (dispatch) => {
       userInfo,
     }
   );
-  localStorage.setItem("TOKEN", response.data.token);
-  dispatch(login());
+
+  if (response.data) {
+    console.log(response.data);
+    localStorage.setItem("TOKENCUS", response.data.token);
+    dispatch(login());
+  }
+
+  // console.log("customer login running")
+  // localStorage.setItem("TOKEN", response.data.token);
+  // console.log(response.data);
+  // dispatch(login());
+};
+
+
+//Google Login Thunk
+export const GoogleLoginThunk = (userInfo) => async (dispatch) => {
+  let response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/auth/google`,
+    {
+      userInfo,
+    }
+  );
+
+  if (response.data) {
+    console.log(response.data);
+    localStorage.setItem("TOKENCUS", response.data.token);
+    dispatch(login());
+  }
+  
+  // localStorage.setItem("TOKEN", response.data.token);
+  // dispatch(login());
 };

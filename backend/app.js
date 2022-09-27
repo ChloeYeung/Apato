@@ -37,7 +37,7 @@ app.use("/customer", new CustomerRouter(new CustomerService(knex, jwt, jwt_decod
 app.post("/company/signup", async (req, res) => {
   const image_data = req.files.image_data.data;
   console.log(image_data);
-  let { email, password, name, phone_no, cypto_no} = req.body;
+  let { email, password, name, phone_no, cypto_no } = req.body;
   // const username = req.body.username;
   // const password = req.body.password;
   console.log(email);
@@ -81,12 +81,12 @@ app.post("/company/login", async (req, res) => {
 app.post("/customer/signup", async (req, res) => {
   const image_data = req.files.image_data.data;
   console.log(image_data);
-  let { email, password, name, phone_no, cypto_no, address} = req.body;
+  let { email, password, name, phone_no, cypto_no, address } = req.body;
   let query = await knex("customer_users").where({ email }).first();
   const hashed = await bcrypt.hash(password, 10);
   if (query == undefined) {
     let data = await knex.select("id").from('customer_users').orderBy('id');
-    await knex("customer_users").insert({ "id": `${data.length + 1}`,"email": email, "password": hashed, "name": name, "phone_no": phone_no, "address": address, "cypto_no": cypto_no, "image_data": image_data });
+    await knex("customer_users").insert({ "id": `${data.length + 1}`, "email": email, "password": hashed, "name": name, "phone_no": phone_no, "address": address, "cypto_no": cypto_no, "image_data": image_data });
     //same as     await knex("users").insert({ username: username, password: hashed });
     res.json("signup complete");
   } else {
@@ -121,10 +121,54 @@ app.post("/auth/facebook", async (req, res) => {
   let user = await knex("customer_users").where({ facebook_id: userInfo.id }).first();
 
   if (!user) {
+    let data = await knex.select("id").from('customer_users').orderBy('id');
+
     let id = await knex("customer_users")
       .insert({
+        id: data.length + 1,
         facebook_id: userInfo.id,
         name: userInfo.name,
+        email: userInfo.email,
+      })
+      .returning("id");
+
+    const payload = {
+      id: id[0].id,
+      name: userInfo.name,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
+    console.log(token);
+    res.json({ token });
+  } else {
+    const payload = {
+      id: user.id,
+      name: user.username,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
+    console.log(token);
+    res.json({ token });
+  }
+});
+
+
+//Customer Google Login
+app.post("/auth/google", async (req, res) => {
+  console.log("body", req.body);
+  let userInfo = req.body.userInfo;
+
+  let user = await knex("customer_users").where({ google_id: userInfo.sub }).first();
+
+  if (!user) {
+    let data = await knex.select("id").from('customer_users').orderBy('id');
+
+    let id = await knex("customer_users")
+      .insert({
+        id: data.length + 1,
+        google_id: userInfo.sub,
+        name: userInfo.name ,
+        email: userInfo.email,
       })
       .returning("id");
 
@@ -145,5 +189,6 @@ app.post("/auth/facebook", async (req, res) => {
     res.json({ token });
   }
 });
+
 
 app.listen(8000, () => console.log("Listening to port 8000"));

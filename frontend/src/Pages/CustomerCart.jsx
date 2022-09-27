@@ -34,6 +34,7 @@ export default function CustomerCart() {
   console.log(showcart);
   console.log(showmessagechart);
   console.log(customernavinfo);
+  console.log(showordertotal);
 
   const dispatch = useDispatch();
 

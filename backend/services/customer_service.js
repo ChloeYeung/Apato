@@ -24,12 +24,12 @@ class CustomerService {
 
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
       let decoded = this.jwt_decode(token);
-      let ckeckExitProduct = await this.knex.select("product_id").from('customer_cart').where({product_id: `${id}`, customer_id: `${decoded.id}`});
+      let ckeckExitProduct = await this.knex.select("product_id").from('customer_cart').where({ product_id: `${id}`, customer_id: `${decoded.id}` });
       console.log(ckeckExitProduct);
       if (verify && ckeckExitProduct[0]) {
         // 2. token is verified and selected product exit
         console.log("in Service add cart -> have token, have exit product")
-        let findUnit = await this.knex.select("unit").from('customer_cart').where({product_id: `${id}`, customer_id: `${decoded.id}`});
+        let findUnit = await this.knex.select("unit").from('customer_cart').where({ product_id: `${id}`, customer_id: `${decoded.id}` });
         let findStock = await this.knex.select("stock").from("company_product").where("id", `${id}`);
         console.log("customer current unit: " + findUnit[0].unit);
         console.log("company stock: " + findStock[0].stock);
@@ -52,7 +52,7 @@ class CustomerService {
 
         console.log("newUnit again: " + addOne);
         //updating the cart unit
-        await this.knex("customer_cart").where({product_id: `${id}`, customer_id: `${decoded.id}`}).update("unit", `${addOne}`)
+        await this.knex("customer_cart").where({ product_id: `${id}`, customer_id: `${decoded.id}` }).update("unit", `${addOne}`)
 
         //return value
         return message;
@@ -112,12 +112,12 @@ class CustomerService {
 
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
       let decoded = this.jwt_decode(token);
-      let ckeckExitProduct = await this.knex.select("product_id").from('customer_cart').where({product_id: `${id}`, customer_id: `${decoded.id}`});
+      let ckeckExitProduct = await this.knex.select("product_id").from('customer_cart').where({ product_id: `${id}`, customer_id: `${decoded.id}` });
       console.log(ckeckExitProduct);
       if (verify && ckeckExitProduct[0]) {
         // 2. token is verified and selected product exit
         console.log("in Service add cart service -> have token, have exit product")
-        let findUnit = await this.knex.select("unit").from('customer_cart').where({product_id: `${id}`, customer_id: `${decoded.id}` });
+        let findUnit = await this.knex.select("unit").from('customer_cart').where({ product_id: `${id}`, customer_id: `${decoded.id}` });
         let findStock = await this.knex.select("stock").from("company_product").where("id", `${id}`);
         console.log("customer current unit: " + findUnit[0].unit);
         console.log("company stock: " + findStock[0].stock);
@@ -140,7 +140,7 @@ class CustomerService {
 
         console.log("newUnit again: " + addOne);
         //updating the cart unit
-        await this.knex("customer_cart").where({product_id: `${id}`, customer_id: `${decoded.id}`}).update("unit", `${addOne}`)
+        await this.knex("customer_cart").where({ product_id: `${id}`, customer_id: `${decoded.id}` }).update("unit", `${addOne}`)
 
         //return value
         return message;
@@ -194,7 +194,7 @@ class CustomerService {
       .innerJoin('company_users', 'customer_cart.company_id', 'company_users.id')
       .where('customer_cart.customer_id', `${decoded.id}`)
       .orderBy('customer_cart.id', 'desc');
-      console.log(data);
+    console.log(data);
     return data;
   }
 
@@ -283,11 +283,19 @@ class CustomerService {
   async showOrderTotal(token) {
     try {
       let decoded = this.jwt_decode(token);
+      console.log(decoded);
       token = token.replace("Bearer ", "");
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      console.log(verify);
       if (verify) {
-        let data = await this.knex.select("price", "unit").where("customer_id", `${decoded.id}`).from("customer_cart");
 
+        let haveProduct = await this.knex("customer_cart").where({ id: decoded.id }).first();
+
+        if (!haveProduct) {
+          return "0";
+        }
+
+        let data = await this.knex.select("price", "unit").where("customer_id", `${decoded.id}`).from("customer_cart");
         let priceArray = [];
         for (let i = 0; i < data.length; i++) {
           priceArray.push((data[i].price) * (data[i].unit))
@@ -298,7 +306,6 @@ class CustomerService {
           0,
         );
         console.log("orderTotal: " + orderTotal);
-
         return orderTotal;
 
       } else {
