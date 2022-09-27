@@ -3,7 +3,6 @@
 import CompanyNavbar from '../Components/CompanyNavbar';
 import cusNavNoPic from '../images/cusNavNoPic.jpg';
 import { comNavInfoThunk } from "../redux/company_navbarSlice";
-
 //bootstrap
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';

@@ -1,20 +1,34 @@
 // /company/sales_history
-
-import React from 'react'
-
+import React from 'react';
 //Bootstrap
 import Accordion from 'react-bootstrap/Accordion';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Table from 'react-bootstrap/Table';
-
 //file
 import CompanyNavbar from '../Components/CompanyNavbar';
-
+import cusNavNoPic from '../images/cusNavNoPic.jpg';
+import { comNavInfoThunk } from "../redux/company_navbarSlice";
+//state
+import { useState, useEffect } from "react";
+//redux
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CompanySalesHistory() {
+  const companynavinfo = useSelector((state) => state.navbarComReducer.companynavinfo);
+  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(comNavInfoThunk());
+  }, );
+
   return (
     <div>
-      <CompanyNavbar />
+      {/* Navbar */}
+      <CompanyNavbar
+        companyImage={companynavinfo.image_data === null ? cusNavNoPic : `data:image/png;base64 ,${companynavinfo.image_data}`}
+        companyName={companynavinfo.name} />
+
       <Accordion defaultActiveKey={['0']} alwaysOpen>
 
         <Accordion.Item eventKey="0">
@@ -23,36 +37,36 @@ export default function CompanySalesHistory() {
 
 
 
-<div style={{ minWidth: '30rem' }}>
-  
+            <div style={{ minWidth: '30rem' }}>
 
-            <Table striped bordered hover variant="primary" id='comSalesHisTable' style={{ minWidth: '30rem' }}>
-              <thead id='comSalesHisThead'>
-                <tr className='comSalesHisTr'>
-                  <th >Customer</th>
-                  <th >Phone no</th>
-                  <th >Address</th>
-                  <th >Product</th>
-                  <th >Status</th>
-                </tr>
-              </thead>
-              <tbody id='comSalesHisTbody'>
-                <tr className='comSalesHisTr'>
-                  <td>Siri</td>
-                  <td>12345678</td>
-                  <td>MK</td>
-                  <td>Apple * 1</td>
-                  <td>
-                    <select name="languages" id="lang">
-                      <option value="javascript">Pending</option>
-                      <option value="javascript">JavaScript</option>
-                      <option value="php">PHP</option>
-                    </select>
-                  </td>
-                </tr>
 
-              </tbody>
-            </Table>
+              <Table striped bordered hover variant="primary" id='comSalesHisTable' style={{ minWidth: '30rem' }}>
+                <thead id='comSalesHisThead'>
+                  <tr className='comSalesHisTr'>
+                    <th >Customer</th>
+                    <th >Phone no</th>
+                    <th >Address</th>
+                    <th >Product</th>
+                    <th >Status</th>
+                  </tr>
+                </thead>
+                <tbody id='comSalesHisTbody'>
+                  <tr className='comSalesHisTr'>
+                    <td>Siri</td>
+                    <td>12345678</td>
+                    <td>MK</td>
+                    <td>Apple * 1</td>
+                    <td>
+                      <select name="languages" id="lang">
+                        <option value="javascript">Pending</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="php">PHP</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </Table>
 
             </div>
 
