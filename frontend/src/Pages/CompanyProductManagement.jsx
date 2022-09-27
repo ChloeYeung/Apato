@@ -1,7 +1,9 @@
 // /company/product_management
 //file
 import CompanyNavbar from '../Components/CompanyNavbar';
-import cusNavNoPic from '../images/cusNavNoPic.jpg'
+import cusNavNoPic from '../images/cusNavNoPic.jpg';
+import { comNavInfoThunk } from "../redux/company_navbarSlice";
+
 //bootstrap
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -25,18 +27,21 @@ import $ from 'jquery';
 export default function CompanyProductManagement() {
   const showpm = useSelector((state) => state.pmReducer.showpm);
   const companyinfopm = useSelector((state) => state.pmReducer.companyinfopm);
+  const companynavinfo = useSelector((state) => state.navbarComReducer.companynavinfo);
+
   console.log(showpm);
   console.log(companyinfopm);
+  console.log(companynavinfo);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(showpmThunk());
+    dispatch(comNavInfoThunk());
   }, [addpmThunk]);
 
   const handleDelBtnChange = (id) => {
     console.log(id);
     dispatch(deletepmThunk({ id: id }));
-    // document.getElementById(event.target.id).style.textDecoration = 'line-through'
   }
 
   const [editProduct, setEditProduct] = useState("");
@@ -57,8 +62,8 @@ export default function CompanyProductManagement() {
 
       {/* Navbar */}
       <CompanyNavbar
-        companyImage={companyinfopm.company_image === null ? cusNavNoPic  : `data:image/png;base64 ,${companyinfopm.company_image}`}
-        companyName={companyinfopm.company_name} />
+        companyImage={companynavinfo.image_data === null ? cusNavNoPic : `data:image/png;base64 ,${companynavinfo.image_data}`}
+        companyName={companynavinfo.name} />
 
 
       {/* table */}

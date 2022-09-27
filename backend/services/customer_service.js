@@ -5,6 +5,27 @@ class CustomerService {
     this.jwt = jwt;
   }
 
+  // Navbar info
+  async showNavInfo(token) {
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        let data = await this.knex.select("image_data", "name").where("id", `${decoded.id}`).from("customer_users");
+        console.log(data[0]);
+        return data[0];
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error Service customer showOrderTotal ");
+      console.log(error);
+    }
+  }
+
+
+
   // Show Product
   async showProduct(token) {
     let data = await this.knex.select("id", "name", "description", "stock", "price", "tag", "type", "image_data").from('company_product').where('type', "Product").orderBy('id', 'desc');
@@ -321,23 +342,6 @@ class CustomerService {
 
 
 
-  async showNavInfoCart(token) {
-    try {
-      let decoded = this.jwt_decode(token);
-      token = token.replace("Bearer ", "");
-      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
-      if (verify) {
-        let data = await this.knex.select("image_data", "name").where("id", `${decoded.id}`).from("customer_users");
-        console.log(data[0]);
-        return data[0];
-      } else {
-        res.sendStatus(401);
-      }
-    } catch (error) {
-      console.log("Error Service customer showOrderTotal ");
-      console.log(error);
-    }
-  }
 
 }
 

@@ -11,12 +11,13 @@ import CustomerNavbar from '../Components/CustomerNavbar';
 import cusShowProCarousel1 from '../images/cusShowProCarousel1.jpg';
 import cusShowProCarousel2 from '../images/cusShowProCarousel2.png';
 import cusShowProCarousel3 from '../images/cusShowProCarousel3.png';
+import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
+import comNavNoPic from '../images/comNavNoPic.jpg';
 //react icon
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { BiCheckCircle } from "react-icons/bi";
 import { FiAlertCircle } from "react-icons/fi";
-
 //state
 import React, { useState, useEffect } from "react";
 //redux
@@ -25,6 +26,9 @@ import { showProductThunk, addCartThunk } from "../redux/customer_showProductSli
 
 
 export default function CustomerShowProduct() {
+  const customernavinfo = useSelector((state) => state.navbarCusReducer.customernavinfo);
+  console.log(customernavinfo);
+
   const showproduct = useSelector((state) => state.showProductReducer.showproduct);
   console.log(showproduct);
 
@@ -35,6 +39,7 @@ export default function CustomerShowProduct() {
 
   useEffect(() => {
     dispatch(showProductThunk());
+    dispatch(cusNavInfoThunk());
   }, []);
 
   const handleAddCartBtn = (element) => {
@@ -44,10 +49,12 @@ export default function CustomerShowProduct() {
     // document.getElementById(event.target.id).style.textDecoration = 'line-through'
   }
 
-
   //  for the toast notice
   const [show, setShow] = useState(false);
 
+  //navbar token
+  const token = localStorage.getItem("TOKENCUS");
+  console.log(token);
 
   return (
     <>
@@ -57,9 +64,9 @@ export default function CustomerShowProduct() {
         <div id="cusShowProductBottomLayer">
 
           {/* Customer Navbar */}
-          <CustomerNavbar />
-
-
+          <CustomerNavbar
+            customerImage={(token === null) ? (comNavNoPic) : (customernavinfo.image_data === null) ? (comNavNoPic) : `data:image/png;base64 ,${customernavinfo.image_data}`}
+            customerName={customernavinfo.name} />
 
           <div id="cusShowProductTopLayer" className='container'  >
             <div className="d-flex flex-nowrap"  >

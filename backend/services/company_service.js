@@ -5,6 +5,25 @@ class CompanyService {
     this.jwt = jwt;
   }
 
+
+  async showNavInfoCom(token) {
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        let data = await this.knex.select("image_data", "name").where("id", `${decoded.id}`).from("company_users");
+        console.log(data[0]);
+        return data[0];
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error Service company showNavInfoCom ");
+      console.log(error);
+    }
+  }
+
   async showProductManagement(token) {
     let decoded = this.jwt_decode(token);
     token = token.replace("Bearer ", "");

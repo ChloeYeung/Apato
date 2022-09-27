@@ -8,14 +8,29 @@ class CompanyRouter {
 
   router() {
     let router = express.Router();
+    //Navbar info
+    router.post("/nav_info", this.showNavInfoCom.bind(this));
+
     // Product Management
     router.get("/showPm", this.showProductManagement.bind(this));
     router.post("/addPm", this.addProductManagement.bind(this));
     router.post("/deletePm", this.deleteProductManagement.bind(this));
     router.post("/editPm", this.editProductManagement.bind(this));
+
     return router;
   }
 
+  //Nav info
+  async showNavInfoCom(req, res) {
+    let token = req.body.token;
+    let response = await (this.CompanyService.showNavInfoCom(token));
+    return res.send(response);
+  }
+
+
+
+
+  // Product Management
   async showProductManagement(req, res) {
     let token = req.headers.authorization;
     let response = await (this.CompanyService.showProductManagement(token));
@@ -27,7 +42,7 @@ class CompanyRouter {
     const image_data = req.files.image.data;
     console.log(image_name);
     console.log(image_data);
-    let { name, description, stock, price, tag, type , token} = req.body;
+    let { name, description, stock, price, tag, type, token } = req.body;
     console.log(req.body)
     let response = await this.CompanyService.addProductManagement(token, name, description, stock, price, tag, type, image_name, image_data);
     return res.send(response);

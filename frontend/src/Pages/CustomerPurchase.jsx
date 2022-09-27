@@ -4,28 +4,41 @@ import React from 'react'
 //file
 import CustomerNavbar from '../Components/CustomerNavbar';
 import { showOrderTotalThunk } from "../redux/customer_cartSlice";
-import paymentQRcode from '../images/paymentQRcode.png'
+import paymentQRcode from '../images/paymentQRcode.png';
+import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
+import comNavNoPic from '../images/comNavNoPic.jpg';
 //bootstrap
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Alert from 'react-bootstrap/Alert';
-
 //react icon
 import { TiTick } from "react-icons/ti";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 //react-router-dom
 import { Link } from "react-router-dom";
+//state
+import { useState, useEffect } from "react";
 
 
 export default function CustomerPurchase() {
+  const dispatch = useDispatch();
+
+  const customernavinfo = useSelector((state) => state.navbarCusReducer.customernavinfo);
   const showordertotal = useSelector((state) => state.cartReducer.showordertotal);
+
+  useEffect(() => {
+    dispatch(cusNavInfoThunk());
+  }, []);
+
   return (
     <>
       {/* navbar */}
-      <CustomerNavbar />
+      <CustomerNavbar
+        customerImage={customernavinfo.image_data === null ? comNavNoPic : `data:image/png;base64 ,${customernavinfo.image_data}`}
+        customerName={customernavinfo.name} />
 
       <div className="text-center">
         <h1>Payment</h1>

@@ -4,7 +4,9 @@ import React from 'react';
 import CustomerNavbar from '../Components/CustomerNavbar';
 import logo from '../logo.svg';
 import cartEmpty from '../images/cartEmpty2.png';
-import comNavNoPic from '../images/comNavNoPic.jpg'
+import comNavNoPic from '../images/comNavNoPic.jpg';
+import { showCartThunk, addCartUnitThunk, minusCartUnitThunk, deleteCartThunk, showOrderTotalThunk } from "../redux/customer_cartSlice";
+import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 //bootstrap
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -21,7 +23,6 @@ import { MdReportProblem } from "react-icons/md";
 import { useState, useEffect } from "react";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { showCartThunk, addCartUnitThunk, minusCartUnitThunk, deleteCartThunk, showOrderTotalThunk, cusNavInfoThunk } from "../redux/customer_cartSlice";
 import { Link } from "react-router-dom";
 
 
@@ -29,7 +30,7 @@ export default function CustomerCart() {
   const showcart = useSelector((state) => state.cartReducer.showcart);
   const showmessagechart = useSelector((state) => state.cartReducer.showmessagecart);
   const showordertotal = useSelector((state) => state.cartReducer.showordertotal);
-  const customernavinfo = useSelector((state) => state.cartReducer.customernavinfo);
+  const customernavinfo = useSelector((state) => state.navbarCusReducer.customernavinfo);
 
   console.log(showcart);
   console.log(showmessagechart);

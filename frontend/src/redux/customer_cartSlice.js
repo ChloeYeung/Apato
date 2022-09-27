@@ -26,16 +26,10 @@ export const customer_cartSlice = createSlice({
         showOrderTotal: (state, action) => {
             state.showordertotal = action.payload;
         },
-        customerNavInfo: (state, action) => {
-            state.customernavinfo = action.payload;
-        },
-        // tempTest:(state, action) => {
-        //     state.temptest = action.payload;
-        // }
     },
 });
 
-export const { showCart, customerInfoCart, showMessageChart, showOrderTotal, customerNavInfo } = customer_cartSlice.actions;
+export const { showCart, customerInfoCart, showMessageChart, showOrderTotal } = customer_cartSlice.actions;
 
 export default customer_cartSlice.reducer;
 
@@ -132,18 +126,4 @@ export const showOrderTotalThunk = () => async (dispatch) => {
         token
     })
     dispatch(showOrderTotal(response.data));
-};
-
-export const cusNavInfoThunk = () => async (dispatch) => {
-    const token = localStorage.getItem("TOKENCUS");
-
-    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/cart_nav_info`, {
-        token
-    })
-
-    if (response.data.image_data != null) {
-        response.data.image_data = toBase64(response.data.image_data.data);
-      }
-    
-    dispatch(customerNavInfo(response.data));
 };

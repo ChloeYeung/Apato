@@ -4,15 +4,31 @@ import React from 'react';
 //file
 import CustomerNavbar from '../Components/CustomerNavbar';
 import logo from '../logo.svg';
+import comNavNoPic from '../images/comNavNoPic.jpg';
+import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
+
 //bootstrap
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+//state
+import { useState, useEffect } from "react";
+//redux
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CustomerOrderHistory() {
+  const dispatch = useDispatch();
+
+  const customernavinfo = useSelector((state) => state.navbarCusReducer.customernavinfo);
+  console.log(customernavinfo);
+  useEffect(() => {
+    dispatch(cusNavInfoThunk());
+  }, []);
   return (
     <div>
       {/* Navbar */}
-      <CustomerNavbar />
+      <CustomerNavbar
+        customerImage={customernavinfo.image_data === null ? comNavNoPic : `data:image/png;base64 ,${customernavinfo.image_data}`}
+        customerName={customernavinfo.name} />
 
       {/* Title */}
       <br />
@@ -23,30 +39,30 @@ export default function CustomerOrderHistory() {
       <div className='container'>
         <div className='d-flex text-center justify-content-center align-items-center'>
 
-        <Card style={{ width: '25rem' }}>
-          <Card.Body>
-            <Card.Title> Order number #  </Card.Title>
-            <Card.Text>
-              Date
-              Status
-            </Card.Text>
-            <hr />
+          <Card style={{ width: '25rem' }}>
+            <Card.Body>
+              <Card.Title> Order number #  </Card.Title>
+              <Card.Text>
+                Date
+                Status
+              </Card.Text>
+              <hr />
 
-            <div className='row'>
+              <div className='row'>
 
-              <div className='col'><img src={logo} alt="" /></div>
-              <div className='col'>
-                <p>Name</p> 
-                
-                <p>Unit</p> <p>Price</p>
+                <div className='col'><img src={logo} alt="" /></div>
+                <div className='col'>
+                  <p>Name</p>
+
+                  <p>Unit</p> <p>Price</p>
                 </div>
 
-            </div>
-          </Card.Body>
+              </div>
+            </Card.Body>
 
 
 
-        </Card>
+          </Card>
         </div>
       </div>
 
