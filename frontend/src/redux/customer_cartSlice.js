@@ -125,5 +125,5 @@ export const showOrderTotalThunk = () => async (dispatch) => {
     const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/show_order_total`, {
         token
     })
-    dispatch(showOrderTotal(response.data));
+    dispatch(showOrderTotal((response.data).toFixed(4)));
 };

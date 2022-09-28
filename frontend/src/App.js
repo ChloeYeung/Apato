@@ -25,6 +25,8 @@ import CustomerShowProductDetail from './Pages/CustomerShowProductDetail';
 import CustomerShowService from './Pages/CustomerShowService';
 import CustomerShowServiceDetail from './Pages/CustomerShowServiceDetail';
 import CompanySalesDetail from './Pages/CompanySalesDetail';
+
+import Test from './Pages/Test';
 import Error from './Pages/Error';
 
 
@@ -65,6 +67,7 @@ function App() {
         <Route path="/customer/show_service" element={<CustomerShowService />} />
         {/* <Route path="/customer/show_service/:id" element={<CustomerShowServiceDetail />} /> */}
 
+        <Route path="/customer/test" element={<Test />} />
         <Route path="/customer/show_product" element={<CustomerShowProduct />} />
         <Route path="/customer/cart" element={<RequireAuthCus><CustomerCart /></RequireAuthCus>} />
         <Route path="/customer/purchase" element={<RequireAuthCus><CustomerPurchase /></RequireAuthCus>} />
