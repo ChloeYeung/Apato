@@ -15,12 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 
-function orderTotal() { // Rule 2: call hooks in function component
-  const auth = useSelector(state => state.auth); // Rule 1: call hooks in top-level
-  return <>{auth}</>
-}
-
-
 class Test extends React.Component {
   state = {
     apato: "",
@@ -28,7 +22,7 @@ class Test extends React.Component {
     balance: "",
     value: "",
     message: "",
-    showordertotal: showordertotal,
+    showordertotal: "showordertotal",
   };
   async componentDidMount() {
 
@@ -36,35 +30,35 @@ class Test extends React.Component {
     const customer = await purchase.methods.customer().call();
     const balance = await web3.eth.getBalance(purchase.options.address);
 
-    this.setState({ apato, customer, balance, showordertotal });
+    this.setState({ apato, customer, balance });
   }
 
-  onSubmit = async (event) => {
-    event.preventDefault();
+//   onSubmit = async (event) => {
+//     event.preventDefault();
 
-    const accounts = await web3.eth.getAccounts();
+//     const accounts = await web3.eth.getAccounts();
 
-    this.setState({ message: "Waiting on transaction success..." });
+//     this.setState({ message: "Waiting on transaction success..." });
 
-    await purchase.methods.enter().send({
-      from: accounts[0],
-      value: web3.utils.toWei(this.state.value, "ether"),
-    });
+//     await purchase.methods.enter().send({
+//       from: accounts[0],
+//       value: web3.utils.toWei(this.state.value, "ether"),
+//     });
 
-    this.setState({ message: "You have been entered!" });
-  };
+//     this.setState({ message: "You have been entered!" });
+//   };
 
-  onClick = async () => {
-    const accounts = await web3.eth.getAccounts();
+//   onClick = async () => {
+//     const accounts = await web3.eth.getAccounts();
 
-    this.setState({ message: "Waiting on transaction success..." });
+//     this.setState({ message: "Waiting on transaction success..." });
 
-    await purchase.methods.pickWinner().send({
-      from: accounts[0],
-    });
+//     await purchase.methods.pickWinner().send({
+//       from: accounts[0],
+//     });
 
-    this.setState({ message: "A winner has been picked!" });
-  };
+//     this.setState({ message: "A winner has been picked!" });
+//   };
 
   render() {
     return (
@@ -77,6 +71,7 @@ class Test extends React.Component {
                 <Card.Title> Summary </Card.Title>
                 <hr />
                 <Card.Text>
+                  <h1>{this.state.balence}</h1>
                   Order Total: $ {this.state.showordertotal && this.state.showordertotal}
                   <br />
                   <br />
@@ -101,8 +96,8 @@ class Test extends React.Component {
             </Card>
           </div>
         </div>
-
-        {/* <h2>Lottery Contract</h2>
+{/* 
+        <h2>Lottery Contract</h2>
         <p>
           This contract is managed by {this.state.manager}. There are currently{" "}
           {this.state.players.length} people entered, competing to win{" "}

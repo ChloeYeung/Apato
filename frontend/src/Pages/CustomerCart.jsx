@@ -19,6 +19,7 @@ import { TbMinus } from "react-icons/tb";
 import { AiOutlineConsoleSql, AiOutlineMinusCircle } from "react-icons/ai";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { MdReportProblem } from "react-icons/md";
+import { FaEthereum } from "react-icons/fa";
 //state
 import { useState, useEffect } from "react";
 //redux
@@ -142,7 +143,7 @@ export default function CustomerCart() {
                             <Card.Text>
                               {/* <p>{element2.image_data}</p> */}
                               <h4>{element2.product_name}</h4>
-                              <p>$ {element2.price}</p>
+                              <p><FaEthereum className="FaEthereumIcon"/>  {element2.price} </p>
                             </Card.Text>
 
 
@@ -221,7 +222,7 @@ export default function CustomerCart() {
 
               <div style={{ float: "left" }}>
                 <p>
-                  Order Total $ {showordertotal && showordertotal}
+                  Order Total <FaEthereum className="FaEthereumIcon"/>  {showordertotal && showordertotal}
                 </p>
               </div>
 

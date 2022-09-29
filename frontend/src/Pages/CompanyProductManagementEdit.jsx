@@ -83,12 +83,8 @@ export default function CompanyProductManagementEdit() {
                             <Form.Control type="file" />
                         </Form.Group>
 
-                        {/* <div className='row'>
-                        <label >Image: </label>
-                        <input type="file" />
-                    </div> */}
                         <br />
-                        <Button onClick={() => dispatch(editpmThunk(editProduct))} variant="dark"><TiTick /></Button>
+                        <Button onClick={() => dispatch(editpmThunk(editProduct))} variant="outline-dark"><TiTick /></Button>
                     </Card.Body>
                 </Card>
             </div>

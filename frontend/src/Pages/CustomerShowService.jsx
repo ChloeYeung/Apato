@@ -18,6 +18,7 @@ import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { BiCheckCircle } from "react-icons/bi";
 import { FiAlertCircle } from "react-icons/fi";
+import { FaEthereum } from "react-icons/fa";
 //state
 import React, { useState, useEffect } from "react";
 //redux
@@ -151,7 +152,7 @@ export default function CustomerShowService() {
                             <Card.Text>
                               {element.description}
                               <br />
-                              ${element.price}
+                              <FaEthereum className="FaEthereumIcon"/> {element.price}
                             </Card.Text>
 
 

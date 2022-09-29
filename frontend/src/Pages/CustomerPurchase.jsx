@@ -3,7 +3,7 @@
 import React from "react";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
-import { showOrderTotalThunk } from "../redux/customer_cartSlice";
+import { showOrderTotalPurchaseThunk } from "../redux/customer_purchaseSlice";
 import paymentQRcode from "../images/paymentQRcode.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
@@ -15,6 +15,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Alert from "react-bootstrap/Alert";
 //react icon
 import { TiTick } from "react-icons/ti";
+import { FaEthereum } from "react-icons/fa";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 //react-router-dom
@@ -25,42 +26,51 @@ import { useState, useEffect } from "react";
 import web3 from "../smart_contract/web3";
 import purchase from "../smart_contract/purchase";
 
-
-
-
-
 export default function CustomerPurchase() {
-
   const dispatch = useDispatch();
 
   const customernavinfo = useSelector(
     (state) => state.navbarCusReducer.customernavinfo
   );
-  const showordertotal = useSelector(
-    (state) => state.cartReducer.showordertotal
+  const showOrderTotalPurchase = useSelector(
+    (state) => state.purchaseReducer.showordertotalpurchase
   );
 
-  console.log(showordertotal);
+  //metamask payment
+  const [payment, setPayment] = useState({
+    apato: "",
+    customer: "",
+    balance: "",
+    value: "",
+    message: "",
+    comfirmAccount: "",
+  });
 
   useEffect(() => {
     dispatch(cusNavInfoThunk());
+    dispatch(showOrderTotalPurchaseThunk());
+    const smartContract = async () => {
+      const apato = await purchase.methods.apato().call();
+      const customer = await purchase.methods.customer().call();
+      const balance = await web3.eth.getBalance(purchase.options.address);
+
+      setPayment((prevValue) => ({
+        ...prevValue,
+        apato: apato,
+        customer: customer,
+        balance: balance,
+      }));
+      console.log(payment);
+    };
+    smartContract();
   }, []);
 
-//metamask payment
-// state = {
-//   manager: "",
-//   players: [],
-//   balance: "",
-//   value: "",
-//   message: "",
-// };
-// async componentDidMount() {
-//   const manager = await lottery.methods.manager().call();
-//   const players = await lottery.methods.getPlayers().call();
-//   const balance = await web3.eth.getBalance(lottery.options.address);
-
-//   this.setState({ manager, players, balance });
-// }
+  let handlePaymentAccountChange = function (event) {
+    setPayment((prevValue) => ({
+      ...prevValue,
+      comfirmAccount: event.target.value,
+    }));
+  };
 
   return (
     <>
@@ -87,13 +97,15 @@ export default function CustomerPurchase() {
               <Card.Title> Summary </Card.Title>
               <hr />
               <Card.Text>
-                Order Total: $ {showordertotal && showordertotal}
-                <br /><br />
+                Order Total: <FaEthereum className="FaEthereumIcon"/> {showOrderTotalPurchase && showOrderTotalPurchase}
+                <br />
+                <br />
                 <InputGroup className="mb-3">
                   <Form.Control
                     placeholder="account number"
                     aria-label="Recipient's username"
                     aria-describedby="basic-addon2"
+                    onChange={handlePaymentAccountChange}
                   />
                   <Button variant="outline-secondary" id="button-addon2">
                     <Link to="/customer/payment_status" className="rmLinkStyle">
@@ -107,6 +119,8 @@ export default function CustomerPurchase() {
           </Card>
         </div>
       </div>
+
+      <h1>{payment.message}</h1>
 
       {/* payment code */}
       {/* <div className="container">

@@ -38,17 +38,6 @@ export const showpmThunk = () => async (dispatch) => {
     }
   });
 
-  let company_image = response.data[response.data.length - 1][1];
-  let company_name = response.data[response.data.length - 1][0];
-  if (company_image != null) {
-    company_image = toBase64(company_image.data);
-  }
-
-  let arrayCom = { company_name: company_name, company_image: company_image }
-  dispatch(companyInFoPm(arrayCom));
-
-
-  response.data.pop();
   // change image from Buffer to base64
   response.data.forEach((e, i) => {
     if (e.image_data != null)
@@ -89,9 +78,10 @@ export const deletepmThunk = ({ id }) => async (dispatch) => {
     id,
     token
   });
-  let tmp = [];
-  tmp.push(res.data)
-  dispatch(showPm(tmp[0]));
+  dispatch(showpmThunk());
+  // let tmp = [];
+  // tmp.push(res.data)
+  // dispatch(showPm(tmp[0]));
 };
 
 export const editpmThunk = (update) => async (dispatch) => {
@@ -99,10 +89,11 @@ export const editpmThunk = (update) => async (dispatch) => {
   let res = await axios.post(`${process.env.REACT_APP_BACKEND}/company/editPm`, {
     update, token
   });
-  let tmp = [];
-  tmp.push(res.data)
-  dispatch(showPm(tmp[0]));
-  for (let i = 0; i < document.getElementsByClassName("pmEditInput").length; i++) {
-    document.getElementsByClassName("pmEditInput")[i].value = "";
-  }
+  dispatch(showpmThunk());
+  // let tmp = [];
+  // tmp.push(res.data)
+  // dispatch(showPm(tmp[0]));
+  // for (let i = 0; i < document.getElementsByClassName("pmEditInput").length; i++) {
+  //   document.getElementsByClassName("pmEditInput")[i].value = "";
+  // }
 };

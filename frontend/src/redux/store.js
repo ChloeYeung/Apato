@@ -8,6 +8,7 @@ import company_pmSlice from "./company_pmSlice";
 import customer_showProductSlice from "./customer_showProductSlice";
 import customer_showServiceSlice from "./customer_showServiceSlice";
 import customer_cartSlice from "./customer_cartSlice";
+import customer_purchaseSlice from "./customer_purchaseSlice";
 import logger from "redux-logger";
 
 export const store = configureStore({
@@ -21,7 +22,7 @@ export const store = configureStore({
     showProductReducer: customer_showProductSlice,
     showServiceReducer: customer_showServiceSlice,
     cartReducer: customer_cartSlice,
-    
+    purchaseReducer: customer_purchaseSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

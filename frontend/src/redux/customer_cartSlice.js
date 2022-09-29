@@ -97,6 +97,7 @@ export const addCartUnitThunk = (add) => async (dispatch) => {
 
     dispatch(showCartThunk());
     dispatch(showMessageChart(response.data));
+    dispatch(showOrderTotalThunk());
 };
 
 
@@ -108,6 +109,7 @@ export const minusCartUnitThunk = (minus) => async (dispatch) => {
 
     dispatch(showCartThunk());
     dispatch(showMessageChart(response.data));
+    dispatch(showOrderTotalThunk());
 };
 
 export const deleteCartThunk = (del) => async (dispatch) => {
@@ -117,6 +119,7 @@ export const deleteCartThunk = (del) => async (dispatch) => {
     })
 
     dispatch(showCartThunk());
+    dispatch(showOrderTotalThunk());
 };
 
 

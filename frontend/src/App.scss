@@ -1,15 +1,23 @@
 @import "./styles/partials";
 
-
-
 //remove all link style
 .rmLinkStyle {
-  @include rmLinkStyle
+  @include rmLinkStyle;
 }
 
 .rmLinkStyle:hover {
   color: white;
 }
+
+.FaEthereumIcon {
+  @include FaEthereumIconColor;
+}
+
+//font
+p{
+  font-family: 'Nunito Sans', sans-serif;
+}
+
 
 
 
@@ -29,7 +37,6 @@
   font-size: 13px;
 }
 
-
 /* components/navbar */
 .logoutBtn {
   background: none;
@@ -40,7 +47,6 @@
   cursor: pointer;
   outline: inherit;
 }
-
 
 /* Customer Show Product */
 .toastNoticeShowProduct {
@@ -79,8 +85,6 @@
   transform: translate(50%, 50%);
 }
 
-
-
 /* Customer Show Service */
 .toastNoticeShowService {
   opacity: 0.8;
@@ -118,15 +122,12 @@
   transform: translate(50%, 50%);
 }
 
-
 // Company Navbar
 .NavBarIcon {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-
 }
-
 
 //customer cart
 .overlayCartMessage {
@@ -157,8 +158,6 @@
   width: 200px;
 }
 
-
-
 //customer payment status
 .paymentStatusImg {
   height: 250px;
@@ -166,9 +165,11 @@
 }
 
 .paymentRedirect {
-  color: rgb(78, 105, 172)
+  color: rgb(78, 105, 172);
 }
 
 .paymentRedirect:hover {
-  color: rgb(93, 79, 108)
+  color: rgb(93, 79, 108);
 }
+
+//company sales summary

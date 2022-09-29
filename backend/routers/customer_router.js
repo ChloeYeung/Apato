@@ -20,7 +20,8 @@ class CustomerRouter {
     router.post("/minus_cart_unit", this.minusCartUnit.bind(this));
     router.post("/del_cart_unit", this.delCart.bind(this));
     router.post("/show_order_total", this.showOrderTotal.bind(this));
-
+    //purchase
+    router.post("/purchase_show_order_total", this.showOrderTotalPurchase.bind(this));
     return router;
   }
 
@@ -101,8 +102,13 @@ class CustomerRouter {
     return res.send(response.toString());
   }
 
+  async showOrderTotalPurchase(req, res) {
+    let token = req.body.token;
+    let response = await (this.CustomerService.showOrderTotalPurchase(token));
+    return res.send(response.toString());
+  }
 
-
+  
 
 }
 

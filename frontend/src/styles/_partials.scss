@@ -11,3 +11,7 @@ $color5: #beedc7;
     color: grey;
     text-decoration: none;
 }
+
+@mixin FaEthereumIconColor {
+color: #4568DC;
+}

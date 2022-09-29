@@ -66,7 +66,7 @@ export default function CompanyProductManagement() {
 
 
       {/* table */}
-      <Table striped bordered hover variant="dark">
+      <Table striped bordered hover variant="outline-dark">
         <thead>
           <tr>
             <th>#</th>
@@ -76,7 +76,6 @@ export default function CompanyProductManagement() {
             <th>Stock</th>
             <th>Tag</th>
             <th>Image</th>
-            <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
@@ -96,7 +95,7 @@ export default function CompanyProductManagement() {
                       placement="bottom"
                       overlay={
                         <Popover id={"pmEditClosePopover" + element.id + "name"}>
-                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Name ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                          <Popover.Header className="text-center" as="h3">{`Update Name ${element.type.split("")[0]}${element.id}`}</Popover.Header>
                           <Popover.Body>
                             <input type="text" name="name" placeholder='name' id='pmEditInput' onChange={handleEditChange} />
                             <br />
@@ -118,7 +117,7 @@ export default function CompanyProductManagement() {
                       placement="bottom"
                       overlay={
                         <Popover id={"pmEditClosePopover" + element.id + "description"}>
-                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Description ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                          <Popover.Header className="text-center" as="h3">{`Update Description ${element.type.split("")[0]}${element.id}`}</Popover.Header>
                           <Popover.Body>
                             <input type="text" name="description" placeholder='description' id='pmEditInput' onChange={handleEditChange} />
                             <br />
@@ -140,7 +139,7 @@ export default function CompanyProductManagement() {
                       placement="bottom"
                       overlay={
                         <Popover id={"pmEditClosePopover" + element.id + "price"}>
-                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Price ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                          <Popover.Header className="text-center" as="h3">{`Update Price ${element.type.split("")[0]}${element.id}`}</Popover.Header>
                           <Popover.Body>
                             <input type="number" name="price" placeholder='price' id='pmEditInput' onChange={handleEditChange} />
                             <br />
@@ -162,7 +161,7 @@ export default function CompanyProductManagement() {
                       placement="bottom"
                       overlay={
                         <Popover id={"pmEditClosePopover" + element.id + "stock"}>
-                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update stock ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                          <Popover.Header className="text-center" as="h3">{`Update stock ${element.type.split("")[0]}${element.id}`}</Popover.Header>
                           <Popover.Body>
                             <input type="number" name="stock" placeholder='stock' id='pmEditInput' onChange={handleEditChange} />
                             <br />
@@ -176,10 +175,6 @@ export default function CompanyProductManagement() {
                       <div>{element.stock}</div>
                     </OverlayTrigger>
                   </td>
-                  {/* 
-                  <td>
-                    <input type="text" value={element.tag} name="tag" onChange={handleEditChange} />
-                    </td> */}
 
 
 
@@ -190,8 +185,8 @@ export default function CompanyProductManagement() {
                       placement="bottom"
                       overlay={
                         <Popover id={"pmEditClosePopover" + element.id + "tag"}>
-                          <Popover.Header style={{ backgroundColor: "black", color: "white" }} as="h3">{`Update Tag ${element.type.split("")[0]}${element.id}`}</Popover.Header>
-                          <Popover.Body>
+                          <Popover.Header className="text-center" as="h3">{`Update Tag ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                          <Popover.Body className="bg-light">
                             <input type="text" name="tag" placeholder='tag' id='pmEditInput' onChange={handleEditChange} />
                             <br />
                             <br />
@@ -210,12 +205,6 @@ export default function CompanyProductManagement() {
                   </td>
 
                   <td>
-                    <Link to="/company/product_management/edit">
-                      <Button variant='light'><AiOutlineEdit /></Button>
-                    </Link>
-                  </td>
-
-                  <td>
                     <Button variant='light' onClick={() => handleDelBtnChange(element.id)}><IoTrashOutline className={"pmDel" + element.id} /></Button>
                   </td>
 
@@ -229,7 +218,7 @@ export default function CompanyProductManagement() {
       {/* add button */}
       <div className='d-flex justify-content-center'>
         <Link to="/company/product_management/add">
-          <Button variant="dark" style={{ zIndex: "1000" }}>Add <IoMdAdd /></Button>
+          <Button variant="outline-dark" style={{ zIndex: "1000" }}>Add <IoMdAdd /></Button>
         </Link>
       </div>
 
