@@ -23,6 +23,10 @@ class CustomerRouter {
     //purchase
     router.post("/purchase_show_order_total", this.showOrderTotalPurchase.bind(this));
     router.post("/purchase_del_cart", this.delCartInPurchase.bind(this));
+    router.post("/purchase_add_order_history", this.addOrderHistoryPurchase.bind(this));
+    //order history
+    router.post("/show_order_history", this.showOrderHistory.bind(this));
+    
     return router;
   }
 
@@ -104,6 +108,7 @@ class CustomerRouter {
     return res.send(response.toString());
   }
 
+  //Purchase
   async showOrderTotalPurchase(req, res) {
     let token = req.body.token;
     let response = await (this.CustomerService.showOrderTotalPurchase(token));
@@ -115,6 +120,21 @@ class CustomerRouter {
     let response = await (this.CustomerService.delCartInPurchase(token));
     return res.send(response);
   }
+
+  async addOrderHistoryPurchase(req, res) {
+    let token = req.body.token;
+    let response = await (this.CustomerService.addOrderHistoryPurchase(token));
+    return res.send(response);
+  }
+
+  //order history
+  async showOrderHistory(req, res) {
+    let token = req.body.token;
+    let response = await (this.CustomerService.showOrderHistory(token));
+    console.log(response);
+    return res.send(response);
+  }
+  
 
   
 

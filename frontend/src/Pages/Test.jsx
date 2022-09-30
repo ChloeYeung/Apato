@@ -1,132 +1,43 @@
-import React from "react";
-import web3 from "../smart_contract/web3";
-import purchase from "../smart_contract/purchase";
-//bootstrap
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Alert from "react-bootstrap/Alert";
-//react icon
-import { TiTick } from "react-icons/ti";
-//redux
-import { useDispatch, useSelector } from "react-redux";
-//react-router-dom
-import { Link } from "react-router-dom";
+// [ 
+//   '1-1-20220930-123001': 
+// [ { order_id: '1-1-20220930-123001',
+//       id: 1,
+//       customer_id: 1,
+//       product_id: 1,
+//       unit: 2,
+//       company_id: 1,
+//       product_name: 'Apple',
+//       price: 0.012,
+//       type: 'Product',
+//       image_data: null,
+//       date: '2022-09-29T16:00:00.000Z',
+//       time: '12:30:01',
+//       status: 'Pending' } ],
 
-
-class Test extends React.Component {
-  state = {
-    apato: "",
-    customer: "",
-    balance: "",
-    value: "",
-    message: "",
-    showordertotal: "showordertotal",
-  };
-  async componentDidMount() {
-
-    const apato = await purchase.methods.apato().call();
-    const customer = await purchase.methods.customer().call();
-    const balance = await web3.eth.getBalance(purchase.options.address);
-
-    this.setState({ apato, customer, balance });
-  }
-
-//   onSubmit = async (event) => {
-//     event.preventDefault();
-
-//     const accounts = await web3.eth.getAccounts();
-
-//     this.setState({ message: "Waiting on transaction success..." });
-
-//     await purchase.methods.enter().send({
-//       from: accounts[0],
-//       value: web3.utils.toWei(this.state.value, "ether"),
-//     });
-
-//     this.setState({ message: "You have been entered!" });
-//   };
-
-//   onClick = async () => {
-//     const accounts = await web3.eth.getAccounts();
-
-//     this.setState({ message: "Waiting on transaction success..." });
-
-//     await purchase.methods.pickWinner().send({
-//       from: accounts[0],
-//     });
-
-//     this.setState({ message: "A winner has been picked!" });
-//   };
-
-  render() {
-    return (
-      <div>
-        {/* summary card */}
-        <div className="container">
-          <div className="d-flex   text-center justify-content-center align-items-center">
-            <Card style={{ width: "25rem" }}>
-              <Card.Body>
-                <Card.Title> Summary </Card.Title>
-                <hr />
-                <Card.Text>
-                  <h1>{this.state.balence}</h1>
-                  Order Total: $ {this.state.showordertotal && this.state.showordertotal}
-                  <br />
-                  <br />
-                  <InputGroup className="mb-3">
-                    <Form.Control
-                      placeholder="account number"
-                      aria-label="Recipient's username"
-                      aria-describedby="basic-addon2"
-                    />
-                    <Button variant="outline-secondary" id="button-addon2">
-                      <Link
-                        to="/customer/payment_status"
-                        className="rmLinkStyle"
-                      >
-                        {" "}
-                        <TiTick />
-                      </Link>
-                    </Button>
-                  </InputGroup>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-        </div>
-{/* 
-        <h2>Lottery Contract</h2>
-        <p>
-          This contract is managed by {this.state.manager}. There are currently{" "}
-          {this.state.players.length} people entered, competing to win{" "}
-          {web3.utils.fromWei(this.state.balance, "ether")} ether!
-        </p>
-
-        <hr />
-        <form onSubmit={this.onSubmit}>
-          <h4>Want to try your luck?</h4>
-          <div>
-            <label>Amount of ether to enter</label>
-            <input
-              value={this.state.value}
-              onChange={(event) => this.setState({ value: event.target.value })}
-            />
-          </div>
-          <button>Enter</button>
-        </form>
-
-        <hr />
-
-        <h4>Ready to pick a winner?</h4>
-        <button onClick={this.onClick}>Pick a winner!</button>
-
-        <hr />
-
-        <h1>{this.state.message}</h1> */}
-      </div>
-    );
-  }
-}
-export default Test;
+//   '1-1-20220930-214125': 
+//   [ { order_id: '1-1-20220930-214125',
+//       id: 2,
+//       customer_id: 1,
+//       product_id: 2,
+//       unit: 1,
+//       company_id: 1,
+//       product_name: 'Strawberry',
+//       price: 0.015,
+//       type: 'Product',
+//       image_data: null,
+//       date: '2022-09-29T16:00:00.000Z',
+//       time: '21:41:25',
+//       status: 'Pending' },
+//     { order_id: '1-1-20220930-214125',
+//       id: 3,
+//       customer_id: 1,
+//       product_id: 1,
+//       unit: 1,
+//       company_id: 1,
+//       product_name: 'Apple',
+//       price: 0.012,
+//       type: 'Product',
+//       image_data: null,
+//       date: '2022-09-29T16:00:00.000Z',
+//       time: '21:41:25',
+//       status: 'Pending' } ] ]

@@ -39,7 +39,7 @@ export default function CustomerNavbar(props) {
 
                             {/* company image */}
                             <Nav.Link disabled>
-                                <img class="NavBarIcon" src={props.customerImage} />
+                                <img className="NavBarIcon" src={props.customerImage} />
                             </Nav.Link>
 
                             {/* company name */}

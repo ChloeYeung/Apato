@@ -5,7 +5,8 @@ import React from "react";
 import CustomerNavbar from "../Components/CustomerNavbar";
 import {
   showOrderTotalPurchaseThunk,
-  delOrderTotalPurchaseThunk,
+  addOrderHistoryThunk,
+  delOrderTotalPurchaseThunk
 } from "../redux/customer_purchaseSlice";
 import paymentQRcode from "../images/paymentQRcode.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
@@ -91,15 +92,21 @@ export default function CustomerPurchase() {
         value: web3.utils.toWei(String(showOrderTotalPurchase), "ether"),
       });
 
-      setPayment((prevValue) => ({
-        ...prevValue,
-        message: "Transaction success",
-      }));
+
+
       console.log(payment);
 
       setSuccessPayment(true);
 
+      dispatch(addOrderHistoryThunk());
+
       dispatch(delOrderTotalPurchaseThunk());
+      
+      setPayment((prevValue) => ({
+        ...prevValue,
+        message: "Transaction success",
+      }));
+
     } catch (error) {
       setPayment((prevValue) => ({
         ...prevValue,

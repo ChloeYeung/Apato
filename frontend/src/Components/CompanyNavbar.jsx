@@ -37,7 +37,7 @@ export default function CompanyNavbar(props) {
             <Nav>
               {/* company image */}
               <Nav.Link disabled>
-                <img class="NavBarIcon" src={props.companyImage} />
+                <img className="NavBarIcon" src={props.companyImage} />
               </Nav.Link>
 
               {/* company name */}

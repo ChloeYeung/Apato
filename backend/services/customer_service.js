@@ -500,6 +500,99 @@ class CustomerService {
       console.log(error);
     }
   }
+
+  async addOrderHistoryPurchase(token) {
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        let date = new Date().toISOString().split("T")[0];
+
+        let Accepted_time = new Date();
+        const option = { timeZone: "Asia/Hong_Kong", hour12: false };
+        let time = Accepted_time.toLocaleTimeString("zh-HK", option);
+
+        let cart = await this.knex
+          .select("*")
+          .where("customer_id", decoded.id)
+          .table("customer_cart");
+        console.log("cart");
+        console.log(cart);
+        console.log("cart");
+
+        const fieldsToInsert = cart.map((field, index) => ({
+          order_id: `${decoded.id}-${field.company_id}-${date
+            .split("-")
+            .join("")}-${time.split(":").join("")}`,
+          customer_id: field.customer_id,
+          product_id: field.product_id,
+          unit: field.unit,
+          company_id: field.company_id,
+          product_name: field.product_name,
+          price: field.price,
+          type: field.type,
+          image_data: field.image_data,
+          date: date,
+          time: time,
+          status: "Pending",
+        }));
+        console.log("fieldsToInsert");
+        console.log(fieldsToInsert);
+        console.log("fieldsToInsert");
+        await this.knex("purchase_history").insert(fieldsToInsert);
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error Service customer addOrderHistoryPurchase ");
+      console.log(error);
+    }
+  }
+
+  //order history
+  async showOrderHistory(token) {
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        // let data = await this.knex
+        //   .select("*")
+        //   .where("customer_id", decoded.id)
+        //   .from("purchase_history");
+
+        // let data = await this.knex
+        //   .select(
+        //     "purchase_history.order_id, purchase_history.unit,purchase_history.product_name, purchase_history.price,purchase_history.type,purchase_history.image_data, purchase_history.date,purchase_history.time,purchase_history.status, company_users.name"
+        //   )
+        //   .from("purchase_history")
+        //   .innerJoin(
+        //     "company_users",
+        //     "company_users.id",
+        //     "purchase_history.company_id"
+        //   )
+        //   .where("purchase_history.customer_id", "=", decoded.id);
+
+        let data = await this.knex
+          .from("purchase_history")
+          .innerJoin(
+            "company_users",
+            "purchase_history.company_id",
+            "company_users.id"
+          )
+          .where("purchase_history.customer_id", "=", decoded.id);
+        console.log(data);
+        console.log("+++++++++++++==========");
+        return data;
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error Service customer delCartInPurchase ");
+      console.log(error);
+    }
+  }
 }
 
 module.exports = CustomerService;

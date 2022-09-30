@@ -26,5 +26,5 @@ export const store = configureStore({
     purchaseReducer: customer_purchaseSlice,
     orderHistoryReducer: customer_orderHistory,
   },
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

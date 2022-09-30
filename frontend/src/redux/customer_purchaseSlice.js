@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   showordertotalpurchase: [],
   delordertotalpurchase: [],
+  addorderhistory: [],
 };
 
 export const customer_purchaseSlice = createSlice({
@@ -16,10 +17,13 @@ export const customer_purchaseSlice = createSlice({
     delOrderTotalPurchase: (state, action) => {
       state.delordertotalpurchase = action.payload;
     },
+    addOrderHistory: (state, action) => {
+      state.addorderhistory = action.payload;
+    },
   },
 });
 
-export const { showOrderTotalPurchase, delOrderTotalPurchase } = customer_purchaseSlice.actions;
+export const { showOrderTotalPurchase, delOrderTotalPurchase, addOrderHistory } = customer_purchaseSlice.actions;
 
 export default customer_purchaseSlice.reducer;
 
@@ -38,6 +42,16 @@ export const delOrderTotalPurchaseThunk = () => async (dispatch) => {
   const token = localStorage.getItem("TOKENCUS");
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/customer/purchase_del_cart`,
+    {
+      token,
+    }
+  );
+};
+
+export const addOrderHistoryThunk = () => async (dispatch) => {
+  const token = localStorage.getItem("TOKENCUS");
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/customer/purchase_add_order_history`,
     {
       token,
     }

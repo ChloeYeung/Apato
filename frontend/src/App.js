@@ -93,7 +93,7 @@ function App() {
         />
         {/* <Route path="/customer/show_service/:id" element={<CustomerShowServiceDetail />} /> */}
 
-        <Route path="/customer/test" element={<Test />} />
+        {/* <Route path="/customer/test" element={<Test />} /> */}
         <Route
           path="/customer/show_product"
           element={<CustomerShowProduct />}
