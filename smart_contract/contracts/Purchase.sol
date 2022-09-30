@@ -15,8 +15,14 @@ contract Purchase {
     }
 
     function purchase() public payable {
+        address payable  empty;
         require(msg.value > .01 ether);
         customer = payable(msg.sender);
         recieve();
+        customer = empty ;
     }
+
+    // function showCustomer() public view returns (address payable memory){
+    //     return customer;
+    // }
 }

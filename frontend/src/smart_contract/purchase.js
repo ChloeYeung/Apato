@@ -1,6 +1,6 @@
 import web3 from "./web3";
 
-const address = "0x0a65c3660771279FeDE36cc8AD304c3E9AD150e3";
+const address = "0xD9279a79a78e491D17A574001be204A90062e771";
 const abi = [
   {
     inputs: [],
@@ -48,5 +48,4 @@ const abi = [
 
 export default new web3.eth.Contract(abi, address);
 
-
-// deployed contract address: 0x4f4840Ef91948c3FD4D35F8Ac35cC2afE2b47e82
+// deployed contract address: 0xD9279a79a78e491D17A574001be204A90062e771

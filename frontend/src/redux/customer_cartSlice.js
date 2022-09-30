@@ -69,6 +69,7 @@ export const showCartThunk = () => async (dispatch) => {
         }
     }
 
+
       // response.data.forEach((e, i) => {
     //     if (e.image_data != null)
     //       response.data[i].image_data = toBase64(e.image_data.data);
@@ -84,7 +85,7 @@ export const showCartThunk = () => async (dispatch) => {
 
     //         })
     // }
-
+    dispatch(showOrderTotalThunk());
     dispatch(showCart(tmp_showChart));
 };
 
@@ -125,8 +126,11 @@ export const deleteCartThunk = (del) => async (dispatch) => {
 
 export const showOrderTotalThunk = () => async (dispatch) => {
     const token = localStorage.getItem("TOKENCUS");
-    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/show_order_total`, {
+
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/cart_show_order_total`, {
         token
     })
+    console.log(response.data);
+    console.log("in showOrderTotalThunk")
     dispatch(showOrderTotal((response.data).toFixed(4)));
 };

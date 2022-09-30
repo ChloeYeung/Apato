@@ -23,3 +23,5 @@ const deploy = async () => {
   provider.engine.stop();
 };
 deploy();
+
+//deploy address: 0xD9279a79a78e491D17A574001be204A90062e771

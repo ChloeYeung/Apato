@@ -29,10 +29,10 @@ export default function CustomerPayment() {
         customerImage={customernavinfo.image_data === null ? comNavNoPic : `data:image/png;base64 ,${customernavinfo.image_data}`}
         customerName={customernavinfo.name} />
 
-      {/* Success payment */}
+      {/* Success Fail */}
       <br />
 
-      <div>
+      {/* <div>
         <h3 className='text-center'> Transaction Success </h3>
 
         <div className='d-flex align-items-center justify-content-center'>
@@ -44,7 +44,7 @@ export default function CustomerPayment() {
             click here
           </Link>
           {" "} to view your order history.</p>
-      </div>
+      </div> */}
 
       <div>
         <h3 className='text-center'> Transaction Failed </h3>

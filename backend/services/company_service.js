@@ -13,7 +13,6 @@ class CompanyService {
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
       if (verify) {
         let data = await this.knex.select("image_data", "name").where("id", `${decoded.id}`).from("company_users");
-        console.log(data[0]);
         return data[0];
       } else {
         res.sendStatus(401);
@@ -47,10 +46,8 @@ class CompanyService {
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
       if (verify) {
         console.log("added PM")
-        console.log(image_name);
-        console.log(image_data);
         let data = await this.knex.select("id").from('company_product').orderBy('id');
-        await this.knex("company_product").insert({ id: `${data.length + 1}`, company_id: decoded.id, name: name, description: description, stock: stock, price: price, tag: tag, type: type, image_name: image_name, image_data: image_data });
+        await this.knex("company_product").insert({ id: `${data[data.length-1].id + 1}`, company_id: decoded.id, name: name, description: description, stock: stock, price: price, tag: tag, type: type, image_name: image_name, image_data: image_data });
         let product = await this.knex("company_product").where("company_id", `${decoded.id}`).select("id", "name", "description", "stock", "price", "tag", "type", "image_name", "image_data").orderBy('id');
         return product;
       } else {

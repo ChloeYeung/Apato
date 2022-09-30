@@ -28,9 +28,6 @@ export default function CompanyProductManagement() {
   const companyinfopm = useSelector((state) => state.pmReducer.companyinfopm);
   const companynavinfo = useSelector((state) => state.navbarComReducer.companynavinfo);
 
-  console.log(showpm);
-  console.log(companyinfopm);
-  console.log(companynavinfo);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -56,17 +53,24 @@ export default function CompanyProductManagement() {
     $(`#pmEditClosePopover${id}${column}`).hide();
   }
 
+  //show add card
+  const handlepmAddOnClickShow = () => {
+    console.log("hide");
+    document.getElementById("pmAddHideCard").style.visibility =
+      "visible";
+  };
+
   return (
-    <div>
+    <div className="fontNormal">
 
       {/* Navbar */}
-      <CompanyNavbar
+      <CompanyNavbar 
         companyImage={companynavinfo.image_data === null ? cusNavNoPic : `data:image/png;base64 ,${companynavinfo.image_data}`}
         companyName={companynavinfo.name} />
 
 
       {/* table */}
-      <Table striped bordered hover variant="outline-dark">
+      <Table striped bordered hover className='text-center'>
         <thead>
           <tr>
             <th>#</th>
@@ -185,7 +189,7 @@ export default function CompanyProductManagement() {
                       placement="bottom"
                       overlay={
                         <Popover id={"pmEditClosePopover" + element.id + "tag"}>
-                          <Popover.Header className="text-center" as="h3">{`Update Tag ${element.type.split("")[0]}${element.id}`}</Popover.Header>
+                          <Popover.Header className="text-center testing" as="h3">{`Update Tag ${element.type.split("")[0]}${element.id}`}</Popover.Header>
                           <Popover.Body className="bg-light">
                             <input type="text" name="tag" placeholder='tag' id='pmEditInput' onChange={handleEditChange} />
                             <br />
@@ -218,7 +222,7 @@ export default function CompanyProductManagement() {
       {/* add button */}
       <div className='d-flex justify-content-center'>
         <Link to="/company/product_management/add">
-          <Button variant="outline-dark" style={{ zIndex: "1000" }}>Add <IoMdAdd /></Button>
+          <Button variant="outline-secondary" style={{ zIndex: "1000" }} onClick={handlepmAddOnClickShow}>Add <IoMdAdd /></Button>
         </Link>
       </div>
 

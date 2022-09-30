@@ -400,14 +400,59 @@ class CustomerService {
   async showOrderTotal(token) {
     try {
       let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        let haveProduct = await this.knex("customer_cart").where({
+          id: decoded.id,
+        });
+        // .first();
+        console.log("have Product");
+        console.log(haveProduct);
+
+        if (!haveProduct) {
+          return "0";
+        }
+
+        let data = await this.knex
+          .select("price", "unit")
+          .where("customer_id", `${decoded.id}`)
+          .from("customer_cart");
+        let priceArray = [];
+        for (let i = 0; i < data.length; i++) {
+          priceArray.push(data[i].price * data[i].unit);
+        }
+
+        let orderTotal = priceArray.reduce(
+          (previousValue, currentValue) => previousValue + currentValue,
+          0
+        );
+        console.log("++++++++");
+        console.log("orderTotal: " + orderTotal);
+        console.log("++++++++");
+        return orderTotal;
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error Service customer showOrderTotal ");
+      console.log(error);
+    }
+  }
+
+  //Purchase
+  async showOrderTotalPurchase(token) {
+    try {
+      let decoded = this.jwt_decode(token);
       console.log(decoded);
       token = token.replace("Bearer ", "");
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
       console.log(verify);
       if (verify) {
-        let haveProduct = await this.knex("customer_cart")
-          .where({ id: decoded.id })
-          .first();
+        let haveProduct = await this.knex("customer_cart").where({
+          id: decoded.id,
+        });
+        // .first();
 
         if (!haveProduct) {
           return "0";
@@ -438,42 +483,20 @@ class CustomerService {
   }
 
   //Purchase
-  async showOrderTotalPurchase(token) {
+  async delCartInPurchase(token) {
     try {
       let decoded = this.jwt_decode(token);
-      console.log(decoded);
       token = token.replace("Bearer ", "");
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
-      console.log(verify);
       if (verify) {
-        let haveProduct = await this.knex("customer_cart")
-          .where({ id: decoded.id })
-          .first();
-
-        if (!haveProduct) {
-          return "0";
-        }
-
-        let data = await this.knex
-          .select("price", "unit")
+        await this.knex("customer_cart")
           .where("customer_id", `${decoded.id}`)
-          .from("customer_cart");
-        let priceArray = [];
-        for (let i = 0; i < data.length; i++) {
-          priceArray.push(data[i].price * data[i].unit);
-        }
-
-        let orderTotal = priceArray.reduce(
-          (previousValue, currentValue) => previousValue + currentValue,
-          0
-        );
-        console.log("orderTotal: " + orderTotal);
-        return orderTotal;
+          .del();
       } else {
         res.sendStatus(401);
       }
     } catch (error) {
-      console.log("Error Service customer showOrderTotal ");
+      console.log("Error Service customer delCartInPurchase ");
       console.log(error);
     }
   }

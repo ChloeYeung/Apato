@@ -3,7 +3,10 @@
 import React from "react";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
-import { showOrderTotalPurchaseThunk } from "../redux/customer_purchaseSlice";
+import {
+  showOrderTotalPurchaseThunk,
+  delOrderTotalPurchaseThunk,
+} from "../redux/customer_purchaseSlice";
 import paymentQRcode from "../images/paymentQRcode.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
@@ -13,18 +16,22 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Alert from "react-bootstrap/Alert";
+import Spinner from "react-bootstrap/Spinner";
 //react icon
 import { TiTick } from "react-icons/ti";
 import { FaEthereum } from "react-icons/fa";
+import { AiOutlineCheck } from "react-icons/ai";
+import { MdOutlineSmsFailed } from "react-icons/md";
 //redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 //react-router-dom
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 //state
 import { useState, useEffect } from "react";
 //smart contract
 import web3 from "../smart_contract/web3";
 import purchase from "../smart_contract/purchase";
+import { bindActionCreators } from "@reduxjs/toolkit";
 
 export default function CustomerPurchase() {
   const dispatch = useDispatch();
@@ -32,44 +39,76 @@ export default function CustomerPurchase() {
   const customernavinfo = useSelector(
     (state) => state.navbarCusReducer.customernavinfo
   );
-  const showOrderTotalPurchase = useSelector(
-    (state) => state.purchaseReducer.showordertotalpurchase
-  );
 
   //metamask payment
+  const [successPayment, setSuccessPayment] = useState(false);
+  console.log(successPayment);
+  const [failPayment, setFailPayment] = useState(false);
+  console.log(failPayment);
   const [payment, setPayment] = useState({
     apato: "",
     customer: "",
     balance: "",
     value: "",
-    message: "",
-    comfirmAccount: "",
+    message: "Please click COMFIRM to process payment",
   });
+
+  let showOrderTotalPurchase = useSelector(
+    (state) => state.purchaseReducer.showordertotalpurchase
+  );
 
   useEffect(() => {
     dispatch(cusNavInfoThunk());
     dispatch(showOrderTotalPurchaseThunk());
     const smartContract = async () => {
+      // const solPurchase = await purchase.methods.customer.call();
+      // console.log(solPurchase);
       const apato = await purchase.methods.apato().call();
-      const customer = await purchase.methods.customer().call();
       const balance = await web3.eth.getBalance(purchase.options.address);
-
       setPayment((prevValue) => ({
         ...prevValue,
         apato: apato,
-        customer: customer,
         balance: balance,
       }));
-      console.log(payment);
     };
     smartContract();
   }, []);
 
-  let handlePaymentAccountChange = function (event) {
+  //check if the provided address account and the actual account similar
+  let handlePaymentAccountSubmit = async () => {
+    console.log("in handlePaymentAccountSubmit");
+
     setPayment((prevValue) => ({
       ...prevValue,
-      comfirmAccount: event.target.value,
+      message: "Waiting on transaction success",
     }));
+    console.log(payment);
+    const accounts = await web3.eth.getAccounts();
+
+    try {
+      const purchase1 = await purchase.methods.purchase().send({
+        from: accounts[0],
+        value: web3.utils.toWei(String(showOrderTotalPurchase), "ether"),
+      });
+
+      setPayment((prevValue) => ({
+        ...prevValue,
+        message: "Transaction success",
+      }));
+      console.log(payment);
+
+      setSuccessPayment(true);
+
+      dispatch(delOrderTotalPurchaseThunk());
+    } catch (error) {
+      setPayment((prevValue) => ({
+        ...prevValue,
+        message: "Transaction fail",
+      }));
+      setFailPayment(true);
+      console.log("Transaction fail");
+      console.log(error);
+    }
   };
 
   return (
@@ -97,30 +136,56 @@ export default function CustomerPurchase() {
               <Card.Title> Summary </Card.Title>
               <hr />
               <Card.Text>
-                Order Total: <FaEthereum className="FaEthereumIcon"/> {showOrderTotalPurchase && showOrderTotalPurchase}
+                Order Total: <FaEthereum className="FaEthereumIcon" />{" "}
+                {showOrderTotalPurchase && showOrderTotalPurchase}
                 <br />
                 <br />
-                <InputGroup className="mb-3">
-                  <Form.Control
-                    placeholder="account number"
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                    onChange={handlePaymentAccountChange}
-                  />
-                  <Button variant="outline-secondary" id="button-addon2">
-                    <Link to="/customer/payment_status" className="rmLinkStyle">
-                      {" "}
-                      <TiTick />
-                    </Link>
-                  </Button>
-                </InputGroup>
+                <Button
+                  variant="outline-secondary"
+                  id="button-addon2"
+                  onClick={handlePaymentAccountSubmit}
+                >
+                  {/* <Link to="/customer/payment_status" className="rmLinkStyle">
+                      {" "} */}
+                  Confirm <TiTick />
+                  {/* </Link> */}
+                </Button>
+                {/* </InputGroup> */}
               </Card.Text>
             </Card.Body>
           </Card>
         </div>
       </div>
+      <br />
 
-      <h1>{payment.message}</h1>
+      <div className="text-center text-secondary">
+        {payment.message == "Waiting on transaction success" ? (
+          <p>
+            {" "}
+            {payment.message} <Spinner animation="border" variant="warning" />{" "}
+          </p>
+        ) : payment.message == "Transaction success" ? (
+          <p>
+            {" "}
+            {payment.message} <AiOutlineCheck />
+            <Navigate to="/customer/payment_success" />
+          </p>
+        ) : payment.message == "Please click COMFIRM to process payment" ? (
+          <p>{payment.message}</p>
+        ) : (
+          <p>
+            {" "}
+            {payment.message} <MdOutlineSmsFailed />
+            <Navigate to="/customer/payment_fail" />
+          </p>
+        )}
+      </div>
+
+      {/* navigate */}
+      {/* {successPayment && (
+        <Navigate to="/customer/payment_success" />
+      )}
+      {failPayment && <Navigate to="/customer/payment_fail" />} */}
 
       {/* payment code */}
       {/* <div className="container">

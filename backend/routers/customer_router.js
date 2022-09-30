@@ -19,9 +19,10 @@ class CustomerRouter {
     router.post("/add_cart_unit", this.addCartUnit.bind(this));
     router.post("/minus_cart_unit", this.minusCartUnit.bind(this));
     router.post("/del_cart_unit", this.delCart.bind(this));
-    router.post("/show_order_total", this.showOrderTotal.bind(this));
+    router.post("/cart_show_order_total", this.showOrderTotal.bind(this));
     //purchase
     router.post("/purchase_show_order_total", this.showOrderTotalPurchase.bind(this));
+    router.post("/purchase_del_cart", this.delCartInPurchase.bind(this));
     return router;
   }
 
@@ -99,6 +100,7 @@ class CustomerRouter {
   async showOrderTotal(req, res) {
     let token = req.body.token;
     let response = await (this.CustomerService.showOrderTotal(token));
+  
     return res.send(response.toString());
   }
 
@@ -106,6 +108,12 @@ class CustomerRouter {
     let token = req.body.token;
     let response = await (this.CustomerService.showOrderTotalPurchase(token));
     return res.send(response.toString());
+  }
+
+  async delCartInPurchase(req, res) {
+    let token = req.body.token;
+    let response = await (this.CustomerService.delCartInPurchase(token));
+    return res.send(response);
   }
 
   
