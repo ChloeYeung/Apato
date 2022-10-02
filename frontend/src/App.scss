@@ -49,6 +49,11 @@
 }
 
 /* Customer Show Product */
+.alertStockProduct{
+  font-size: 12px;
+}
+
+
 .toastNoticeShowProduct {
   opacity: 0.8;
   width: 200px;
@@ -122,6 +127,9 @@
   transform: translate(50%, 50%);
 }
 
+
+
+
 // Company Navbar
 .NavBarIcon {
   width: 30px;
@@ -181,7 +189,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   #paymentSuccessImg {
-    animation: App-paymentSuccess-spin infinite 0.3s linear;
+    animation: App-paymentSuccess-spin infinite 3s linear;
   }
 }
 

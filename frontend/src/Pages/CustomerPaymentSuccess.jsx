@@ -58,6 +58,7 @@ export default function CustomerPayment() {
             src={paymentStatusSuccess}
             className="paymentStatusImg"
             id="paymentSuccessImg"
+          
           /> */}
           {/* condition 3 - after lucky draw */}
           {/* <img src={paymentStatusSuccess} className="paymentStatusImg" /> */}

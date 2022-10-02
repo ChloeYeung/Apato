@@ -10,6 +10,7 @@ import Accordion from "react-bootstrap/Accordion";
 import CompanyNavbar from "../Components/CompanyNavbar";
 import cusNavNoPic from "../images/cusNavNoPic.jpg";
 import { comNavInfoThunk } from "../redux/company_navbarSlice";
+import {showSalesSummaryThunk, showSalesSummaryDetailThunk} from "../redux/company_summarySlice"
 
 //react icon
 import { BiMoney } from "react-icons/bi";
@@ -27,11 +28,23 @@ export default function CompanySalesSummary() {
     (state) => state.navbarComReducer.companynavinfo
   );
 
+  const showsalessummary = useSelector(
+    (state) => state.salesSummaryReducer.showsalessummary
+  );
+
+  console.log(showsalessummary);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(comNavInfoThunk());
-  });
+    dispatch(showSalesSummaryThunk());
+  },[]);
+  
+  let handleFunction = function(){
+     dispatch(showSalesSummaryDetailThunk());
+  }
+
   return (
     <div>
       {/* Navbar */}
@@ -43,9 +56,9 @@ export default function CompanySalesSummary() {
         }
         companyName={companynavinfo.name}
       />
+<Button onClick={handleFunction}>thunk</Button>
 
       {/* Summary card */}
-
       <br />
       <br />
       <div className="d-flex justify-content-center">
@@ -65,9 +78,11 @@ export default function CompanySalesSummary() {
                   <div className="col">
                     Current sales:
                     <FaEthereum className="FaEthereumIcon" />
+                    {showsalessummary.currentSales}
                   </div>
                   <div className="col">
                     Accumlated sales:
+                    {showsalessummary.accumlatedSales}
                     <FaEthereum className="FaEthereumIcon" />
                   </div>
                 </div>

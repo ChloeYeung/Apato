@@ -16,7 +16,9 @@ class CompanyRouter {
     router.post("/addPm", this.addProductManagement.bind(this));
     router.post("/deletePm", this.deleteProductManagement.bind(this));
     router.post("/editPm", this.editProductManagement.bind(this));
-
+    //Sales Summary
+    router.post("/show_salesSummary", this.showSalesSummary.bind(this));
+    router.post("/show_salesSummary_detail", this.showSalesSummaryDetail.bind(this));
     return router;
   }
 
@@ -61,6 +63,22 @@ class CompanyRouter {
     let response = await (this.CompanyService.editProductManagement(token, id, column, value));
     return res.send(response);
   }
+
+
+  //Sales Summary
+  async showSalesSummary(req, res) {
+    let token = req.body.token;
+    let response = await (this.CompanyService.showSalesSummary(token));
+    return res.send(response);
+  }
+
+  async showSalesSummaryDetail(req, res) {
+    let token = req.body.token;
+    let response = await (this.CompanyService.showSalesSummaryDetail(token));
+    return res.send(response);
+  }
+
+  
 }
 
 module.exports = CompanyRouter;

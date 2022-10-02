@@ -35,11 +35,32 @@ export default function CustomerOrderHistory() {
   useEffect(() => {
     dispatch(cusNavInfoThunk());
     dispatch(showOrderHistoryThunk());
-    setHistory(showorderhistory);
   }, []);
   console.log(history);
+
   return (
+   
     <div>
+
+    
+  
+      {showorderhistory && Object.entries(showorderhistory).map((element,index)=>(
+
+  <p>{element[1][0].id}</p>
+
+
+
+      )
+
+// console.log(element)
+
+
+
+      )}
+      
+     
+      
+    
       {/* Navbar */}
       <CustomerNavbar
         customerImage={
@@ -53,25 +74,36 @@ export default function CustomerOrderHistory() {
       {/* Title */}
       <br />
       <h3 className="text-center">Order History</h3>
+     
+      
+       
+       
+      
       <br />
 
       {/* order card */}
-      {showorderhistory && showorderhistory.map((element, index) => <></>)}
-      {showorderhistory &&
+      {/* {showorderhistory && showorderhistory.map((element, index) => <>
+     <p>dawdidhwa</p>
+      
+      </>)} */}
+      {/* {showorderhistory &&
         showorderhistory.map((element1, index) => (
           <>
-            <div key={"orderHistoryNo" + index} className="container">
+          
+          
+            <div key={"orderHistoryNo" } className="container">
               <div className="d-flex text-center justify-content-center align-items-center">
                 <Card style={{ width: "25rem" }}>
                   <Card.Body>
                     <Card.Title>
                       {" "}
-                      Order number # {element1[0].order_id}
+                      Order number # 
                     </Card.Title>
                     <Card.Text>
-                      Date{element1[0].date} 
-                      Status{element1[0].status} 
-                      Company {element1[0].name}
+                      <p>dawuhdawhdawhdiuahwoahiw</p>
+                      Date
+                      Status 
+                      Company 
                     </Card.Text>
                     <hr />
 
@@ -85,11 +117,11 @@ export default function CustomerOrderHistory() {
                             />{" "}
                           </div>
                           <div className="col">
-                            <p>Name {element2.product_name}</p>
+                            <p>Name </p>
 
                             <p>Unit</p>
                             <p>
-                              Unit price {element2.price}
+                              Unit price 
                               <FaEthereum className="FaEthereumIcon" />
                             </p>
                             <p>
@@ -104,7 +136,7 @@ export default function CustomerOrderHistory() {
               </div>
             </div>
           </>
-        ))}
+        ))} */}
     </div>
   );
 }

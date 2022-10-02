@@ -118,7 +118,7 @@ export default function CustomerCart() {
         )}
 
         {/* product cart */}
-        {showcart && showcart.map((element, index) => <></>)}
+     
         {showcart &&
           showcart.map((element1, index) => (
             <>

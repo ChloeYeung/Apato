@@ -6,9 +6,11 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
+import Alert from "react-bootstrap/Alert";
+
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
-import cusShowProCarousel1 from "../images/cusShowProCarousel1.jpg";
+import cusShowProCarousel1 from "../images/cusShowProCarousel1.png";
 import cusShowProCarousel2 from "../images/cusShowProCarousel2.png";
 import cusShowProCarousel3 from "../images/cusShowProCarousel3.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
@@ -115,45 +117,27 @@ export default function CustomerShowProduct() {
                 className="d-block w-100 cusShowProCarousel"
                 src={cusShowProCarousel1}
                 alt="First slide"
-                style={{ maxHeight: "400px" }}
+                // style={{ maxHeight: "400px" }}
               />
-              <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
-              </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={500}>
               <img
                 className="d-block w-100 cusShowProCarousel"
                 src={cusShowProCarousel3}
                 alt="Second slide"
-                style={{ maxHeight: "400px" }}
+                // style={{ maxHeight: "400px" }}
               />
-              <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
               <img
                 className="d-block w-100 cusShowProCarousel"
                 src={cusShowProCarousel2}
                 alt="Third slide"
-                style={{ maxHeight: "400px" }}
+                // style={{ maxHeight: "400px" }}
               />
-              <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
-              </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
           <br />
-        
 
           {/* Product card */}
           <div className="container" style={{ padding: "5px" }}>
@@ -183,27 +167,71 @@ export default function CustomerShowProduct() {
 
                           <div className="container">
                             <div className="row">
-                              <div className="col">
-                                {/* Add cart btn */}
-                                <Button
-                                  id="showProductAddCartBtn"
-                                  onClick={() => handleAddCartBtn(element)}
-                                  variant="outline-primary"
-                                >
-                                  {" "}
-                                  <BsCartPlus />
-                                </Button>
+                              <div className="col-8">
+                                {element.stock === 0 ? (
+                                  <>
+                                    <Alert
+                                      className="text-center alertStockProduct"
+                                      variant="danger"
+                                    >
+                                      Out of stock
+                                    </Alert>
+                                  </>
+                                ) : element.stock < 10 ? (
+                                  <Alert
+                                    className="text-center alertStockProduct"
+                                    variant="warning"
+                                  >
+                                    Limited quantity
+                                  </Alert>
+                                ) : (
+                                  <Alert
+                                    className="text-center alertStockProduct"
+                                    variant="success"
+                                  >
+                                    Large stock
+                                  </Alert>
+                                )}
                               </div>
-                              <div className="col">
+
+                              <div className="col-4">
+                                {/* Add cart btn */}
+                                {element.stock == 0 ? (
+                                  <Button
+                                    id="showProductAddCartBtn"
+                                    onClick={() => handleAddCartBtn(element)}
+                                    variant="outline-primary"
+                                    disabled
+                                  >
+                                    <BsCartPlus />
+                                  </Button>
+                                ) : (
+                                  <Button
+                                    id="showProductAddCartBtn"
+                                    onClick={() => handleAddCartBtn(element)}
+                                    variant="outline-primary"
+                                  >
+                                    <BsCartPlus />
+                                  </Button>
+                                )}
+                             
+
+                 
                                 {/* Descrition Btn */}
-                                <Link to={"/customer/show_product/"+ element.id}>
+                                <Link
+                                  to={"/customer/show_product/" + element.id}
+                                >
                                   <Button variant="outline-warning">
                                     {" "}
                                     <HiOutlineInformationCircle />
                                   </Button>
                                 </Link>
                               </div>
+
+
+                              
                             </div>
+
                           </div>
                         </Card.Body>
                       </Card>

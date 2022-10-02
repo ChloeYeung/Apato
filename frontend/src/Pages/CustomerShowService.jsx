@@ -8,9 +8,9 @@ import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
-import cusShowSerCarousel1 from "../images/cusShowSerCarousel1.jpg";
-import cusShowSerCarousel2 from "../images/cusShowSerCarousel2.jpg";
-import cusShowSerCarousel3 from "../images/cusShowSerCarousel3.jpg";
+import cusShowSerCarousel1 from "../images/cusShowSerCarousel1.png";
+import cusShowSerCarousel2 from "../images/cusShowSerCarousel2.png";
+import cusShowSerCarousel3 from "../images/cusShowSerCarousel3.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 //react icon
@@ -55,7 +55,6 @@ export default function CustomerShowService() {
     console.log(element);
     dispatch(addCartSerThunk(element));
     setShowSer(true);
-    // document.getElementById(event.target.id).style.textDecoration = 'line-through'
   };
 
   //  for the toast notice
@@ -115,41 +114,21 @@ export default function CustomerShowService() {
                 className="d-block w-100 cusShowProCarousel"
                 src={cusShowSerCarousel1}
                 alt="First slide"
-                style={{ maxHeight: "400px" }}
               />
-              <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
-              </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={500}>
               <img
                 className="d-block w-100 cusShowProCarousel"
                 src={cusShowSerCarousel3}
                 alt="Second slide"
-                style={{ maxHeight: "400px" }}
               />
-              <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
               <img
                 className="d-block w-100 cusShowProCarousel"
                 src={cusShowSerCarousel2}
                 alt="Third slide"
-                style={{ maxHeight: "400px" }}
               />
-              <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
-              </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
           <br />
