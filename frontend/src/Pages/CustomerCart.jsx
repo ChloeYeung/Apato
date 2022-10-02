@@ -66,7 +66,6 @@ export default function CustomerCart() {
   }, 3000);
 
   let handleAddCartUnit = function (element2) {
-    console.log(element2);
     let cart_id = element2.id;
     let product_id = element2.product_id;
     let add = { cart_id: cart_id, product_id, product_id };
@@ -75,7 +74,6 @@ export default function CustomerCart() {
   };
 
   let handleMinusCartUnit = function (element2) {
-    console.log(element2);
     let cart_id = element2.id;
     let product_id = element2.product_id;
     let minus = { cart_id: cart_id, product_id, product_id };
@@ -84,7 +82,6 @@ export default function CustomerCart() {
   };
 
   let handleDeleteCartBtn = function (element2) {
-    console.log(element2.id);
     dispatch(deleteCartThunk(element2.id));
   };
 
@@ -207,15 +204,14 @@ export default function CustomerCart() {
             </>
           ))}
 
+        <br />
+        <br />
+
         {/* alert message box (add or minus) */}
-
-        <br />
-        <br />
-
         {isAlertVisible && (
-          <Toast>
-            <Toast.Body>
-              <div className="overlayCartMessage text-center align-items-center">
+          <div className="overlayCartMessage text-center align-items-center">
+            <Toast>
+              <Toast.Body>
                 <br />
                 <p id="overlayCartMessageText">{showmessagechart}</p>
                 <div>
@@ -227,9 +223,9 @@ export default function CustomerCart() {
                     <MdReportProblem className="overlayCartMessageIcon" />
                   )}
                 </div>
-              </div>
-            </Toast.Body>
-          </Toast>
+              </Toast.Body>
+            </Toast>
+          </div>
         )}
 
         {/* bottom total */}
@@ -254,7 +250,6 @@ export default function CustomerCart() {
                   </Button>
                 </div>
               )}
-              
             </div>
           </Card>
         </div>

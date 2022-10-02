@@ -57,7 +57,6 @@ export default function CustomerShowProduct() {
     console.log(element);
     dispatch(addCartThunk(element));
     setShow(true);
-    // document.getElementById(event.target.id).style.textDecoration = 'line-through'
   };
 
   //  for the toast notice
@@ -85,34 +84,6 @@ export default function CustomerShowProduct() {
             }
             customerName={customernavinfo.name}
           />
-
-          {/* <div id="cusShowProductTopLayer" className="container">
-            <div className="d-flex flex-nowrap">
-              <Row>
-                <Col xs={6}>
-                  <Toast
-                    id="toastNoticeShowProduct"
-                    className="d-flex justify-content-center align-items-center text-center"
-                    onClose={() => setShow(false)}
-                    show={show}
-                    delay={3000}
-                    autohide
-                  >
-                    <Toast.Body>
-                      <p id="addcartmessage"> {addcartmessage} </p>
-                      <br />
-                      {addcartmessage == "No stock remain" ? (
-                        <FiAlertCircle className="addcarticon" />
-                      ) : (
-                        <BiCheckCircle className="addcarticon" />
-                      )}
-                    </Toast.Body>
-                  </Toast>
-                </Col>
-                <Col xs={6}></Col>
-              </Row>
-            </div>
-          </div> */}
 
           {show && (
             <div className="overlayCartMessage text-center align-items-center">
@@ -182,6 +153,7 @@ export default function CustomerShowProduct() {
             </Carousel.Item>
           </Carousel>
           <br />
+        
 
           {/* Product card */}
           <div className="container" style={{ padding: "5px" }}>

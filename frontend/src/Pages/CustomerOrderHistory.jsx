@@ -27,13 +27,17 @@ export default function CustomerOrderHistory() {
   const showorderhistory = useSelector(
     (state) => state.orderHistoryReducer.showorderhistory
   );
+
+  const [history, setHistory] = useState("");
   console.log(customernavinfo);
   console.log(showorderhistory);
 
   useEffect(() => {
     dispatch(cusNavInfoThunk());
     dispatch(showOrderHistoryThunk());
+    setHistory(showorderhistory);
   }, []);
+  console.log(history);
   return (
     <div>
       {/* Navbar */}
@@ -50,13 +54,12 @@ export default function CustomerOrderHistory() {
       <br />
       <h3 className="text-center">Order History</h3>
       <br />
-      {true && showorderhistory.map((element, index) => <>
-      <h1>kkk</h1> 
-      </>)}
+
+      {/* order card */}
+      {showorderhistory && showorderhistory.map((element, index) => <></>)}
       {showorderhistory &&
         showorderhistory.map((element1, index) => (
           <>
-            {/* order card */}
             <div key={"orderHistoryNo" + index} className="container">
               <div className="d-flex text-center justify-content-center align-items-center">
                 <Card style={{ width: "25rem" }}>
@@ -66,37 +69,38 @@ export default function CustomerOrderHistory() {
                       Order number # {element1[0].order_id}
                     </Card.Title>
                     <Card.Text>
-                      Date{element1[0].date} Status{element1[0].status} Company
-                      {element1[0].name}
+                      Date{element1[0].date} 
+                      Status{element1[0].status} 
+                      Company {element1[0].name}
                     </Card.Text>
                     <hr />
 
                     {element1.map((element2) => (
-                    <>
-                    <div className="row">
-                      <div className="col">
-                        <img src={logo} alt="" />
-                      </div>
-                      <div className="col">
-                        <p>Name {element2.product_name}</p>
+                      <>
+                        <div className="row" >
+                          <div className="col">
+                            <img
+                              src={`data:image/png;base64 ,${element2.image_data}`}
+                              style={{ height: "150px", width: "150px" }}
+                            />{" "}
+                          </div>
+                          <div className="col">
+                            <p>Name {element2.product_name}</p>
 
-                        <p>Unit</p>
-                        <p>
-                          Unit price <FaEthereum className="FaEthereumIcon" />
-                        </p>
-                        <p>
-                          Total <FaEthereum className="FaEthereumIcon" />
-                        </p>
-                      </div>
-                    </div>
-
-
-
-                    </>
-                  ))}
+                            <p>Unit</p>
+                            <p>
+                              Unit price {element2.price}
+                              <FaEthereum className="FaEthereumIcon" />
+                            </p>
+                            <p>
+                              Total <FaEthereum className="FaEthereumIcon" />
+                            </p>
+                          </div>
+                        </div>
+                      </>
+                    ))}
                   </Card.Body>
                 </Card>
-
               </div>
             </div>
           </>

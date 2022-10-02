@@ -6,7 +6,8 @@ import CustomerNavbar from "../Components/CustomerNavbar";
 import {
   showOrderTotalPurchaseThunk,
   addOrderHistoryThunk,
-  delOrderTotalPurchaseThunk
+  delOrderTotalPurchaseThunk,
+  updateCompanyStockThunk
 } from "../redux/customer_purchaseSlice";
 import paymentQRcode from "../images/paymentQRcode.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
@@ -97,6 +98,7 @@ export default function CustomerPurchase() {
       console.log(payment);
 
       setSuccessPayment(true);
+      dispatch(updateCompanyStockThunk());
 
       dispatch(addOrderHistoryThunk());
 

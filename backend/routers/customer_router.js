@@ -24,6 +24,7 @@ class CustomerRouter {
     router.post("/purchase_show_order_total", this.showOrderTotalPurchase.bind(this));
     router.post("/purchase_del_cart", this.delCartInPurchase.bind(this));
     router.post("/purchase_add_order_history", this.addOrderHistoryPurchase.bind(this));
+    router.post("/purchase_update_company_stock", this.updateCompanyStockPurchase.bind(this));
     //order history
     router.post("/show_order_history", this.showOrderHistory.bind(this));
     
@@ -124,6 +125,12 @@ class CustomerRouter {
   async addOrderHistoryPurchase(req, res) {
     let token = req.body.token;
     let response = await (this.CustomerService.addOrderHistoryPurchase(token));
+    return res.send(response);
+  }
+
+  async updateCompanyStockPurchase(req, res) {
+    let token = req.body.token;
+    let response = await (this.CustomerService.updateCompanyStockPurchase(token));
     return res.send(response);
   }
 

@@ -85,6 +85,7 @@ export const showCartThunk = () => async (dispatch) => {
 
     //         })
     // }
+    console.log(tmp_showChart);
     dispatch(showOrderTotalThunk());
     dispatch(showCart(tmp_showChart));
 };
@@ -130,7 +131,5 @@ export const showOrderTotalThunk = () => async (dispatch) => {
     const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/cart_show_order_total`, {
         token
     })
-    console.log(response.data);
-    console.log("in showOrderTotalThunk")
     dispatch(showOrderTotal((response.data).toFixed(4)));
 };

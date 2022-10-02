@@ -517,9 +517,6 @@ class CustomerService {
           .select("*")
           .where("customer_id", decoded.id)
           .table("customer_cart");
-        console.log("cart");
-        console.log(cart);
-        console.log("cart");
 
         const fieldsToInsert = cart.map((field, index) => ({
           order_id: `${decoded.id}-${field.company_id}-${date
@@ -537,15 +534,43 @@ class CustomerService {
           time: time,
           status: "Pending",
         }));
-        console.log("fieldsToInsert");
-        console.log(fieldsToInsert);
-        console.log("fieldsToInsert");
+
         await this.knex("purchase_history").insert(fieldsToInsert);
       } else {
         res.sendStatus(401);
       }
     } catch (error) {
       console.log("Error Service customer addOrderHistoryPurchase ");
+      console.log(error);
+    }
+  }
+
+  async updateCompanyStockPurchase(token) {
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        let productIdUnit = await this.knex("customer_cart")
+          .where("customer_id", decoded.id)
+          .select("product_id", "unit")
+          .orderBy("id");
+
+        for (let i = 0; i < productIdUnit.length; i++) {
+          let stock = await this.knex("company_product")
+            .where("id", productIdUnit[i].product_id)
+            .select("stock");
+
+          await this.knex("company_product")
+            .where("id", productIdUnit[i].product_id)
+            .update("stock", stock[0].stock - productIdUnit[i].unit);
+        }
+        
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error Service customer updateCompanyStockPurchase ");
       console.log(error);
     }
   }
@@ -557,22 +582,9 @@ class CustomerService {
       token = token.replace("Bearer ", "");
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
       if (verify) {
-        // let data = await this.knex
-        //   .select("*")
-        //   .where("customer_id", decoded.id)
-        //   .from("purchase_history");
-
-        // let data = await this.knex
-        //   .select(
-        //     "purchase_history.order_id, purchase_history.unit,purchase_history.product_name, purchase_history.price,purchase_history.type,purchase_history.image_data, purchase_history.date,purchase_history.time,purchase_history.status, company_users.name"
-        //   )
-        //   .from("purchase_history")
-        //   .innerJoin(
-        //     "company_users",
-        //     "company_users.id",
-        //     "purchase_history.company_id"
-        //   )
-        //   .where("purchase_history.customer_id", "=", decoded.id);
+        let dataImage = await this.knex("purchase_history")
+          .select("image_data")
+          .where("customer_id", decoded.id);
 
         let data = await this.knex
           .from("purchase_history")
@@ -582,6 +594,11 @@ class CustomerService {
             "company_users.id"
           )
           .where("purchase_history.customer_id", "=", decoded.id);
+
+        for (let i = 0; i < dataImage.length; i++) {
+          data[i].image_data = dataImage[i].image_data;
+        }
+        console.log("+++++++++++++==========");
         console.log(data);
         console.log("+++++++++++++==========");
         return data;

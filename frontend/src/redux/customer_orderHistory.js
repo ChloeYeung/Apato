@@ -35,6 +35,7 @@ export const showOrderHistoryThunk = () => async (dispatch) => {
     }
   );
 
+
   let tmp_showChart = [];
   response.data.forEach((ele1) => {
     let arr = [];
@@ -46,14 +47,15 @@ export const showOrderHistoryThunk = () => async (dispatch) => {
     }
   });
 
-  // console.log(tmp_showChart);
-//   for (const property in tmp_showChart) {
-//     for (let i = 0; i < tmp_showChart[property].length; i++) {
-//         if (tmp_showChart[property][i].image_data != null) {
-//             tmp_showChart[property][i].image_data = toBase64(tmp_showChart[property][i].image_data.data)
-//         }
-//     }
-// }
+  for (const property in tmp_showChart) {
+    for (let i = 0; i < tmp_showChart[property].length; i++) {
+        if (tmp_showChart[property][i].image_data != null) {
+            tmp_showChart[property][i].image_data = toBase64(tmp_showChart[property][i].image_data.data)
+        }
+    }
+}
+  console.log(tmp_showChart);
+
 
   dispatch(showOrderHistory(tmp_showChart));
 };

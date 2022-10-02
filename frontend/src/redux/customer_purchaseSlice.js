@@ -23,7 +23,11 @@ export const customer_purchaseSlice = createSlice({
   },
 });
 
-export const { showOrderTotalPurchase, delOrderTotalPurchase, addOrderHistory } = customer_purchaseSlice.actions;
+export const {
+  showOrderTotalPurchase,
+  delOrderTotalPurchase,
+  addOrderHistory,
+} = customer_purchaseSlice.actions;
 
 export default customer_purchaseSlice.reducer;
 
@@ -52,6 +56,16 @@ export const addOrderHistoryThunk = () => async (dispatch) => {
   const token = localStorage.getItem("TOKENCUS");
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/customer/purchase_add_order_history`,
+    {
+      token,
+    }
+  );
+};
+
+export const updateCompanyStockThunk = () => async (dispatch) => {
+  const token = localStorage.getItem("TOKENCUS");
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND}/customer/purchase_update_company_stock`,
     {
       token,
     }
