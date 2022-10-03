@@ -7,7 +7,7 @@ import {
   showOrderTotalPurchaseThunk,
   addOrderHistoryThunk,
   delOrderTotalPurchaseThunk,
-  updateCompanyStockThunk
+  updateCompanyStockThunk,
 } from "../redux/customer_purchaseSlice";
 import paymentQRcode from "../images/paymentQRcode.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
@@ -15,8 +15,6 @@ import comNavNoPic from "../images/comNavNoPic.jpg";
 //bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 //react icon
@@ -38,15 +36,15 @@ import { bindActionCreators } from "@reduxjs/toolkit";
 export default function CustomerPurchase() {
   const dispatch = useDispatch();
 
+  const [checkedornot, toggleChecked] = useState(true);
+
   const customernavinfo = useSelector(
     (state) => state.navbarCusReducer.customernavinfo
   );
 
   //metamask payment
   const [successPayment, setSuccessPayment] = useState(false);
-  console.log(successPayment);
   const [failPayment, setFailPayment] = useState(false);
-  console.log(failPayment);
   const [payment, setPayment] = useState({
     apato: "",
     customer: "",
@@ -88,14 +86,19 @@ export default function CustomerPurchase() {
     const accounts = await web3.eth.getAccounts();
 
     try {
-      const purchase1 = await purchase.methods.purchase().send({
-        from: accounts[0],
-        value: web3.utils.toWei(String(showOrderTotalPurchase), "ether"),
-      });
-
-
-
-      console.log(payment);
+      if (checkedornot == true) {
+        let purchaseWithLuck = await purchase.methods.purchaseWithLuck().send({
+          from: accounts[0],
+          value: web3.utils.toWei(String(showOrderTotalPurchase), "ether"),
+        });
+      } else {
+        let purchaseWithOutLuck = await purchase.methods
+          .purchaseWithOutLuck()
+          .send({
+            from: accounts[0],
+            value: web3.utils.toWei(String(showOrderTotalPurchase), "ether"),
+          });
+      }
 
       setSuccessPayment(true);
       dispatch(updateCompanyStockThunk());
@@ -103,12 +106,11 @@ export default function CustomerPurchase() {
       dispatch(addOrderHistoryThunk());
 
       dispatch(delOrderTotalPurchaseThunk());
-      
+
       setPayment((prevValue) => ({
         ...prevValue,
         message: "Transaction success",
       }));
-
     } catch (error) {
       setPayment((prevValue) => ({
         ...prevValue,
@@ -160,6 +162,25 @@ export default function CustomerPurchase() {
                   {/* </Link> */}
                 </Button>
                 {/* </InputGroup> */}
+                <br />
+                <br />
+                <div className="container">
+                  <div className="row">
+                    <div className="col-2">
+                      <input
+                        type="checkbox"
+                        // id="chooseLuckyDraw"
+                        name="chooseLuckyDraw"
+                        value="lucky"
+                        checked={checkedornot}
+                        onClick={() => toggleChecked(!checkedornot)}
+                      />
+                    </div>
+                    <div className="col-8">
+                      <p>Tick the box to test your luck</p>
+                    </div>
+                  </div>
+                </div>
               </Card.Text>
             </Card.Body>
           </Card>
@@ -168,18 +189,25 @@ export default function CustomerPurchase() {
       <br />
 
       <div className="text-center text-secondary">
-        {payment.message == "Waiting on transaction success" ? (
+        {(payment.message == "Waiting on transaction success") ? (
           <p>
             {" "}
             {payment.message} <Spinner animation="border" variant="warning" />{" "}
           </p>
-        ) : payment.message == "Transaction success" ? (
+        ) : (payment.message == "Transaction success" && checkedornot) ? (
           <p>
             {" "}
             {payment.message} <AiOutlineCheck />
             <Navigate to="/customer/payment_success" />
           </p>
-        ) : payment.message == "Please click COMFIRM to process payment" ? (
+        ) : (payment.message == "Transaction success") &&
+          checkedornot == false ? (
+          <p>
+            {" "}
+            {payment.message} <AiOutlineCheck />
+            <Navigate to="/customer/payment_success/withoutLuckDraw" />
+          </p>
+        ) : (payment.message == "Please click COMFIRM to process payment") ? (
           <p>{payment.message}</p>
         ) : (
           <p>

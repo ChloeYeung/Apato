@@ -28,39 +28,29 @@ export default function CustomerOrderHistory() {
     (state) => state.orderHistoryReducer.showorderhistory
   );
 
-  const [history, setHistory] = useState("");
-  console.log(customernavinfo);
-  console.log(showorderhistory);
+  // console.log(customernavinfo);
+  // console.log(showorderhistory);
 
   useEffect(() => {
     dispatch(cusNavInfoThunk());
     dispatch(showOrderHistoryThunk());
+    Object.entries(showorderhistory);
   }, []);
-  console.log(history);
+
+  let handlecusHistoryTotal = function (element) {
+    let uint = 0;
+    let price = 0;
+    let totalPrice = 0;
+
+    element[1].forEach((e) => {
+      totalPrice += e.unit * e.price;
+    });
+
+    return totalPrice;
+  };
 
   return (
-   
     <div>
-
-    
-  
-      {showorderhistory && Object.entries(showorderhistory).map((element,index)=>(
-
-  <p>{element[1][0].id}</p>
-
-
-
-      )
-
-// console.log(element)
-
-
-
-      )}
-      
-     
-      
-    
       {/* Navbar */}
       <CustomerNavbar
         customerImage={
@@ -74,69 +64,82 @@ export default function CustomerOrderHistory() {
       {/* Title */}
       <br />
       <h3 className="text-center">Order History</h3>
-     
-      
-       
-       
-      
+
       <br />
 
       {/* order card */}
-      {/* {showorderhistory && showorderhistory.map((element, index) => <>
-     <p>dawdidhwa</p>
-      
-      </>)} */}
-      {/* {showorderhistory &&
-        showorderhistory.map((element1, index) => (
-          <>
-          
-          
-            <div key={"orderHistoryNo" } className="container">
-              <div className="d-flex text-center justify-content-center align-items-center">
-                <Card style={{ width: "25rem" }}>
-                  <Card.Body>
-                    <Card.Title>
-                      {" "}
-                      Order number # 
-                    </Card.Title>
-                    <Card.Text>
-                      <p>dawuhdawhdawhdiuahwoahiw</p>
-                      Date
-                      Status 
-                      Company 
-                    </Card.Text>
-                    <hr />
-
-                    {element1.map((element2) => (
-                      <>
-                        <div className="row" >
-                          <div className="col">
-                            <img
-                              src={`data:image/png;base64 ,${element2.image_data}`}
-                              style={{ height: "150px", width: "150px" }}
-                            />{" "}
-                          </div>
-                          <div className="col">
-                            <p>Name </p>
-
-                            <p>Unit</p>
-                            <p>
-                              Unit price 
-                              <FaEthereum className="FaEthereumIcon" />
-                            </p>
-                            <p>
-                              Total <FaEthereum className="FaEthereumIcon" />
-                            </p>
+      {showorderhistory &&
+        Object.entries(showorderhistory).map((element, index) => {
+          return (
+            <>
+              <div key={"orderHistoryNo"+index} className="container">
+                <div className="d-flex  justify-content-center align-items-center">
+                  <Card style={{ width: "50rem" }}>
+                    <Card.Body>
+                      <Card.Title className="text-center">
+                        {" "}
+                        Order number # {element[0]}
+                      </Card.Title>
+                      <Card.Title className="text-center">
+                        {" "}
+                        {element[1][0].name}
+                      </Card.Title>
+                      <Card.Text className="text-secondary text-center">
+                        <div className="container">
+                          <div className="row">
+                            <div className="col">{element[1][0].date}</div>
+                            <div className="col">{element[1][0].time}</div>
+                            <div className="col">
+                              {element[1][0].status}
+                            </div>{" "}
                           </div>
                         </div>
-                      </>
-                    ))}
-                  </Card.Body>
-                </Card>
+                      </Card.Text>
+                      <hr />
+                      {element[1] &&
+                        element[1].map((element2) => (
+                          <>
+                            <div className="row">
+                              <div className="col">
+                                <img
+                                  src={`data:image/png;base64 ,${element2.image_data}`}
+                                  style={{ height: "150px", width: "150px" }}
+                                />{" "}
+                              </div>
+                              <div className="col">
+                                <p>Name: {element2.product_name} </p>
+
+                                <p>Unit: {element2.unit}</p>
+                                <p>
+                                  Unit price: {element2.price}
+                                  <FaEthereum className="FaEthereumIcon" />
+                                </p>
+                                <p>
+                                  Total:{" "}
+                                  <span id={"cusHistoryTotal" + index}>
+                                    {element2.unit * element2.price}
+                                  </span>
+                                  <FaEthereum className="FaEthereumIcon" />
+                                </p>
+                              </div>
+                            </div>
+                            <br />
+                          </>
+                        ))}
+                      <hr />
+                      Order Total:
+                      <span id="cusHistoryOrderTotal">
+                        {handlecusHistoryTotal(element)}
+                        <FaEthereum className="FaEthereumIcon" />
+                      </span>
+                    </Card.Body>
+                  </Card>
+                </div>
               </div>
-            </div>
-          </>
-        ))} */}
+              <br />
+            </>
+          );
+        })}
     </div>
   );
 }

@@ -44,6 +44,7 @@ export const showSalesSummaryDetailThunk = () => async (dispatch) => {
       token,
     }
   );
+  console.log(response.data);
 
   // dispatch(showSalesSummaryDetail(response.data));
 };

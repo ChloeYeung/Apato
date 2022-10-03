@@ -15,11 +15,8 @@
 
 //font
 .fontNormal {
-  font-family: 'Baloo 2', cursive;
+  font-family: "Baloo 2", cursive;
 }
-
-
-
 
 /* /Pages/CompanySalesHistory */
 #comSalesHisTable {
@@ -49,10 +46,9 @@
 }
 
 /* Customer Show Product */
-.alertStockProduct{
+.alertStockProduct {
   font-size: 12px;
 }
-
 
 .toastNoticeShowProduct {
   opacity: 0.8;
@@ -127,9 +123,6 @@
   transform: translate(50%, 50%);
 }
 
-
-
-
 // Company Navbar
 .NavBarIcon {
   width: 30px;
@@ -182,10 +175,13 @@
 }
 
 //customer payment success
-#luckyDrawIconBtn{
+#luckyDrawIconBtn {
   color: rgba(81, 12, 81, 0.42);
 }
 
+#luckyDrawSpinner {
+  color: rgba(81, 12, 81, 0.42);
+}
 
 @media (prefers-reduced-motion: no-preference) {
   #paymentSuccessImg {
@@ -201,4 +197,7 @@
     transform: rotate(360deg);
   }
 }
+
+
+
 

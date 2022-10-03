@@ -18,7 +18,9 @@ import CustomerSignUp from "./Pages/CustomerSignUp";
 import CustomerOrderDetail from "./Pages/CustomerOrderDetail";
 import CustomerOrderHistory from "./Pages/CustomerOrderHistory";
 import CustomerPaymentSuccess from "./Pages/CustomerPaymentSuccess";
+import CustomerPaymentSuccessWithoutLuckyDraw from "./Pages/CustomerPaymentSuccessWithoutLuckyDraw";
 import CustomerPaymentFail from "./Pages/CustomerPaymentFail";
+import CustomerRefundFail from "./Pages/CustomerRefundFail";
 import CustomerPurchase from "./Pages/CustomerPurchase";
 import CustomerShowProduct from "./Pages/CustomerShowProduct";
 import CustomerShowProductPublic from "./Pages/CustomerShowProductPublic";
@@ -52,8 +54,7 @@ function App() {
           path="/company/sales_summary"
           element={
             <RequireAuthCom>
-              {" "}
-              <CompanySalesSummary />{" "}
+              <CompanySalesSummary />
             </RequireAuthCom>
           }
         />
@@ -72,7 +73,6 @@ function App() {
           path="/company/product_management"
           element={
             <RequireAuthCom>
-              {" "}
               <CompanyProductManagement />
             </RequireAuthCom>
           }
@@ -127,6 +127,25 @@ function App() {
             </RequireAuthCus>
           }
         />
+        
+        <Route
+          path="/customer/payment_success/withoutLuckDraw"
+          element={
+            <RequireAuthCus>
+              <CustomerPaymentSuccessWithoutLuckyDraw />
+            </RequireAuthCus>
+          }
+        />
+
+        <Route
+          path="/customer/cashback_fail"
+          element={
+            <RequireAuthCus>
+              <CustomerRefundFail />
+            </RequireAuthCus>
+          }
+        />
+
         <Route
           path="/customer/payment_fail"
           element={

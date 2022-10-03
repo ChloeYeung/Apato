@@ -10,7 +10,10 @@ import Accordion from "react-bootstrap/Accordion";
 import CompanyNavbar from "../Components/CompanyNavbar";
 import cusNavNoPic from "../images/cusNavNoPic.jpg";
 import { comNavInfoThunk } from "../redux/company_navbarSlice";
-import {showSalesSummaryThunk, showSalesSummaryDetailThunk} from "../redux/company_summarySlice"
+import {
+  showSalesSummaryThunk,
+  showSalesSummaryDetailThunk,
+} from "../redux/company_summarySlice";
 
 //react icon
 import { BiMoney } from "react-icons/bi";
@@ -32,18 +35,25 @@ export default function CompanySalesSummary() {
     (state) => state.salesSummaryReducer.showsalessummary
   );
 
-  console.log(showsalessummary);
+  // const showsalessummarydetail = useSelector(
+  //   (state) => state.salesSummaryReducer.showsalessummarydetail
+  // );
+
+  // console.log(showsalessummarydetail);
+
+  // console.log(showsalessummary);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(comNavInfoThunk());
     dispatch(showSalesSummaryThunk());
-  },[]);
-  
-  let handleFunction = function(){
-     dispatch(showSalesSummaryDetailThunk());
-  }
+    // dispatch(showSalesSummaryDetailThunk());
+  }, []);
+
+  let handleFunction = function () {
+    dispatch(showSalesSummaryDetailThunk());
+  };
 
   return (
     <div>
@@ -56,7 +66,7 @@ export default function CompanySalesSummary() {
         }
         companyName={companynavinfo.name}
       />
-<Button onClick={handleFunction}>thunk</Button>
+      <Button onClick={handleFunction}>thunk</Button>
 
       {/* Summary card */}
       <br />
@@ -81,17 +91,12 @@ export default function CompanySalesSummary() {
                     {showsalessummary.currentSales}
                   </div>
                   <div className="col">
+                    <FaEthereum className="FaEthereumIcon" />
                     Accumlated sales:
                     {showsalessummary.accumlatedSales}
-                    <FaEthereum className="FaEthereumIcon" />
                   </div>
                 </div>
               </div>
-
-              {/* Current sales: <BiMoney />
-              <br />
-              Accumlated sales: <GiReceiveMoney />
-              <br /> */}
             </Card.Text>
 
             <Accordion defaultActiveKey={["0"]} alwaysOpen>

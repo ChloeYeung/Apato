@@ -20,10 +20,8 @@ export const { showOrderHistory } = customer_orderHistory.actions;
 export default customer_orderHistory.reducer;
 
 function toBase64(arr) {
-  arr = new Uint8Array(arr)
-  return btoa(
-      arr.reduce((data, byte) => data + String.fromCharCode(byte), '')
-  );
+  arr = new Uint8Array(arr);
+  return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""));
 }
 
 export const showOrderHistoryThunk = () => async (dispatch) => {
@@ -34,7 +32,6 @@ export const showOrderHistoryThunk = () => async (dispatch) => {
       token,
     }
   );
-
 
   let tmp_showChart = [];
   response.data.forEach((ele1) => {
@@ -49,13 +46,14 @@ export const showOrderHistoryThunk = () => async (dispatch) => {
 
   for (const property in tmp_showChart) {
     for (let i = 0; i < tmp_showChart[property].length; i++) {
-        if (tmp_showChart[property][i].image_data != null) {
-            tmp_showChart[property][i].image_data = toBase64(tmp_showChart[property][i].image_data.data)
-        }
+      if (tmp_showChart[property][i].image_data != null) {
+        tmp_showChart[property][i].image_data = toBase64(
+          tmp_showChart[property][i].image_data.data
+        );
+      }
     }
-}
+  }
   console.log(tmp_showChart);
-
 
   dispatch(showOrderHistory(tmp_showChart));
 };

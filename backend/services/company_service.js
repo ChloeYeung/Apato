@@ -215,34 +215,31 @@ class CompanyService {
           .where({ company_id: decoded.id })
           .select("unit", "price", "date")
           .orderBy("id");
-        // console.log(data);
+
         // convert result array to object (key,val)
         let returnObject = {};
 
-        data.forEach(element => {
-          let month =new Date(element.date).getMonth()+1;
+        data.forEach((element) => {
+          let month = new Date(element.date).getMonth() + 1;
 
-          if( returnObject[month] == undefined)
-          returnObject[month] = [];
-          
+          if (returnObject[month] == undefined) returnObject[month] = [];
+
           returnObject[month].push(element);
         });
 
-   
-
-
+        console.log(returnObject);
 
         let month;
         let monthYear;
         function toMonthName(monthNumber) {
           const date = new Date();
           date.setMonth(monthNumber - 1);
-        
-          return date.toLocaleString('en-US', {
-            month: 'long',
+
+          return date.toLocaleString("en-US", {
+            month: "long",
           });
         }
-        console.log(data[0].date.split("/")[1])
+        // console.log(data[0].date.split("/")[1])
         // for (let m = 0; m < data.length; m++) {
         //   if (
         //     data[m].date.split("/")[1] == data[m + 1].date.split("/")[1] &&

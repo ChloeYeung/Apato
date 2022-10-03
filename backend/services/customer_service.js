@@ -584,7 +584,8 @@ class CustomerService {
       if (verify) {
         let dataImage = await this.knex("purchase_history")
           .select("image_data")
-          .where("customer_id", decoded.id);
+          .where("customer_id", decoded.id)
+          .orderBy("id", "desc");
 
         let data = await this.knex
           .from("purchase_history")
@@ -593,11 +594,13 @@ class CustomerService {
             "purchase_history.company_id",
             "company_users.id"
           )
-          .where("purchase_history.customer_id", "=", decoded.id);
+          .where("purchase_history.customer_id", "=", decoded.id)
+          .orderBy("purchase_history.id", "desc");
 
         for (let i = 0; i < dataImage.length; i++) {
           data[i].image_data = dataImage[i].image_data;
         }
+
         console.log("+++++++++++++==========");
         console.log(data);
         console.log("+++++++++++++==========");
@@ -606,7 +609,7 @@ class CustomerService {
         res.sendStatus(401);
       }
     } catch (error) {
-      console.log("Error Service customer delCartInPurchase ");
+      console.log("Error Service customer showOrderHistory");
       console.log(error);
     }
   }
