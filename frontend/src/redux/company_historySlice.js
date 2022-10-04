@@ -48,14 +48,16 @@ export const showSalesHistoryThunk = () => async (dispatch) => {
   dispatch(showSalesHistory(tmp_showChart));
 };
 
-export const editSalesHistoryStatusThunk = () => async (dispatch) => {
+export const editSalesHistoryStatusThunk = (sendObject) => async (dispatch) => {
   const token = localStorage.getItem("TOKENCOM");
+  console.log("in editSalesHistoryStatusThunk");
   const response = await axios.post(
     `${process.env.REACT_APP_BACKEND}/company/edit_sales_history_status`,
     {
       token,
+      sendObject,
     }
   );
-  //   console.log(response.data);
-  //   dispatch(showSalesSummaryDetail(response.data));
+
+  dispatch(showSalesHistoryThunk());
 };

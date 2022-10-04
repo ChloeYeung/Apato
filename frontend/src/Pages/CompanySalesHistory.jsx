@@ -36,21 +36,15 @@ export default function CompanySalesHistory() {
 
   useEffect(() => {
     dispatch(comNavInfoThunk());
-  });
-
-  let handleThunkBtn = function () {
     dispatch(showSalesHistoryThunk());
-    console.log(showsaleshistory);
-  };
+  });
 
   //  Handle History Total
   let handlecomHistoryTotal = function (element) {
     let totalPrice = 0;
-
     element[1].forEach((e) => {
       totalPrice += e.unit * e.price;
     });
-
     return totalPrice;
   };
 
@@ -67,14 +61,12 @@ export default function CompanySalesHistory() {
 
   let handleSelectComHistoryChange = function (orderId, selectedOption) {
     // console.log(selectedOption);
-    console.log(selectedOption)
-    console.log(orderId)
     setSelectDefault(selectedOption.value);
-    console.log(selectDefault);
     let sendObject = {};
     sendObject.orderId = orderId;
-    sendObject.newStatus =selectedOption.value
-    
+    sendObject.newStatus = selectedOption.value;
+    console.log(sendObject);
+    dispatch(editSalesHistoryStatusThunk(sendObject));
   };
 
   return (
@@ -88,8 +80,6 @@ export default function CompanySalesHistory() {
         }
         companyName={companynavinfo.name}
       />
-
-      <Button onClick={handleThunkBtn}>Thunk</Button>
 
       {showsaleshistory &&
         Object.entries(showsaleshistory).map((element, index) => {
@@ -189,7 +179,7 @@ export default function CompanySalesHistory() {
                             <Select
                               options={options}
                               onChange={(e) =>
-                                handleSelectComHistoryChange(element[0],e)
+                                handleSelectComHistoryChange(element[0], e)
                               }
                               value={options.find(function (option) {
                                 return option.value === element[1][0].status;

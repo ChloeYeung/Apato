@@ -146,8 +146,6 @@ class CompanyService {
     }
   }
 
-
-
   //Sales Summary
   async showSalesSummary(token) {
     try {
@@ -294,35 +292,53 @@ class CompanyService {
     }
   }
 
-
-//Sales History
+  //Sales History
   async showSalesHistory(token) {
     let decoded = this.jwt_decode(token);
     token = token.replace("Bearer ", "");
     let verify = this.jwt.verify(token, process.env.JWT_SECRET);
     if (verify) {
-        let data = await this.knex
-          .from("purchase_history")
-          .innerJoin(
-            "customer_users",
-            "purchase_history.company_id",
-            "customer_users.id"
-          )
-          .where("purchase_history.company_id", "=", decoded.id)
-          .orderBy("purchase_history.id", "desc");
+      let data = await this.knex
+        .from("purchase_history")
+        .innerJoin(
+          "customer_users",
+          "purchase_history.company_id",
+          "customer_users.id"
+        )
+        .where("purchase_history.company_id", "=", decoded.id)
+        .orderBy("purchase_history.id", "desc");
 
-        console.log("+++++++++++++==========");
-        console.log(data);
-        console.log("+++++++++++++==========");
-        return data;
+      return data;
     } else {
       res.sendStatus(401);
     }
   }
 
+  async editStatusSalesHistory(token, orderId, newStatus) {
+    let decoded = this.jwt_decode(token);
+    token = token.replace("Bearer ", "");
+    let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+    if (verify) {
+      let id = await this.knex("purchase_history")
+        .where("order_id", `${orderId}`)
+        .select("id");
+
+      console.log(id);
 
 
+      // const fieldsToUpdate = id.map((field, index) => ({
+      // id: field,
+      // }));
 
+      console.log(newStatus);
+
+      await this.knex("purchase_history")
+        .where("order_id", `${orderId}`)
+        .update("status", `${newStatus}`);
+    } else {
+      res.sendStatus(401);
+    }
+  }
 }
 
 module.exports = CompanyService;
