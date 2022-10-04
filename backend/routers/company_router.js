@@ -19,6 +19,8 @@ class CompanyRouter {
     //Sales Summary
     router.post("/show_salesSummary", this.showSalesSummary.bind(this));
     router.post("/show_salesSummary_detail", this.showSalesSummaryDetail.bind(this));
+    //Sales History
+    router.post("/show_sales_history", this.showSalesHistory.bind(this));
     return router;
   }
 
@@ -77,6 +79,14 @@ class CompanyRouter {
     let response = await (this.CompanyService.showSalesSummaryDetail(token));
     return res.send(response);
   }
+
+
+  async showSalesHistory(req, res) {
+    let token = req.body.token;
+    let response = await (this.CompanyService.showSalesHistory(token));
+    return res.send(response);
+  }
+
 
   
 }

@@ -6,7 +6,7 @@ const initialState = {
   editsaleshistorystatus: [],
 };
 
-export const company_summarySlice = createSlice({
+export const company_historySlice = createSlice({
   name: "sales_history",
   initialState,
   reducers: {
@@ -20,29 +20,42 @@ export const company_summarySlice = createSlice({
 });
 
 export const { showSalesHistory, editSalesHistoryStatus } =
-  company_summarySlice.actions;
+  company_historySlice.actions;
 
-export default company_summarySlice.reducer;
+export default company_historySlice.reducer;
 
-export const showSalesSummaryThunk = () => async (dispatch) => {
+export const showSalesHistoryThunk = () => async (dispatch) => {
   const token = localStorage.getItem("TOKENCOM");
   const response = await axios.post(
-    `${process.env.REACT_APP_BACKEND}/company/show_salesSummary`,
+    `${process.env.REACT_APP_BACKEND}/company/show_sales_history`,
     {
       token,
     }
   );
-//   dispatch(showSalesSummary(response.data));
+
+  let tmp_showChart = [];
+  response.data.forEach((ele1) => {
+    let arr = [];
+    if (tmp_showChart[ele1.order_id] == undefined) {
+      arr.push(ele1);
+      tmp_showChart[ele1.order_id] = arr;
+    } else {
+      tmp_showChart[ele1.order_id].push(ele1);
+    }
+  });
+
+  console.log(tmp_showChart);
+  dispatch(showSalesHistory(tmp_showChart));
 };
 
-export const showSalesSummaryDetailThunk = () => async (dispatch) => {
+export const editSalesHistoryStatusThunk = () => async (dispatch) => {
   const token = localStorage.getItem("TOKENCOM");
   const response = await axios.post(
-    `${process.env.REACT_APP_BACKEND}/company/show_salesSummary_detail`,
+    `${process.env.REACT_APP_BACKEND}/company/edit_sales_history_status`,
     {
       token,
     }
   );
-//   console.log(response.data);
-//   dispatch(showSalesSummaryDetail(response.data));
+  //   console.log(response.data);
+  //   dispatch(showSalesSummaryDetail(response.data));
 };

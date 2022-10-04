@@ -28,8 +28,6 @@ export default function CustomerOrderHistory() {
     (state) => state.orderHistoryReducer.showorderhistory
   );
 
-  // console.log(customernavinfo);
-  // console.log(showorderhistory);
 
   useEffect(() => {
     dispatch(cusNavInfoThunk());
@@ -38,8 +36,6 @@ export default function CustomerOrderHistory() {
   }, []);
 
   let handlecusHistoryTotal = function (element) {
-    let uint = 0;
-    let price = 0;
     let totalPrice = 0;
 
     element[1].forEach((e) => {

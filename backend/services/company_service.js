@@ -146,6 +146,9 @@ class CompanyService {
     }
   }
 
+
+
+  //Sales Summary
   async showSalesSummary(token) {
     try {
       let decoded = this.jwt_decode(token);
@@ -290,6 +293,36 @@ class CompanyService {
       console.log(error);
     }
   }
+
+
+//Sales History
+  async showSalesHistory(token) {
+    let decoded = this.jwt_decode(token);
+    token = token.replace("Bearer ", "");
+    let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+    if (verify) {
+        let data = await this.knex
+          .from("purchase_history")
+          .innerJoin(
+            "customer_users",
+            "purchase_history.company_id",
+            "customer_users.id"
+          )
+          .where("purchase_history.company_id", "=", decoded.id)
+          .orderBy("purchase_history.id", "desc");
+
+        console.log("+++++++++++++==========");
+        console.log(data);
+        console.log("+++++++++++++==========");
+        return data;
+    } else {
+      res.sendStatus(401);
+    }
+  }
+
+
+
+
 }
 
 module.exports = CompanyService;
