@@ -16,8 +16,6 @@ import {
 } from "../redux/company_summarySlice";
 
 //react icon
-import { BiMoney } from "react-icons/bi";
-import { GiReceiveMoney } from "react-icons/gi";
 import { FaEthereum } from "react-icons/fa";
 
 //state
@@ -51,10 +49,6 @@ export default function CompanySalesSummary() {
     dispatch(showSalesSummaryDetailThunk());
   }, []);
 
-  let handleFunction = function () {
-    dispatch(showSalesSummaryDetailThunk());
-  };
-
   return (
     <div>
       {/* Navbar */}
@@ -66,7 +60,6 @@ export default function CompanySalesSummary() {
         }
         companyName={companynavinfo.name}
       />
-      <Button onClick={handleFunction}>thunk</Button>
 
       {/* Summary card */}
       <br />
@@ -109,17 +102,22 @@ export default function CompanySalesSummary() {
                         <div>
                           <div className="container">
                             <div className="row">
-                              <div className="col">Most Popular Product:</div>
-                              <div className="col">Most Popular Service:</div>
+                              <div className="col">
+                                Most Popular Product/Service:{" "}
+                                {element[1]["MostPopular"][0][0]}
+                              </div>
                             </div>
                           </div>
                           <br />
                           <div className="container">
                             <div className="row">
-                              <div className="col"> Total Selling Unit:</div>
                               <div className="col">
                                 {" "}
-                                Total Sales:
+                                Total Selling Unit: {element[1]["totalUnit"]}
+                              </div>
+                              <div className="col">
+                                {" "}
+                                Total Sales: {element[1]["totalSale"]}
                                 <FaEthereum className="FaEthereumIcon" />
                               </div>
                             </div>

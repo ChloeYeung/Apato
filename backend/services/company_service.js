@@ -235,11 +235,14 @@ class CompanyService {
             returnObject[title] = {};
             returnObject[title]["MostPopular"] = {};
             returnObject[title]["totalSale"] = 0;
+            returnObject[title]["totalUnit"] = 0;
 
             Object.entries(element).forEach((el) => {
               returnObject[title][el[0]] = [];
             });
           }
+
+          returnObject[title]["totalUnit"] += element["unit"];
 
           returnObject[title]["totalSale"] +=
             element["unit"] * element["price"];
@@ -259,8 +262,6 @@ class CompanyService {
         });
 
         Object.entries(returnObject).forEach((e) => {
-          console.log("++++++++++");
-
           let compareMostPopular = Object.values(e[1]["MostPopular"]);
           let max = Math.max(...compareMostPopular);
 
@@ -279,50 +280,6 @@ class CompanyService {
             colors: true,
           })
         );
-
-        // console.log("++++++++++");
-
-        // console.log(returnObject);
-
-        // price * uint
-
-        // for (const property in returnObject) {
-        //   // for (const property2 in returnObject[property]["MostPopular"]) {
-        //   //   console.log(
-        //   //     property2 +
-        //   //       ": " +
-        //   //       returnObject[property]["MostPopular"][property2]
-        //   //   );
-        //   //Sales
-        //   console.log("=====")
-
-        //   console.log(property)
-        //   // sales = returnObject[property]["unit"].map((u) => {
-
-        //   //   console.log(u)
-
-        //   // });
-        //   //   console.log(sales);
-
-        //   // sales.push(
-        //   //   returnObject[property]["unit"] * returnObject[property]["price"]
-        //   // );
-        //   // console.log(  sales)
-        //   // const sumWithSales = sales.reduce((p, c) => p + c, 0);
-        //   // console.log(sales);
-        //   // console.log(sumWithSales);
-        //   //  returnObject[property]["price"] = sumWithSales;
-
-        //   //Unit
-        //   // const sumWithUnit = returnObject[property]["unit"].reduce(
-        //   //   (previousValue, currentValue) => previousValue + currentValue,
-        //   //   0
-        //   // );
-        //   // returnObject[property]["unit"] = sumWithUnit;
-        // }
-
-        // console.log(returnObject);
-        // }
 
         return returnObject;
       } else {
