@@ -213,44 +213,118 @@ class CompanyService {
       if (verify) {
         let data = await this.knex("purchase_history")
           .where({ company_id: decoded.id })
-          .select("unit", "price", "date")
+          .select("unit", "price", "date", "type", "product_name")
           .orderBy("id");
 
         // convert result array to object (key,val)
-        let returnObject = {};
-
-        data.forEach((element) => {
-          let month = new Date(element.date).getMonth() + 1;
-
-          if (returnObject[month] == undefined) returnObject[month] = [];
-
-          returnObject[month].push(element);
-        });
-
-        console.log(returnObject);
-
-        let month;
-        let monthYear;
         function toMonthName(monthNumber) {
           const date = new Date();
           date.setMonth(monthNumber - 1);
-
           return date.toLocaleString("en-US", {
             month: "long",
           });
         }
-        // console.log(data[0].date.split("/")[1])
-        // for (let m = 0; m < data.length; m++) {
-        //   if (
-        //     data[m].date.split("/")[1] == data[m + 1].date.split("/")[1] &&
-        //     data[m].date.split("/")[0] == data[m + 1].date.split("/")[0]
-        //   ) {
-        //     month = toMonthName(Number( data[m].date.split("/")[1]));
-        //     monthYear = month+ data[m].date.split("/")[0]
-        //     object.monthYear = [data[m].unit , data[m].price]
-        //   }
+
+        let returnObject = {};
+        data.forEach((element) => {
+          let month = toMonthName(new Date(element.date).getMonth() + 1);
+          let year = new Date(element.date).getFullYear();
+          let title = month + " " + year;
+
+          if (returnObject[title] == undefined) {
+            returnObject[title] = {};
+            returnObject[title]["MostPopular"] = {};
+            returnObject[title]["totalSale"] = 0;
+
+            Object.entries(element).forEach((el) => {
+              returnObject[title][el[0]] = [];
+            });
+          }
+
+          returnObject[title]["totalSale"] +=
+            element["unit"] * element["price"];
+
+          Object.entries(element).forEach((el) => {
+            returnObject[title][el[0]].push(el[1]);
+
+            if (
+              el[0] == "product_name" &&
+              returnObject[title]["MostPopular"][el[1]] == undefined
+            )
+              returnObject[title]["MostPopular"][el[1]] = 0;
+
+            if (el[0] == "product_name")
+              returnObject[title]["MostPopular"][el[1]] += element.unit;
+          });
+        });
+
+        Object.entries(returnObject).forEach((e) => {
+          console.log("++++++++++");
+
+          let compareMostPopular = Object.values(e[1]["MostPopular"]);
+          let max = Math.max(...compareMostPopular);
+
+          e[1]["MostPopular"] = Object.entries(e[1]["MostPopular"]).filter(
+            (eachTitle) => {
+              return eachTitle[1] == max ? eachTitle : null;
+            }
+          );
+        });
+        const util = require("util");
+
+        console.log(
+          util.inspect(returnObject, {
+            showHidden: false,
+            depth: null,
+            colors: true,
+          })
+        );
+
+        // console.log("++++++++++");
+
+        // console.log(returnObject);
+
+        // price * uint
+
+        // for (const property in returnObject) {
+        //   // for (const property2 in returnObject[property]["MostPopular"]) {
+        //   //   console.log(
+        //   //     property2 +
+        //   //       ": " +
+        //   //       returnObject[property]["MostPopular"][property2]
+        //   //   );
+        //   //Sales
+        //   console.log("=====")
+
+        //   console.log(property)
+        //   // sales = returnObject[property]["unit"].map((u) => {
+
+        //   //   console.log(u)
+
+        //   // });
+        //   //   console.log(sales);
+
+        //   // sales.push(
+        //   //   returnObject[property]["unit"] * returnObject[property]["price"]
+        //   // );
+        //   // console.log(  sales)
+        //   // const sumWithSales = sales.reduce((p, c) => p + c, 0);
+        //   // console.log(sales);
+        //   // console.log(sumWithSales);
+        //   //  returnObject[property]["price"] = sumWithSales;
+
+        //   //Unit
+        //   // const sumWithUnit = returnObject[property]["unit"].reduce(
+        //   //   (previousValue, currentValue) => previousValue + currentValue,
+        //   //   0
+        //   // );
+        //   // returnObject[property]["unit"] = sumWithUnit;
         // }
-        // console.log(object);
+
+        // console.log(returnObject);
+        // }
+
+        return returnObject;
       } else {
         res.sendStatus(401);
       }

@@ -35,11 +35,11 @@ export default function CompanySalesSummary() {
     (state) => state.salesSummaryReducer.showsalessummary
   );
 
-  // const showsalessummarydetail = useSelector(
-  //   (state) => state.salesSummaryReducer.showsalessummarydetail
-  // );
+  const showsalessummarydetail = useSelector(
+    (state) => state.salesSummaryReducer.showsalessummarydetail
+  );
 
-  // console.log(showsalessummarydetail);
+  console.log(showsalessummarydetail);
 
   // console.log(showsalessummary);
 
@@ -48,7 +48,7 @@ export default function CompanySalesSummary() {
   useEffect(() => {
     dispatch(comNavInfoThunk());
     dispatch(showSalesSummaryThunk());
-    // dispatch(showSalesSummaryDetailThunk());
+    dispatch(showSalesSummaryDetailThunk());
   }, []);
 
   let handleFunction = function () {
@@ -100,30 +100,35 @@ export default function CompanySalesSummary() {
             </Card.Text>
 
             <Accordion defaultActiveKey={["0"]} alwaysOpen>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>Sep 2022</Accordion.Header>
-                <Accordion.Body>
-                  <div>
-                    <div className="container">
-                      <div className="row">
-                        <div className="col">Most Popular Product:</div>
-                        <div className="col">Most Popular Service:</div>
-                      </div>
-                    </div>
-                    <br />
-                    <div className="container">
-                      <div className="row">
-                        <div className="col"> Total Selling Unit:</div>
-                        <div className="col">
-                          {" "}
-                          Total Sales:
-                          <FaEthereum className="FaEthereumIcon" />
+              {showsalessummarydetail &&
+                Object.entries(showsalessummarydetail).map((element, index) => (
+                  <>
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header> {element[0]} </Accordion.Header>
+                      <Accordion.Body>
+                        <div>
+                          <div className="container">
+                            <div className="row">
+                              <div className="col">Most Popular Product:</div>
+                              <div className="col">Most Popular Service:</div>
+                            </div>
+                          </div>
+                          <br />
+                          <div className="container">
+                            <div className="row">
+                              <div className="col"> Total Selling Unit:</div>
+                              <div className="col">
+                                {" "}
+                                Total Sales:
+                                <FaEthereum className="FaEthereumIcon" />
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </Accordion.Body>
-              </Accordion.Item>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </>
+                ))}
             </Accordion>
           </Card.Body>
         </Card>

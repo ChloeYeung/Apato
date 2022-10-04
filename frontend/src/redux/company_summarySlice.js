@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   showsalessummary: [],
-  showsalessummarydetail:[],
+  showsalessummarydetail: [],
 };
 
 export const company_summarySlice = createSlice({
@@ -19,7 +19,8 @@ export const company_summarySlice = createSlice({
   },
 });
 
-export const { showSalesSummary, showSalesSummaryDetail } = company_summarySlice.actions;
+export const { showSalesSummary, showSalesSummaryDetail } =
+  company_summarySlice.actions;
 
 export default company_summarySlice.reducer;
 
@@ -31,10 +32,8 @@ export const showSalesSummaryThunk = () => async (dispatch) => {
       token,
     }
   );
-
   dispatch(showSalesSummary(response.data));
 };
-
 
 export const showSalesSummaryDetailThunk = () => async (dispatch) => {
   const token = localStorage.getItem("TOKENCOM");
@@ -45,7 +44,5 @@ export const showSalesSummaryDetailThunk = () => async (dispatch) => {
     }
   );
   console.log(response.data);
-
-  // dispatch(showSalesSummaryDetail(response.data));
+  dispatch(showSalesSummaryDetail(response.data));
 };
-
