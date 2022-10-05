@@ -16,7 +16,7 @@ class CustomerService {
           .select("image_data", "name")
           .where("id", `${decoded.id}`)
           .from("customer_users");
-        console.log(data[0]);
+        // console.log(data[0]);
         return data[0];
       } else {
         res.sendStatus(401);
@@ -147,6 +147,28 @@ class CustomerService {
       }
     } catch (error) {
       console.log("Service: customer addCart error");
+      console.log(error);
+    }
+  }
+
+  //Show Produt Detail
+  async showProductDetail(token, product_id) {
+    try {
+      let data = await this.knex("company_product")
+        .select("*")
+        .where("id", product_id);
+      console.log(data[0]);
+
+      let company = await this.knex("company_users")
+        .select("name", "image_data")
+        .where("id", data[0].company_id);
+
+      data[0].company_name = company[0].name;
+      data[0].company_image = company[0].image_data;
+
+      return data[0];
+    } catch (error) {
+      console.log("Error Service customer showProductDetail ");
       console.log(error);
     }
   }
@@ -565,7 +587,6 @@ class CustomerService {
             .where("id", productIdUnit[i].product_id)
             .update("stock", stock[0].stock - productIdUnit[i].unit);
         }
-        
       } else {
         res.sendStatus(401);
       }

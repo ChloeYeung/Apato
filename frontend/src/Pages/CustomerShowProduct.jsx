@@ -30,23 +30,23 @@ import {
   addCartThunk,
 } from "../redux/customer_showProductSlice";
 //react-router-dom
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 
 export default function CustomerShowProduct() {
   const customernavinfo = useSelector(
     (state) => state.navbarCusReducer.customernavinfo
   );
-  console.log(customernavinfo);
+  // console.log(customernavinfo);
 
   const showproduct = useSelector(
     (state) => state.showProductReducer.showproduct
   );
-  console.log(showproduct);
+  // console.log(showproduct);
 
   const addcartmessage = useSelector(
     (state) => state.showProductReducer.addcartmessage
   );
-  console.log(addcartmessage);
+  // console.log(addcartmessage);
 
   const dispatch = useDispatch();
 
@@ -69,7 +69,15 @@ export default function CustomerShowProduct() {
 
   //navbar token
   const token = localStorage.getItem("TOKENCUS");
-  console.log(token);
+
+  //Search bar nav
+  let [search, setSearch] = useState("");
+
+  let handleSearchChange = function (e) {
+    setSearch(e);
+    console.log(e);
+    console.log(search);
+  };
 
   return (
     <>
@@ -77,6 +85,7 @@ export default function CustomerShowProduct() {
         <div id="cusShowProductBottomLayer">
           {/* Customer Navbar */}
           <CustomerNavbar
+            showSearch={true}
             customerImage={
               token === null
                 ? comNavNoPic
@@ -85,8 +94,11 @@ export default function CustomerShowProduct() {
                 : `data:image/png;base64 ,${customernavinfo.image_data}`
             }
             customerName={customernavinfo.name}
+            onChangeValue={handleSearchChange}
           />
 
+
+          {/* Add cart message */}
           {show && (
             <div className="overlayCartMessage text-center align-items-center">
               <Toast
@@ -109,6 +121,7 @@ export default function CustomerShowProduct() {
               </Toast>
             </div>
           )}
+
 
           {/* Carousel */}
           <Carousel>
@@ -139,11 +152,26 @@ export default function CustomerShowProduct() {
           </Carousel>
           <br />
 
+
           {/* Product card */}
           <div className="container" style={{ padding: "5px" }}>
             <div className="row">
               {showproduct &&
-                showproduct.map((element, index) => (
+                showproduct
+                .filter((element) => {
+                  if (search === "") {
+                    return element;
+                  } else if (
+                    element.tag.toLowerCase().includes(search.toLowerCase())
+                    ||
+                    element.name.toLowerCase().includes(search.toLowerCase())
+                  ) {
+                    return element;
+                  } else {
+                    return undefined;
+                  }
+                })
+                .map((element, index) => (
                   <>
                     <div className="col-sm-6 col-md-4 col-lg-3">
                       <Card
@@ -158,12 +186,9 @@ export default function CustomerShowProduct() {
                         <Card.Body className="text-center">
                           <Card.Title>{element.name}</Card.Title>
                           <Card.Text>
-                            {element.description}
-                            <br />
                             <FaEthereum className="FaEthereumIcon" />{" "}
                             {element.price}
                           </Card.Text>
-                          <></>
 
                           <div className="container">
                             <div className="row">
@@ -198,7 +223,7 @@ export default function CustomerShowProduct() {
                                 {/* Add cart btn */}
                                 {element.stock == 0 ? (
                                   <Button
-                                    id="showProductAddCartBtn"
+                                    id="showServiceAddCartBtn"
                                     onClick={() => handleAddCartBtn(element)}
                                     variant="outline-primary"
                                     disabled
@@ -207,16 +232,14 @@ export default function CustomerShowProduct() {
                                   </Button>
                                 ) : (
                                   <Button
-                                    id="showProductAddCartBtn"
+                                    id="showServiceAddCartBtn"
                                     onClick={() => handleAddCartBtn(element)}
                                     variant="outline-primary"
                                   >
                                     <BsCartPlus />
                                   </Button>
                                 )}
-                             
 
-                 
                                 {/* Descrition Btn */}
                                 <Link
                                   to={"/customer/show_product/" + element.id}
@@ -227,11 +250,7 @@ export default function CustomerShowProduct() {
                                   </Button>
                                 </Link>
                               </div>
-
-
-                              
                             </div>
-
                           </div>
                         </Card.Body>
                       </Card>

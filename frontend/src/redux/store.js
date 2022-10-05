@@ -6,6 +6,7 @@ import company_navbarSlice from "./company_navbarSlice";
 import todoSlice from "./todoSlice";
 import company_pmSlice from "./company_pmSlice";
 import customer_showProductSlice from "./customer_showProductSlice";
+import customer_showProductDetailSlice from "./customer_showProductDetailSlice";
 import customer_showServiceSlice from "./customer_showServiceSlice";
 import customer_cartSlice from "./customer_cartSlice";
 import customer_purchaseSlice from "./customer_purchaseSlice";
@@ -29,6 +30,7 @@ export const store = configureStore({
     orderHistoryReducer: customer_orderHistory,
     salesSummaryReducer: company_summarySlice,
     salesHistoryReducer: company_historySlice,
+    showProductDetailReducer: customer_showProductDetailSlice,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

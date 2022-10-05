@@ -56,7 +56,7 @@ export default function CustomerSignUp() {
 
       {/* sign up navbar */}
       <Navbar bg="light" variant="light">
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Navbar</Navbar.Brand>
         <Nav className="me-auto flex-grow-1 justify-content-evenly">
           <Link to="/customer/signup" style={{ color: 'black', textDecoration: "none" }}>SignUp</Link>
           <Link to="/customer/login" style={{ color: 'black', textDecoration: "none" }}>Login</Link>
@@ -129,16 +129,6 @@ export default function CustomerSignUp() {
               />
             </div>
             <br />
-
-            {/* <Form.Group controlId="formFileSm" className="mb-3">
-              <Form.Label>Personal image</Form.Label>
-              <Form.Control type="file" />
-            </Form.Group> */}
-
-            {/* <div className='row'>
-                        <label >Image: </label>
-                        <input type="file" />
-                    </div> */}
 
             <div className='row'>
               <label >Image: </label>

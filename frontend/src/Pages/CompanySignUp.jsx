@@ -55,7 +55,7 @@ export default function CompanySignUp() {
 
       {/* sign up navbar */}
       <Navbar bg="light" variant="light">
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Apato</Navbar.Brand>
         <Nav className="me-auto flex-grow-1 justify-content-evenly">
           <Link to="/company/signup" style={{ color: 'black', textDecoration: "none" }}>SignUp</Link>
           <Link to="/company/login" style={{ color: 'black', textDecoration: "none" }}>Login</Link>

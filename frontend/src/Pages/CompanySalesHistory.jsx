@@ -56,16 +56,10 @@ export default function CompanySalesHistory() {
     { value: "Finished", label: "Finished" },
   ];
 
-  //selected default
-  let [selectDefault, setSelectDefault] = useState("");
-
   let handleSelectComHistoryChange = function (orderId, selectedOption) {
-    // console.log(selectedOption);
-    setSelectDefault(selectedOption.value);
     let sendObject = {};
     sendObject.orderId = orderId;
     sendObject.newStatus = selectedOption.value;
-    console.log(sendObject);
     dispatch(editSalesHistoryStatusThunk(sendObject));
   };
 
@@ -106,84 +100,15 @@ export default function CompanySalesHistory() {
                         </div>
                         <div className="row">
                           <div className="col">
-                            {/* {element[1][0].status == "Pending" ? (
-                              <div>
-                                <Form.Select size="sm">
-                                  <option value="Pending" selected="selected">
-                                    Pending
-                                  </option>
-                                  <option value="Comfirm">Comfirm</option>
-                                  <option value="Packing">Packing</option>
-                                  <option value="Shipping">Shipping</option>
-                                  <option value="Finished">Finished</option>
-                                </Form.Select>
-                              </div>
-                            ) : element[1][0].status == "Comfirm" ? (
-                              <div>
-                                <Form.Select size="sm">
-                                  <option value="Pending">Pending</option>
-                                  <option value="Comfirm" selected="selected">
-                                    Comfirm
-                                  </option>
-                                  <option value="Packing">Packing</option>
-                                  <option value="Shipping">Shipping</option>
-                                  <option value="Finished">Finished</option>
-                                </Form.Select>
-                              </div>
-                            ) : element[1][0].status == "Packing" ? (
-                              <div>
-                                <Form.Select size="sm">
-                                  <option value="Pending">Pending</option>
-                                  <option value="Comfirm">Comfirm</option>
-                                  <option value="Packing" selected="selected">
-                                    Packing
-                                  </option>
-                                  <option value="Shipping">Shipping</option>
-                                  <option value="Finished">Finished</option>
-                                </Form.Select>
-                              </div>
-                            ) : element[1][0].status == "Shipping" ? (
-                              <div>
-                                <Form.Select size="sm">
-                                  <option value="Pending">Pending</option>
-                                  <option value="Comfirm">Comfirm</option>
-                                  <option value="Packing">Packing</option>
-                                  <option value="Shipping" selected="selected">
-                                    Shipping
-                                  </option>
-                                  <option value="Finished">Finished</option>
-                                </Form.Select>
-                              </div>
-                            ) : (
-                              <div>
-                                <Form.Select size="sm">
-                                  <option value="Pending">Pending</option>
-                                  <option value="Comfirm">Comfirm</option>
-                                  <option value="Packing">Packing</option>
-                                  <option value="Shipping">Shipping</option>
-                                  <option value="Finished" selected="selected">
-                                    Finished
-                                  </option>
-                                </Form.Select>
-                              </div>
-                            )} */}
-
-                            {/* <Form.Select size="sm">
-                              <option value="Pending">Pending</option>
-                              <option value="Comfirm">Comfirm</option>
-                              <option value="Packing">Packing</option>
-                              <option value="Shipping">Shipping</option>
-                              <option value="Finished">Finished</option>
-                            </Form.Select> */}
-
                             <Select
                               options={options}
                               onChange={(e) =>
                                 handleSelectComHistoryChange(element[0], e)
                               }
-                              value={options.find(function (option) {
-                                return option.value === element[1][0].status;
-                              })}
+                              // value={options.find(function (option) {
+                              //   return option.value === element[1][0].status;
+                              // })}
+                              placeholder={element[1][0].status}
                             />
                           </div>
                         </div>

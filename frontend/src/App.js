@@ -5,6 +5,7 @@ import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 
 //file
+import AboutUs from "./Pages/AboutUs";
 import CompanyLogin from "./Pages/CompanyLogin";
 import CompanyProductManagement from "./Pages/CompanyProductManagement";
 import CompanyProductManagementAdd from "./Pages/CompanyProductManagementAdd";
@@ -46,6 +47,7 @@ function App() {
         {/* logo */}
 
         {/* About us */}
+        <Route path="/" element={<AboutUs />} />
 
         {/* company */}
         <Route path="/company/login" element={<CompanyLogin />} />
@@ -88,19 +90,21 @@ function App() {
         {/* <Route path="/customer/show_product/:id" element={<CustomerShowProductDetail />} /> */}
 
         <Route
-          path="/customer/show_service"
-          element={<CustomerShowService />}
-        />
-        {/* <Route path="/customer/show_service/:id" element={<CustomerShowServiceDetail />} /> */}
-
-        {/* <Route path="/customer/test" element={<Test />} /> */}
-        <Route
           path="/customer/show_product"
           element={<CustomerShowProduct />}
         />
         <Route
-          path="/customer/show_product/:id"
+          path="/customer/show_product/:productId"
           element={<CustomerShowProductDetail />}
+        />
+
+        <Route
+          path="/customer/show_service"
+          element={<CustomerShowService />}
+        />
+        <Route
+          path="/customer/show_service/:productId"
+          element={<CustomerShowServiceDetail />}
         />
 
         <Route
@@ -127,7 +131,7 @@ function App() {
             </RequireAuthCus>
           }
         />
-        
+
         <Route
           path="/customer/payment_success/withoutLuckDraw"
           element={
@@ -165,18 +169,6 @@ function App() {
         >
           <Route path=":id" element={<CustomerOrderDetail />} />
         </Route>
-
-        {/* login signup logout testing */}
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route
-          path="/"
-          element={
-            <RequireAuth>
-              <Secret />
-            </RequireAuth>
-          }
-        /> */}
 
         {/* Error */}
         <Route path="*" element={<Error />} />

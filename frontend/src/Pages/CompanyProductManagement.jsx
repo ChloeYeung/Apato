@@ -10,7 +10,6 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 //react icon
 import { IoTrashOutline } from "react-icons/io5";
-import { AiOutlineEdit } from "react-icons/ai";
 import { IoMdAdd } from "react-icons/io";
 //react-router-dom
 import { Link, Outlet } from "react-router-dom";

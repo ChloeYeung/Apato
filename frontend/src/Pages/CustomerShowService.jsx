@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
+import Alert from "react-bootstrap/Alert";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
 import cusShowSerCarousel1 from "../images/cusShowSerCarousel1.png";
@@ -27,6 +28,8 @@ import {
   showServiceThunk,
   addCartSerThunk,
 } from "../redux/customer_showServiceSlice";
+//react-router-dom
+import { Link, NavLink } from "react-router-dom";
 
 export default function CustomerShowService() {
   const customernavinfo = useSelector(
@@ -67,12 +70,22 @@ export default function CustomerShowService() {
   const token = localStorage.getItem("TOKENCUS");
   console.log(token);
 
+  //Search bar nav
+  let [search, setSearch] = useState("");
+
+  let handleSearchChange = function (e) {
+    setSearch(e);
+    console.log(e);
+    console.log(search);
+  };
+
   return (
     <>
       <div id="cusShowServiceContainer">
         <div id="cusShowServiceBottomLayer">
           {/* Customer Navbar */}
           <CustomerNavbar
+            showSearch={true}
             customerImage={
               token === null
                 ? comNavNoPic
@@ -81,6 +94,7 @@ export default function CustomerShowService() {
                 : `data:image/png;base64 ,${customernavinfo.image_data}`
             }
             customerName={customernavinfo.name}
+            onChangeValue={handleSearchChange}
           />
 
           {/* alert message */}
@@ -137,54 +151,109 @@ export default function CustomerShowService() {
           <div className="container">
             <div className="row">
               {showservice &&
-                showservice.map((element, index) => (
-                  <>
-                    <div className="col-sm-6 col-md-4 col-lg-3">
-                      <Card
-                        key={index + "showProductCard"}
-                        className="d-flex align-items-center justify-content-center"
-                      >
-                        <br />
-                        <img
-                          style={{ width: "150px", height: "150px" }}
-                          src={`data:image/png;base64 ,${element.image_data}`}
-                        />
+                showservice
+                  .filter((element) => {
+                    if (search === "") {
+                      return element;
+                    } else if (
+                      element.tag
+                        .toLowerCase()
+                        .includes(search.toLowerCase()) ||
+                      element.name.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return element;
+                    } else {
+                      return undefined;
+                    }
+                  })
+                  .map((element, index) => (
+                    <>
+                      <div className="col-sm-6 col-md-4 col-lg-3">
+                        <Card
+                          key={index + "showProductCard"}
+                          className="d-flex align-items-center justify-content-center"
+                        >
+                          <br />
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={`data:image/png;base64 ,${element.image_data}`}
+                          />
 
-                        <Card.Body className="text-center">
-                          <Card.Title>{element.name}</Card.Title>
+                          <Card.Body className="text-center">
+                            <Card.Title>{element.name}</Card.Title>
 
-                          <Card.Text>
-                            {element.description}
-                            <br />
-                            <FaEthereum className="FaEthereumIcon" />{" "}
-                            {element.price}
-                          </Card.Text>
+                            <Card.Text>
+                              <FaEthereum className="FaEthereumIcon" />{" "}
+                              {element.price}
+                            </Card.Text>
 
-                          <div className="container">
-                            <div className="row">
-                              <div className="col">
-                                <Button
-                                  variant="outline-primary"
-                                  id="showServiceAddCartBtn"
-                                  onClick={() => handleAddCartBtn(element)}
-                                >
-                                  {" "}
-                                  <BsCartPlus />
-                                </Button>
-                              </div>
-                              <div className="col">
-                                <Button variant="outline-warning">
-                                  {" "}
-                                  <HiOutlineInformationCircle />
-                                </Button>
+                            <div className="container">
+                              <div className="row">
+                                <div className="col-8">
+                                  {element.stock === 0 ? (
+                                    <>
+                                      <Alert
+                                        className="text-center alertStockService"
+                                        variant="danger"
+                                      >
+                                        Out of stock
+                                      </Alert>
+                                    </>
+                                  ) : element.stock < 10 ? (
+                                    <Alert
+                                      className="text-center alertStockService"
+                                      variant="warning"
+                                    >
+                                      Limited quantity
+                                    </Alert>
+                                  ) : (
+                                    <Alert
+                                      className="text-center alertStockService"
+                                      variant="success"
+                                    >
+                                      Large stock
+                                    </Alert>
+                                  )}
+                                </div>
+
+                                <div className="col-4">
+                                  {/* Add cart btn */}
+                                  {element.stock == 0 ? (
+                                    <Button
+                                      id="showProductAddCartBtn"
+                                      onClick={() => handleAddCartBtn(element)}
+                                      variant="outline-primary"
+                                      disabled
+                                    >
+                                      <BsCartPlus />
+                                    </Button>
+                                  ) : (
+                                    <Button
+                                      id="showProductAddCartBtn"
+                                      onClick={() => handleAddCartBtn(element)}
+                                      variant="outline-primary"
+                                    >
+                                      <BsCartPlus />
+                                    </Button>
+                                  )}
+
+                                  {/* Descrition Btn */}
+                                  <Link
+                                    to={"/customer/show_service/" + element.id}
+                                  >
+                                    <Button variant="outline-warning">
+                                      {" "}
+                                      <HiOutlineInformationCircle />
+                                    </Button>
+                                  </Link>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  </>
-                ))}
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    </>
+                  ))}
             </div>
           </div>
         </div>

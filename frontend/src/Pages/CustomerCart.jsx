@@ -85,6 +85,7 @@ export default function CustomerCart() {
     dispatch(deleteCartThunk(element2.id));
   };
 
+
   return (
     <div>
       <>
@@ -118,7 +119,7 @@ export default function CustomerCart() {
         )}
 
         {/* product cart */}
-     
+
         {showcart &&
           showcart.map((element1, index) => (
             <>

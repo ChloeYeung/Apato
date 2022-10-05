@@ -9,6 +9,10 @@
   color: white;
 }
 
+.rmLinkStyleClose {
+  color: grey;
+}
+
 .FaEthereumIcon {
   @include FaEthereumIconColor;
 }
@@ -16,6 +20,24 @@
 //font
 .fontNormal {
   font-family: "Baloo 2", cursive;
+}
+
+//About us
+.aboutUsImgOurStory {
+  width: 250px;
+  height: 250px;
+}
+.aboutUsImgCus {
+  width: 225px;
+  height: 225px;
+}
+.aboutUsImgCom {
+  width: 225px;
+  height: 225px;
+}
+.aboutUsImgContactUs {
+  width: 245px;
+  height: 245px;
 }
 
 /* /Pages/CompanySalesHistory */
@@ -47,6 +69,10 @@
 
 /* Customer Show Product */
 .alertStockProduct {
+  font-size: 12px;
+}
+
+.alertStockService {
   font-size: 12px;
 }
 
@@ -198,6 +224,21 @@
   }
 }
 
+//show product detail
+.showProductDetailImg {
+  border-bottom-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+}
 
+.showProductDetailComImg {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
 
-
+.containerComNameAndImage {
+  display: flex;
+  justify-content: start;
+}

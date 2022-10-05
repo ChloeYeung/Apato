@@ -21,7 +21,7 @@ export default function CompanyNavbar(props) {
       {/*  nav bar */}
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Container>
-          <Navbar.Brand>Bripto</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">Bripto</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             {/* content */}

@@ -315,28 +315,24 @@ class CompanyService {
   }
 
   async editStatusSalesHistory(token, orderId, newStatus) {
-    let decoded = this.jwt_decode(token);
-    token = token.replace("Bearer ", "");
-    let verify = this.jwt.verify(token, process.env.JWT_SECRET);
-    if (verify) {
-      let id = await this.knex("purchase_history")
-        .where("order_id", `${orderId}`)
-        .select("id");
+    try {
+      let decoded = this.jwt_decode(token);
+      token = token.replace("Bearer ", "");
+      let verify = this.jwt.verify(token, process.env.JWT_SECRET);
+      if (verify) {
+        let id = await this.knex("purchase_history")
+          .where("order_id", `${orderId}`)
+          .select("id");
 
-      console.log(id);
-
-
-      // const fieldsToUpdate = id.map((field, index) => ({
-      // id: field,
-      // }));
-
-      console.log(newStatus);
-
-      await this.knex("purchase_history")
-        .where("order_id", `${orderId}`)
-        .update("status", `${newStatus}`);
-    } else {
-      res.sendStatus(401);
+        await this.knex("purchase_history")
+          .where("order_id", `${orderId}`)
+          .update("status", `${newStatus}`);
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      console.log("Error: Service Company editStatusSalesHistory");
+      console.log(error);
     }
   }
 }

@@ -22,6 +22,9 @@ import axios from "axios";
 
 //jquery
 import $ from "jquery";
+//react select
+import chroma from 'chroma-js';
+import Select, { StylesConfig } from 'react-select';
 
 export default function CompanyProductManagementAdd() {
   const dispatch = useDispatch();
@@ -52,6 +55,9 @@ export default function CompanyProductManagementAdd() {
     console.log("hide");
     document.getElementById("pmAddHideCard").style.visibility = "hidden";
   };
+
+  //react select
+ 
 
   return (
     <div id="pmAddHideCard">
@@ -104,7 +110,7 @@ export default function CompanyProductManagementAdd() {
                 <label>Price: </label>
                 <input
                   type="number"
-                  placeholder="367100"
+                  placeholder="0.19"
                   name="price"
                   onChange={handleAddChange}
                   id="pmAddFormPrice"
@@ -137,6 +143,8 @@ export default function CompanyProductManagementAdd() {
                   className="addPmInput"
                 />
               </div>
+
+          
               <br />
 
               <div className="row">
