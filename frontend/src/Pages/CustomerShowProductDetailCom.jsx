@@ -8,7 +8,6 @@ import GoBack from "../Components/Back";
 import { useDispatch, useSelector } from "react-redux";
 
 //react icon
-import { BsReverseBackspaceReverse } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
 import { FaEthereum } from "react-icons/fa";
@@ -17,15 +16,14 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { BsBoxSeam } from "react-icons/bs";
 //bootstrap
 import Alert from "react-bootstrap/Alert";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 
 //react-router-dom
 import { Link } from "react-router-dom";
 //state
 import { useState, useEffect } from "react";
 
-
-export default function CustomerShowProductDetail() {
+export default function CustomerShowProductDetailCom() {
   const showproductdetail = useSelector(
     (state) => state.showProductDetailReducer.showproductdetail
   );
@@ -48,8 +46,31 @@ export default function CustomerShowProductDetail() {
         <div className="container">
           <div className="row">
             <div className="col-11">
-              <AiOutlineHome /> &nbsp; <AiOutlineRight /> &nbsp; Product &nbsp;{" "}
-              <AiOutlineRight /> &nbsp; {showproductdetail.name}
+              <AiOutlineHome /> &nbsp; <AiOutlineRight />
+              &nbsp;
+              <Link className="rmLinkStyleClose" to="/customer/show_company">
+                Company
+              </Link>
+              &nbsp; <AiOutlineRight /> &nbsp;
+              <Link
+                className="rmLinkStyleClose"
+                to={"/customer/show_company/" + showproductdetail.company_id}
+              >
+                {showproductdetail.company_name}
+              </Link>
+              &nbsp;
+              <AiOutlineRight /> &nbsp;
+
+              <Link
+                className="rmLinkStyleClose"
+                to={
+                  "/customer/show_company/" +
+                  showproductdetail.company_id + "/" +
+                  showproductdetail.id
+                }
+              >
+                {showproductdetail.name}
+              </Link>
             </div>
             <div className="col-1">
               <GoBack />
@@ -88,7 +109,8 @@ export default function CustomerShowProductDetail() {
 
         <br />
         <p>
-          <TbInfoCircle /> &nbsp; Description: {showproductdetail.description}
+          <TbInfoCircle />
+          &nbsp; Description: {showproductdetail.description}
         </p>
         <p>
           <BiCategoryAlt />

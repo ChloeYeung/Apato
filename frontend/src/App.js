@@ -31,6 +31,7 @@ import CustomerShowServiceDetail from "./Pages/CustomerShowServiceDetail";
 import CompanySalesDetail from "./Pages/CompanySalesDetail";
 import CustomerShowAllCompany from "./Pages/CustomerShowAllCompany";
 import CustomerCompanyDetail from "./Pages/CustomerCompanyDetail";
+import CustomerShowProductDetailCom from "./Pages/CustomerShowProductDetailCom";
 import Test from "./Pages/Test";
 import Error from "./Pages/Error";
 
@@ -81,7 +82,8 @@ function App() {
           <Route path="add" element={<CompanyProductManagementAdd />} />
           <Route path="edit" element={<CompanyProductManagementEdit />} />
         </Route>
-        {/* customer */}
+        
+        {/* Show Customer */}
         <Route path="/customer/login" element={<CustomerLogin />} />
         <Route path="/customer/signup" element={<CustomerSignUp />} />
         <Route
@@ -92,6 +94,8 @@ function App() {
           path="/customer/show_product/:productId"
           element={<CustomerShowProductDetail />}
         />
+
+        {/* Show Service */}
         <Route
           path="/customer/show_service"
           element={<CustomerShowService />}
@@ -101,6 +105,7 @@ function App() {
           element={<CustomerShowServiceDetail />}
         />
 
+        {/* Show Company */}
         <Route
           path="/customer/show_company"
           element={<CustomerShowAllCompany />}
@@ -109,6 +114,13 @@ function App() {
           path="/customer/show_company/:companyId"
           element={<CustomerCompanyDetail />}
         />
+
+        <Route
+          path="/customer/show_company/:companyId/:productId"
+          element={<CustomerShowProductDetailCom />}
+        />
+
+        {/* Cart */}
         <Route
           path="/customer/cart"
           element={

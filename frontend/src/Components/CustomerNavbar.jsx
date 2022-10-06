@@ -34,7 +34,7 @@ export default function CustomerNavbar(props) {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto ">
               <NavDropdown
-                title="Product / Service"
+                title="Categories"
                 id="collasible-nav-dropdown"
               >
                 <NavDropdown.Item

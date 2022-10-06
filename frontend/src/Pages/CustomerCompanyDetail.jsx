@@ -5,12 +5,13 @@ import CustomerNavbar from "../Components/CustomerNavbar";
 import { showCompanyDetailThunk } from "../redux/customer_showCompanyDetailSlice";
 import { addCartThunk } from "../redux/customer_showProductSlice";
 import GoBack from "../Components/Back";
+import comNavNoPic from "../images/comNavNoPic.jpg";
+
 //redux
 import { useDispatch, useSelector } from "react-redux";
 //react icon
-import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineComment } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
-import { AiOutlineClose } from "react-icons/ai";
 import { MdPointOfSale } from "react-icons/md";
 import { AiFillPhone } from "react-icons/ai";
 import { FaEthereum } from "react-icons/fa";
@@ -39,6 +40,10 @@ export default function CustomerCompanyDetail() {
     (state) => state.showProductReducer.addcartmessage
   );
 
+  const customernavinfo = useSelector(
+    (state) => state.navbarCusReducer.customernavinfo
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,10 +68,30 @@ export default function CustomerCompanyDetail() {
     setShow(false);
   }, 5000);
 
+    //navbar token
+    const token = localStorage.getItem("TOKENCUS");
+
+    let handleSearchChange = function (e) {
+      setSearch(e);
+      console.log(e);
+      console.log(search);
+    };
+
   return (
     <div>
       {/* Navbar */}
-      <CustomerNavbar />
+      <CustomerNavbar
+            showSearch={true}
+            customerImage={
+              token === null
+                ? comNavNoPic
+                : customernavinfo.image_data === null
+                ? comNavNoPic
+                : `data:image/png;base64 ,${customernavinfo.image_data}`
+            }
+            customerName={customernavinfo.name}
+            onChangeValue={handleSearchChange}
+          />
 
       {/* Add cart message */}
       {show && (
@@ -102,7 +127,7 @@ export default function CustomerCompanyDetail() {
             </div>
 
             <div className="col-1">
-              <GoBack/>
+              <GoBack />
             </div>
           </div>
         </div>
@@ -124,6 +149,11 @@ export default function CustomerCompanyDetail() {
           <div className="col">
             <MdPointOfSale /> Sales Unit: {showcompanydetail.sales_unit}
           </div>
+
+          <div className="col">
+            <AiOutlineComment /> Chat Now
+          </div>
+          
         </div>
 
         <hr />
@@ -218,7 +248,7 @@ export default function CustomerCompanyDetail() {
 
                                 {/* Descrition Btn */}
                                 <Link
-                                  to={"/customer/show_product/" + element.id}
+                                  to={`/customer/show_company/${element.company_id}/${element.id}`}
                                 >
                                   <Button variant="outline-warning">
                                     {" "}
