@@ -302,12 +302,11 @@ class CompanyService {
         .from("purchase_history")
         .innerJoin(
           "customer_users",
-          "purchase_history.company_id",
+          "purchase_history.customer_id",
           "customer_users.id"
         )
         .where("purchase_history.company_id", "=", decoded.id)
         .orderBy("purchase_history.id", "desc");
-
       return data;
     } else {
       res.sendStatus(401);

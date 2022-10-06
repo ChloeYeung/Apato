@@ -68,30 +68,30 @@ export default function CustomerCompanyDetail() {
     setShow(false);
   }, 5000);
 
-    //navbar token
-    const token = localStorage.getItem("TOKENCUS");
+  //navbar token
+  const token = localStorage.getItem("TOKENCUS");
 
-    let handleSearchChange = function (e) {
-      setSearch(e);
-      console.log(e);
-      console.log(search);
-    };
+  let handleSearchChange = function (e) {
+    setSearch(e);
+    console.log(e);
+    console.log(search);
+  };
 
   return (
     <div>
       {/* Navbar */}
       <CustomerNavbar
-            showSearch={true}
-            customerImage={
-              token === null
-                ? comNavNoPic
-                : customernavinfo.image_data === null
-                ? comNavNoPic
-                : `data:image/png;base64 ,${customernavinfo.image_data}`
-            }
-            customerName={customernavinfo.name}
-            onChangeValue={handleSearchChange}
-          />
+        showSearch={true}
+        customerImage={
+          token === null
+            ? comNavNoPic
+            : customernavinfo.image_data === null
+            ? comNavNoPic
+            : `data:image/png;base64 ,${customernavinfo.image_data}`
+        }
+        customerName={customernavinfo.name}
+        onChangeValue={handleSearchChange}
+      />
 
       {/* Add cart message */}
       {show && (
@@ -122,8 +122,20 @@ export default function CustomerCompanyDetail() {
         <div className="container">
           <div className="row">
             <div className="col-11">
-              <AiOutlineHome /> &nbsp; <AiOutlineRight /> &nbsp; Company &nbsp;{" "}
-              <AiOutlineRight /> &nbsp; {showcompanydetail.company_name}
+              <Link to="/" className="rmLinkStyleClose">
+                <AiOutlineHome />
+              </Link>
+              &nbsp; <AiOutlineRight /> &nbsp;
+              <Link className="rmLinkStyleClose" to="/customer/show_company">
+                Company
+              </Link>
+              &nbsp; <AiOutlineRight /> &nbsp;
+              <Link
+                className="rmLinkStyleClose"
+                to={"/customer/show_company/" + showcompanydetail.company_id}
+              >
+                {showcompanydetail.company_name}
+              </Link>
             </div>
 
             <div className="col-1">
@@ -153,7 +165,6 @@ export default function CustomerCompanyDetail() {
           <div className="col">
             <AiOutlineComment /> Chat Now
           </div>
-          
         </div>
 
         <hr />

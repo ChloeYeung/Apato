@@ -33,7 +33,7 @@ export default function CustomerShowProductDetailCom() {
 
   useEffect(() => {
     let id = window.location;
-    dispatch(showProductDetailThunk(id.pathname.split("/")[3]));
+    dispatch(showProductDetailThunk(id.pathname.split("/")[4]));
   }, []);
 
   return (
@@ -46,7 +46,12 @@ export default function CustomerShowProductDetailCom() {
         <div className="container">
           <div className="row">
             <div className="col-11">
-              <AiOutlineHome /> &nbsp; <AiOutlineRight />
+
+              <Link className="rmLinkStyleClose" to="/">
+              <AiOutlineHome /> 
+              </Link>
+              
+              &nbsp; <AiOutlineRight />
               &nbsp;
               <Link className="rmLinkStyleClose" to="/customer/show_company">
                 Company

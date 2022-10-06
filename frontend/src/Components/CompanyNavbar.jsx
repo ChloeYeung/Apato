@@ -49,7 +49,7 @@ export default function CompanyNavbar(props) {
               <Nav.Link>
                 <button className="logoutBtn"
                   onClick={() => dispatch(logoutComThunk())}>
-                  Logout <RiLoginCircleFill color='blue' />
+                  Logout <RiLoginCircleFill />
                 </button>
               </Nav.Link>
             </Nav>

@@ -48,8 +48,21 @@ export default function CustomerShowProductDetail() {
         <div className="container">
           <div className="row">
             <div className="col-11">
-              <AiOutlineHome /> &nbsp; <AiOutlineRight /> &nbsp; Service &nbsp;
-              <AiOutlineRight /> &nbsp; {showproductdetail.name}
+              <Link to="/" className="rmLinkStyleClose">
+                <AiOutlineHome />
+              </Link>
+              &nbsp; <AiOutlineRight /> &nbsp;
+              <Link to="/customer/show_service" className="rmLinkStyleClose">
+                Service
+              </Link>
+              &nbsp;
+              <AiOutlineRight /> &nbsp;
+              <Link
+                to={"/customer/show_service/" + showproductdetail.id}
+                className="rmLinkStyleClose"
+              >
+                {showproductdetail.name}
+              </Link>
             </div>
 
             <div className="col-1">

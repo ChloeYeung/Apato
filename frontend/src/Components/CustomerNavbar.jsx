@@ -107,7 +107,7 @@ export default function CustomerNavbar(props) {
                   className="logoutBtn"
                   onClick={() => dispatch(logoutCusThunk())}
                 >
-                  Logout <ImExit color="blue" />
+                  Logout <ImExit />
                 </button>
               </Nav.Link>
             </Nav>

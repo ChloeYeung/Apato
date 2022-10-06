@@ -32,12 +32,14 @@ export default function CompanySalesHistory() {
     (state) => state.salesHistoryReducer.showsaleshistory
   );
 
+  console.log(showsaleshistory);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(comNavInfoThunk());
     dispatch(showSalesHistoryThunk());
-  });
+  }, []);
 
   //  Handle History Total
   let handlecomHistoryTotal = function (element) {

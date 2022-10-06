@@ -32,14 +32,14 @@ export const showCompanyDetailThunk = (company_id) => async (dispatch) => {
     }
   );
 
-
+console.log(response.data)
   if (response.data.image_data != null) {
     response.data.image_data = toBase64(response.data.image_data.data);
   }
 
   response.data.product.forEach((e, i) => {
     if (e.image_data != null)
-      response.data[i].image_data = toBase64(e.image_data.data);
+      response.data.product[i].image_data = toBase64(e.image_data.data);
   })
 
 

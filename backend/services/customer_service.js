@@ -314,7 +314,7 @@ class CustomerService {
   async showCompanyDetail(company_id) {
     try {
       let data = await this.knex("company_users")
-        .select("name", "phone_no", "image_data")
+        .select("name", "phone_no", "image_data", "id")
         .where("id", company_id);
 
       let data2 = await this.knex("purchase_history")
@@ -338,6 +338,7 @@ class CustomerService {
       returnObject.company_name = data[0].name;
       returnObject.phone_no = data[0].phone_no;
       returnObject.image_data = data[0].image_data;
+      returnObject.company_id = data[0].id;
       returnObject.sales_unit = unitSum;
       returnObject.product = data3;
       console.log(returnObject);

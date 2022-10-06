@@ -17,13 +17,12 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { BsBoxSeam } from "react-icons/bs";
 //bootstrap
 import Alert from "react-bootstrap/Alert";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 
 //react-router-dom
 import { Link } from "react-router-dom";
 //state
 import { useState, useEffect } from "react";
-
 
 export default function CustomerShowProductDetail() {
   const showproductdetail = useSelector(
@@ -48,8 +47,20 @@ export default function CustomerShowProductDetail() {
         <div className="container">
           <div className="row">
             <div className="col-11">
-              <AiOutlineHome /> &nbsp; <AiOutlineRight /> &nbsp; Product &nbsp;{" "}
-              <AiOutlineRight /> &nbsp; {showproductdetail.name}
+              <Link to="/" className="rmLinkStyleClose">
+                <AiOutlineHome />
+              </Link>
+              &nbsp; <AiOutlineRight /> &nbsp;
+              <Link to="/customer/show_product" className="rmLinkStyleClose">
+                Product
+              </Link>
+              &nbsp; <AiOutlineRight /> &nbsp;
+              <Link
+                to={"/customer/show_product/" + showproductdetail.id}
+                className="rmLinkStyleClose"
+              >
+                {showproductdetail.name}
+              </Link>
             </div>
             <div className="col-1">
               <GoBack />
@@ -69,7 +80,7 @@ export default function CustomerShowProductDetail() {
         <br />
         <br />
         <span>
-          <h3>{showproductdetail.name} </h3>
+          <h3>{showproductdetail.name}</h3>
           <h5>
             <FaEthereum className="FaEthereumIcon" /> {showproductdetail.price}{" "}
           </h5>
@@ -78,13 +89,18 @@ export default function CustomerShowProductDetail() {
         <br />
         <hr />
 
-        <div className="containerComNameAndImage">
-          <h5>{showproductdetail.company_name}</h5>
-          <img
-            src={`data:image/png;base64 ,${showproductdetail.company_image}`}
-            className="showProductDetailComImg"
-          />
-        </div>
+        <Link
+          to={"/customer/show_company/" + showproductdetail.company_id}
+          className="rmLinkStyleBlack"
+        >
+          <div className="containerComNameAndImage">
+            <h5>{showproductdetail.company_name} </h5>
+            <img
+              src={`data:image/png;base64 ,${showproductdetail.company_image}`}
+              className="showProductDetailComImg"
+            />
+          </div>
+        </Link>
 
         <br />
         <p>
