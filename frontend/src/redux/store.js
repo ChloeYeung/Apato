@@ -13,6 +13,8 @@ import customer_purchaseSlice from "./customer_purchaseSlice";
 import customer_orderHistory from "./customer_orderHistory";
 import company_summarySlice from "./company_summarySlice";
 import company_historySlice from "./company_historySlice";
+import customer_showCompanySlice from "./customer_showCompanySlice";
+import customer_showCompanyDetailSlice from "./customer_showCompanyDetailSlice";
 import logger from "redux-logger";
 
 export const store = configureStore({
@@ -31,6 +33,8 @@ export const store = configureStore({
     salesSummaryReducer: company_summarySlice,
     salesHistoryReducer: company_historySlice,
     showProductDetailReducer: customer_showProductDetailSlice,
+    showCompanyReducer: customer_showCompanySlice,
+    showCompanyDetailReducer: customer_showCompanyDetailSlice,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

@@ -29,7 +29,8 @@ import CustomerShowProductDetail from "./Pages/CustomerShowProductDetail";
 import CustomerShowService from "./Pages/CustomerShowService";
 import CustomerShowServiceDetail from "./Pages/CustomerShowServiceDetail";
 import CompanySalesDetail from "./Pages/CompanySalesDetail";
-
+import CustomerShowAllCompany from "./Pages/CustomerShowAllCompany";
+import CustomerCompanyDetail from "./Pages/CustomerCompanyDetail";
 import Test from "./Pages/Test";
 import Error from "./Pages/Error";
 
@@ -45,10 +46,8 @@ function App() {
     <>
       <Routes>
         {/* logo */}
-
         {/* About us */}
         <Route path="/" element={<AboutUs />} />
-
         {/* company */}
         <Route path="/company/login" element={<CompanyLogin />} />
         <Route path="/company/signup" element={<CompanySignup />} />
@@ -82,13 +81,9 @@ function App() {
           <Route path="add" element={<CompanyProductManagementAdd />} />
           <Route path="edit" element={<CompanyProductManagementEdit />} />
         </Route>
-
         {/* customer */}
         <Route path="/customer/login" element={<CustomerLogin />} />
         <Route path="/customer/signup" element={<CustomerSignUp />} />
-        {/* <Route path="/customer/show_product/public" element={<CustomerShowProductPublic />} /> */}
-        {/* <Route path="/customer/show_product/:id" element={<CustomerShowProductDetail />} /> */}
-
         <Route
           path="/customer/show_product"
           element={<CustomerShowProduct />}
@@ -97,7 +92,6 @@ function App() {
           path="/customer/show_product/:productId"
           element={<CustomerShowProductDetail />}
         />
-
         <Route
           path="/customer/show_service"
           element={<CustomerShowService />}
@@ -107,6 +101,14 @@ function App() {
           element={<CustomerShowServiceDetail />}
         />
 
+        <Route
+          path="/customer/show_company"
+          element={<CustomerShowAllCompany />}
+        />
+        <Route
+          path="/customer/show_company/:companyId"
+          element={<CustomerCompanyDetail />}
+        />
         <Route
           path="/customer/cart"
           element={
@@ -131,7 +133,6 @@ function App() {
             </RequireAuthCus>
           }
         />
-
         <Route
           path="/customer/payment_success/withoutLuckDraw"
           element={
@@ -140,7 +141,6 @@ function App() {
             </RequireAuthCus>
           }
         />
-
         <Route
           path="/customer/cashback_fail"
           element={
@@ -149,7 +149,6 @@ function App() {
             </RequireAuthCus>
           }
         />
-
         <Route
           path="/customer/payment_fail"
           element={
@@ -158,7 +157,6 @@ function App() {
             </RequireAuthCus>
           }
         />
-
         <Route
           path="/customer/order_history"
           element={
@@ -169,7 +167,6 @@ function App() {
         >
           <Route path=":id" element={<CustomerOrderDetail />} />
         </Route>
-
         {/* Error */}
         <Route path="*" element={<Error />} />
       </Routes>

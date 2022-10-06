@@ -3,6 +3,7 @@ import React from "react";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
 import { showProductDetailThunk } from "../redux/customer_showProductDetailSlice";
+import GoBack from "../Components/Back";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,19 +12,18 @@ import { BsReverseBackspaceReverse } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
 import { FaEthereum } from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
 import { TbInfoCircle } from "react-icons/tb";
 import { BiCategoryAlt } from "react-icons/bi";
 import { BsBoxSeam } from "react-icons/bs";
-
 //bootstrap
-import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
-import Card from "react-bootstrap/Card";
+import Button from 'react-bootstrap/Button';
+
 //react-router-dom
 import { Link } from "react-router-dom";
 //state
 import { useState, useEffect } from "react";
+
 
 export default function CustomerShowProductDetail() {
   const showproductdetail = useSelector(
@@ -51,11 +51,12 @@ export default function CustomerShowProductDetail() {
               <AiOutlineHome /> &nbsp; <AiOutlineRight /> &nbsp; Product &nbsp;{" "}
               <AiOutlineRight /> &nbsp; {showproductdetail.name}
             </div>
-
+            {/* TbArrowBackUp */}
             <div className="col-1">
-              <Link to="/customer/show_product">
+              {/* <Link to="/customer/show_product">
                 <AiOutlineClose className="rmLinkStyleClose" />
-              </Link>
+              </Link> */}
+              <GoBack />
             </div>
           </div>
         </div>

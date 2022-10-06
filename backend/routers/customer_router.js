@@ -17,6 +17,11 @@ class CustomerRouter {
     //Show Service
     router.get("/show_service", this.showService.bind(this));
     router.post("/add_cart_ser", this.addCartService.bind(this));
+
+    //Show Company
+    router.get("/show_company", this.showCompany.bind(this));
+    router.post("/show_company/:companyId", this.showCompanyDetail.bind(this));
+
     // Cart
     router.get("/show_cart", this.showCart.bind(this));
     router.post("/add_cart_unit", this.addCartUnit.bind(this));
@@ -53,7 +58,6 @@ class CustomerRouter {
   //Show Product
   async showProduct(req, res) {
     let token = req.headers.authorization;
-    console.log(token);
     let response = await this.CustomerService.showProduct(token);
     return res.send(response);
   }
@@ -90,7 +94,10 @@ class CustomerRouter {
   //Show Product Detail
   async showProductDetail(req, res) {
     let { token, product_id } = req.body;
-    let response = await this.CustomerService.showProductDetail(token, product_id);
+    let response = await this.CustomerService.showProductDetail(
+      token,
+      product_id
+    );
     return res.send(response);
   }
 
@@ -128,6 +135,18 @@ class CustomerRouter {
       image_data,
       image_name
     );
+    return res.send(response);
+  }
+
+  //Show Company
+  async showCompany(req, res) {
+    let response = await this.CustomerService.showCompany();
+    return res.send(response);
+  }
+
+  async showCompanyDetail(req, res) {
+    let company_id = req.body.company_id;
+    let response = await this.CustomerService.showCompanyDetail(company_id);
     return res.send(response);
   }
 

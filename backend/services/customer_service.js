@@ -157,7 +157,6 @@ class CustomerService {
       let data = await this.knex("company_product")
         .select("*")
         .where("id", product_id);
-      console.log(data[0]);
 
       let company = await this.knex("company_users")
         .select("name", "image_data")
@@ -295,6 +294,56 @@ class CustomerService {
       }
     } catch (error) {
       console.log("Service: customer addCart service error");
+      console.log(error);
+    }
+  }
+
+  //Show Company
+  async showCompany() {
+    try {
+      let data = await this.knex("company_users").select("*").orderBy("name");
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log("Error Service customer showCompany");
+      console.log(error);
+    }
+  }
+
+  //Show Company Detail
+  async showCompanyDetail(company_id) {
+    try {
+      let data = await this.knex("company_users")
+        .select("name", "phone_no", "image_data")
+        .where("id", company_id);
+
+      let data2 = await this.knex("purchase_history")
+        .select("unit")
+        .where("company_id", company_id);
+
+      let unitArray = [];
+      for (let i = 0; i < data2.length; i++) {
+        unitArray.push(data2[i].unit);
+      }
+
+      let data3 = await this.knex("company_product")
+        .select("*")
+        .where("company_id", company_id);
+      console.log(data3);
+
+      let unitSum = unitArray.reduce((p, c) => p + c, 0);
+
+      //return object
+      let returnObject = {};
+      returnObject.company_name = data[0].name;
+      returnObject.phone_no = data[0].phone_no;
+      returnObject.image_data = data[0].image_data;
+      returnObject.sales_unit = unitSum;
+      returnObject.product = data3;
+      console.log(returnObject);
+      return returnObject;
+    } catch (error) {
+      console.log("Error Service customer showCompanyDetail");
       console.log(error);
     }
   }

@@ -51,6 +51,13 @@ export default function CustomerNavbar(props) {
                 >
                   Service
                 </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/customer/show_company"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  Company
+                </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link
                 as={Link}
@@ -110,4 +117,3 @@ export default function CustomerNavbar(props) {
     </>
   );
 }
-
