@@ -32,6 +32,7 @@ import CompanySalesDetail from "./Pages/CompanySalesDetail";
 import CustomerShowAllCompany from "./Pages/CustomerShowAllCompany";
 import CustomerCompanyDetail from "./Pages/CustomerCompanyDetail";
 import CustomerShowProductDetailCom from "./Pages/CustomerShowProductDetailCom";
+import SupportLogin from "./Pages/SupportLogin";
 import Test from "./Pages/Test";
 import Error from "./Pages/Error";
 
@@ -41,14 +42,16 @@ import Login from "./Pages/Login";
 import Secret from "./Pages/Secret";
 import RequireAuthCom from "./Components/RequireAuthCom";
 import RequireAuthCus from "./Components/RequireAuthCus";
+import RequireAuthSup from "./Components/RequireAuthSup";
+import SupportChat from "./Pages/SupportChat";
 
 function App() {
   return (
     <>
       <Routes>
-        {/* logo */}
         {/* About us */}
         <Route path="/" element={<AboutUs />} />
+
         {/* company */}
         <Route path="/company/login" element={<CompanyLogin />} />
         <Route path="/company/signup" element={<CompanySignup />} />
@@ -82,8 +85,8 @@ function App() {
           <Route path="add" element={<CompanyProductManagementAdd />} />
           <Route path="edit" element={<CompanyProductManagementEdit />} />
         </Route>
-        
-        {/* Show Customer */}
+
+        {/*  Customer */}
         <Route path="/customer/login" element={<CustomerLogin />} />
         <Route path="/customer/signup" element={<CustomerSignUp />} />
         <Route
@@ -179,6 +182,18 @@ function App() {
         >
           <Route path=":id" element={<CustomerOrderDetail />} />
         </Route>
+
+        {/* Customer */}
+        <Route path="/support/login" element={<SupportLogin />} />
+        <Route
+          path="/support/chat"
+          element={
+            <RequireAuthSup>
+              <SupportChat />
+            </RequireAuthSup>
+          }
+        />
+
         {/* Error */}
         <Route path="*" element={<Error />} />
       </Routes>

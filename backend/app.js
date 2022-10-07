@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const jwt_decode = require("jwt-decode");
 const authCom = require("./company_jwt-strategy");
 const authCus = require("./customer_jwt-strategy");
+const authSup = require("./support_jwt-strategy");
 const fileUpload = require("express-fileupload");
 
 const bcrypt = require("bcrypt");
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload());
 authCom(knex).initialize();
 authCus(knex).initialize();
+authSup(knex).initialize();
 
 const CompanyService = require("./services/company_service");
 const CompanyRouter = require("./routers/company_router");
@@ -27,6 +29,7 @@ const CompanyRouter = require("./routers/company_router");
 
 const CustomerService = require("./services/customer_service");
 const CustomerRouter = require("./routers/customer_router");
+
 
 
 app.use("/company", new CompanyRouter(new CompanyService(knex, jwt, jwt_decode)).router());
@@ -99,6 +102,28 @@ app.post("/customer/login", async (req, res) => {
   let user = await knex("customer_users").where({ email }).first();
   if (user) {
     let result = await bcrypt.compare(password, user.password);
+    if (result) {
+      const payload = {
+        id: user.id,
+        email: user.email,
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      res.json({ token });
+    } else {
+      res.sendStatus(401);
+    }
+  }
+});
+
+//Support Login
+app.post("/support/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  let user = await knex("support_users").where({ email }).first();
+
+  if (user) {
+    let result = await bcrypt.compare(password, user.password);
+
     if (result) {
       const payload = {
         id: user.id,

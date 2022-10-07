@@ -254,3 +254,75 @@
   height: "150px";
   width: "150px";
 }
+
+
+
+
+// Support
+#chatty{
+  max-width: 600px;
+  margin: 30px auto;
+  border: 1px solid #ddd;
+  box-shadow: 1px 3px 5px #0000000d;
+  border-radius: 2px;
+}
+
+#chat-window{
+  height: 400px;
+  overflow: auto;
+  background: #f9f9f9;
+}
+
+#output p{
+  padding: 14px 0px;
+  margin: 0 20px;
+  border-bottom: 1px solid #e9e9e9;
+  color: #555;
+}
+
+#echo p{
+  color: #aaa;
+  padding: 14px 0px;
+  margin: 0 20px;
+}
+
+
+#echo {
+  background: #f9f9f9;
+
+}
+
+#output strong{
+  color: #79aa9f;
+}
+
+// label{
+//   box-sizing: border-box;
+//   display: block;
+//   padding: 10px 20px;
+// }
+
+#handle, #message{
+  padding: 10px 20px;
+  box-sizing: border-box;
+  background: #eee;
+  border: 0;
+  display: block;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  font-family: Nunito;
+  font-size: 16px;
+}
+
+#join, #send{
+  background: #7F7FD5;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+  font-size: 18px;
+  border: 0;
+  padding: 12px 0;
+  width: 100%;
+  border-radius: 0 0 2px 2px;
+}
