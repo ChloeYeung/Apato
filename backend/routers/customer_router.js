@@ -9,13 +9,13 @@ class CustomerRouter {
     //Navbar
     router.post("/nav_info", this.showNavInfo.bind(this));
     // Show Product
-    router.get("/show_product", this.showProduct.bind(this));
+    router.post("/show_product", this.showProduct.bind(this));
     router.post("/add_cart", this.addCart.bind(this));
     //Show Product Detail
     router.post("/show_product/:productId", this.showProductDetail.bind(this));
 
     //Show Service
-    router.get("/show_service", this.showService.bind(this));
+    router.post("/show_service", this.showService.bind(this));
     router.post("/add_cart_ser", this.addCartService.bind(this));
 
     //Show Company
@@ -57,8 +57,9 @@ class CustomerRouter {
 
   //Show Product
   async showProduct(req, res) {
+    let sort = req.body.sort;
     let token = req.headers.authorization;
-    let response = await this.CustomerService.showProduct(token);
+    let response = await this.CustomerService.showProduct(token, sort);
     return res.send(response);
   }
 
@@ -103,8 +104,9 @@ class CustomerRouter {
 
   //Show Service
   async showService(req, res) {
+    let sort = req.body.sort
     let token = req.headers.authorization;
-    let response = await this.CustomerService.showService(token);
+    let response = await this.CustomerService.showService(token, sort);
     console.log("in show service router");
     return res.send(response);
   }

@@ -32,6 +32,7 @@ export default function CustomerPayment() {
     balance: "",
     value: "",
     moneybackPercentage: "",
+    moneyback: "",
     message: "beginning",
   });
 
@@ -59,13 +60,10 @@ export default function CustomerPayment() {
   // handle Lucky Draw Btn
   let handleLuckyDraw = async function () {
     try {
-      const moneyBackPercentage = await purchase.methods
-        .get_Refund_Percentage()
-        .call();
+
       setPayment((prevValue) => ({
         ...prevValue,
         message: "waiting",
-        moneybackPercentage: moneyBackPercentage,
       }));
       console.log(payment);
 
@@ -74,11 +72,21 @@ export default function CustomerPayment() {
         from: accounts[0],
       });
 
+
+      const moneyBackPercentage = await purchase.methods
+      .get_Refund_Percentage()
+      .call({
+        from: accounts[0],
+      });
+
+
       setPayment((prevValue) => ({
         ...prevValue,
+        moneyback: web3.utils.fromWei(String(moneyBackPercentage), "ether"),
         message: "success",
+        moneybackPercentage: moneyBackPercentage/payment.balance*100,
       }));
-      console.log(payment);
+      
     } catch (error) {
       setPayment((prevValue) => ({
         ...prevValue,
@@ -172,7 +180,8 @@ export default function CustomerPayment() {
             <Wobble>
               <p className="text-center" id="luckyDrawIconBtn">
                 {" "}
-                Earned {payment.moneybackPercentage}% money back
+                Earned {payment.moneybackPercentage}% ({payment.moneyback} Eth) money back
+                {console.log(payment)}
               </p>
             </Wobble>
           </div>

@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import company_authSlice from "./company_authSlice";
 import customer_authSlice from "./customer_authSlice";
-import support_authSlice from "./support_authSlice";
 import customer_navbarSlice from "./customer_navbarSlice";
 import company_navbarSlice from "./company_navbarSlice";
-import todoSlice from "./todoSlice";
 import company_pmSlice from "./company_pmSlice";
 import customer_showProductSlice from "./customer_showProductSlice";
 import customer_showProductDetailSlice from "./customer_showProductDetailSlice";
@@ -22,10 +20,8 @@ export const store = configureStore({
   reducer: {
     authCom: company_authSlice,
     authCus: customer_authSlice,
-    authSup: support_authSlice,
     navbarCusReducer: customer_navbarSlice,
     navbarComReducer: company_navbarSlice,
-    todoReducer: todoSlice,
     pmReducer: company_pmSlice,
     showProductReducer: customer_showProductSlice,
     showServiceReducer: customer_showServiceSlice,

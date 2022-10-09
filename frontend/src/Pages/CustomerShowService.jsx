@@ -14,6 +14,8 @@ import cusShowSerCarousel2 from "../images/cusShowSerCarousel2.png";
 import cusShowSerCarousel3 from "../images/cusShowSerCarousel3.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
+import SortDropdown from "../Components/SortDropdown";
+
 //react icon
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineInformationCircle } from "react-icons/hi";
@@ -49,10 +51,21 @@ export default function CustomerShowService() {
 
   const dispatch = useDispatch();
 
+  // Sort
+  let [sort, setSort] = useState("");
+  let handleOnSortValue = function (e) {
+    setSort(e);
+  };
+  console.log(sort);
+
   useEffect(() => {
     dispatch(showServiceThunk());
     dispatch(cusNavInfoThunk());
   }, []);
+
+  useEffect(() => {
+    dispatch(showServiceThunk(sort));
+  }, [sort]);
 
   const handleAddCartBtn = (element) => {
     console.log(element);
@@ -147,6 +160,10 @@ export default function CustomerShowService() {
           </Carousel>
           <br />
 
+          {/* Sort dropdown */}
+          <SortDropdown onSortValue={handleOnSortValue} />
+          <br />
+          
           {/* Product card */}
           <div className="container">
             <div className="row">

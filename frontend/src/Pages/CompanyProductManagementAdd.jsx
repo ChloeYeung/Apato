@@ -56,8 +56,6 @@ export default function CompanyProductManagementAdd() {
     document.getElementById("pmAddHideCard").style.visibility = "hidden";
   };
 
-  //react select
- 
 
   return (
     <div id="pmAddHideCard">
@@ -76,8 +74,6 @@ export default function CompanyProductManagementAdd() {
                     </div>
                   </div>
                 </div>
-
-                {/* Add Product <CloseButton onClick={handlepmAddOnClickHide} />{" "} */}
               </Card.Title>
 
               <div className="row">
@@ -173,16 +169,6 @@ export default function CompanyProductManagementAdd() {
                   />
                 </Form.Group>
               </div>
-
-              {/* <div className="row">
-                <label>Image: </label>
-                <input
-                  type="file"
-                  accept="image/png, image/gif, image/jpeg"
-                  id="pmAddFormImage"
-                  name="image"
-                />
-              </div> */}
 
               <Button
                 onClick={() => dispatch(addpmThunk(addProduct))}

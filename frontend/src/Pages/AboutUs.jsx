@@ -1,5 +1,5 @@
+//react
 import React from "react";
-
 //Bootstrap
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -19,7 +19,7 @@ import { MdWorkOutline } from "react-icons/md";
 
 export default function AboutUs() {
   return (
-    <>
+    <div className="fontNormal">
       {/* navBar */}
       <Navbar bg="light" expand="lg">
         <Container>
@@ -45,8 +45,11 @@ export default function AboutUs() {
           <div className="row">
             <div className="col-1"></div>
             <div className="col-6 d-flex align-items-center">
-              <h5>Our Story</h5>
-              <p>apatosaurus + cypto = ApaTo, payment with MetaMask Ethereum</p>
+              <h5>Our <br /> Story</h5> &nbsp;
+              <p>
+              Apatosaurus + Cypto = ApaTo,
+              Payment with MetaMask Ethereum
+              </p>
             </div>
             <div className="col-2">
               <img src={aboutUsOurStory} className="aboutUsImgOurStory" />
@@ -118,16 +121,13 @@ export default function AboutUs() {
 
               <p>
                 We would love to hear from you &nbsp;
-                <a href="mailto: apatonet.gmail.com">
-      
-                  apatonet.gmail.com{" "} 
-                </a>
+                <a href="mailto: apatonet.gmail.com">apatonet.gmail.com </a>
               </p>
             </div>
             <div className="col-1"></div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

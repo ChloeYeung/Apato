@@ -30,13 +30,13 @@ function toBase64(arr) {
   );
 }
 
-export const showProductThunk = () => async (dispatch) => {
+export const showProductThunk = (sort) => async (dispatch) => {
   const token = localStorage.getItem("TOKENCUS");
   console.log(token);
-  const response = await axios.get(`${process.env.REACT_APP_BACKEND}/customer/show_product`, {
+  const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/show_product`, {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`, 
+    }, sort
   });
   console.log(response.data);
 

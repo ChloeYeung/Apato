@@ -9,7 +9,6 @@ import {
   delOrderTotalPurchaseThunk,
   updateCompanyStockThunk,
 } from "../redux/customer_purchaseSlice";
-import paymentQRcode from "../images/paymentQRcode.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 //bootstrap
@@ -61,8 +60,6 @@ export default function CustomerPurchase() {
     dispatch(cusNavInfoThunk());
     dispatch(showOrderTotalPurchaseThunk());
     const smartContract = async () => {
-      // const solPurchase = await purchase.methods.customer.call();
-      // console.log(solPurchase);
       const apato = await purchase.methods.apato().call();
       const balance = await web3.eth.getBalance(purchase.options.address);
       setPayment((prevValue) => ({
@@ -135,8 +132,8 @@ export default function CustomerPurchase() {
       />
 
       <div className="text-center">
-        <h1>Payment</h1>
-        <p>Click the link or scan the QR code to process payment</p>
+        <h1 className="purchasePageFont">Payment</h1>
+        <p>Check your order total and check CONFIRM to process payment</p>
       </div>
 
       {/* summary card */}
@@ -207,7 +204,7 @@ export default function CustomerPurchase() {
             {payment.message} <AiOutlineCheck />
             <Navigate to="/customer/payment_success/withoutLuckDraw" />
           </p>
-        ) : (payment.message == "Please click COMFIRM to process payment") ? (
+        ) : (payment.message == "Please click CONFIRM to process payment") ? (
           <p>{payment.message}</p>
         ) : (
           <p>
@@ -218,41 +215,6 @@ export default function CustomerPurchase() {
         )}
       </div>
 
-      {/* navigate */}
-      {/* {successPayment && (
-        <Navigate to="/customer/payment_success" />
-      )}
-      {failPayment && <Navigate to="/customer/payment_fail" />} */}
-
-      {/* payment code */}
-      {/* <div className="container">
-        <div className="d-flex text-center justify-content-center align-items-center">
-          <Card style={{ width: "25rem" }}>
-            <Card.Body>
-              <Card.Img variant="top" src={paymentQRcode} />
-              <Card.Title> <u> Payment Link: 0x0a65c3660771279FeDE36cc8AD304c3E9AD150e3 </u>  </Card.Title>
-              <Card.Text>
-                <InputGroup className="mb-3">
-                  <Form.Control
-                    placeholder="account number"
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                  />
-                  <Button variant="outline-secondary" id="button-addon2">
-                    <Link to="/customer/payment_status" className="rmLinkStyle">
-                      {" "}
-                      <TiTick />
-                    </Link>
-                  </Button>
-                </InputGroup>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </div>
-      </div>
-      <br />
-
-      <br /> */}
 
       <br />
       <br />

@@ -7,7 +7,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
 import Alert from "react-bootstrap/Alert";
-
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
 import cusShowProCarousel1 from "../images/cusShowProCarousel1.png";
@@ -15,6 +14,7 @@ import cusShowProCarousel2 from "../images/cusShowProCarousel2.png";
 import cusShowProCarousel3 from "../images/cusShowProCarousel3.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
+import SortDropdown from "../Components/SortDropdown";
 //react icon
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineInformationCircle } from "react-icons/hi";
@@ -50,10 +50,22 @@ export default function CustomerShowProduct() {
 
   const dispatch = useDispatch();
 
+  // Sort
+  let [sort, setSort] = useState("");
+  let handleOnSortValue = function (e) {
+    setSort(e);
+  };
+  console.log(sort)
+
+
   useEffect(() => {
     dispatch(showProductThunk());
     dispatch(cusNavInfoThunk());
   }, []);
+
+  useEffect(() => {
+    dispatch(showProductThunk(sort));
+  }, [sort]);
 
   const handleAddCartBtn = (element) => {
     console.log(element);
@@ -79,6 +91,8 @@ export default function CustomerShowProduct() {
     console.log(search);
   };
 
+
+
   return (
     <>
       <div id="cusShowProductContainer">
@@ -96,7 +110,6 @@ export default function CustomerShowProduct() {
             customerName={customernavinfo.name}
             onChangeValue={handleSearchChange}
           />
-
 
           {/* Add cart message */}
           {show && (
@@ -122,7 +135,6 @@ export default function CustomerShowProduct() {
             </div>
           )}
 
-
           {/* Carousel */}
           <Carousel>
             <Carousel.Item interval={1000}>
@@ -130,7 +142,6 @@ export default function CustomerShowProduct() {
                 className="d-block w-100 cusShowProCarousel"
                 src={cusShowProCarousel1}
                 alt="First slide"
-                // style={{ maxHeight: "400px" }}
               />
             </Carousel.Item>
             <Carousel.Item interval={500}>
@@ -138,7 +149,6 @@ export default function CustomerShowProduct() {
                 className="d-block w-100 cusShowProCarousel"
                 src={cusShowProCarousel3}
                 alt="Second slide"
-                // style={{ maxHeight: "400px" }}
               />
             </Carousel.Item>
             <Carousel.Item>
@@ -146,117 +156,119 @@ export default function CustomerShowProduct() {
                 className="d-block w-100 cusShowProCarousel"
                 src={cusShowProCarousel2}
                 alt="Third slide"
-                // style={{ maxHeight: "400px" }}
               />
             </Carousel.Item>
           </Carousel>
           <br />
-
+          
+          {/* Sort dropdown */}
+          <SortDropdown onSortValue={handleOnSortValue} />
 
           {/* Product card */}
           <div className="container" style={{ padding: "5px" }}>
             <div className="row">
               {showproduct &&
                 showproduct
-                .filter((element) => {
-                  if (search === "") {
-                    return element;
-                  } else if (
-                    element.tag.toLowerCase().includes(search.toLowerCase())
-                    ||
-                    element.name.toLowerCase().includes(search.toLowerCase())
-                  ) {
-                    return element;
-                  } else {
-                    return undefined;
-                  }
-                })
-                .map((element, index) => (
-                  <>
-                    <div className="col-sm-6 col-md-4 col-lg-3">
-                      <Card
-                        key={index + "showProductCard"}
-                        className="d-flex align-items-center justify-content-center"
-                      >
-                        <br />
-                        <img
-                          style={{ width: "150px", height: "150px" }}
-                          src={`data:image/png;base64 ,${element.image_data}`}
-                        />
-                        <Card.Body className="text-center">
-                          <Card.Title>{element.name}</Card.Title>
-                          <Card.Text>
-                            <FaEthereum className="FaEthereumIcon" />{" "}
-                            {element.price}
-                          </Card.Text>
+                  .filter((element) => {
+                    if (search === "") {
+                      return element;
+                    } else if (
+                      element.tag
+                        .toLowerCase()
+                        .includes(search.toLowerCase()) ||
+                      element.name.toLowerCase().includes(search.toLowerCase())
+                    ) {
+                      return element;
+                    } else {
+                      return undefined;
+                    }
+                  })
+                  .map((element, index) => (
+                    <>
+                      <div className="col-sm-6 col-md-4 col-lg-3">
+                        <Card
+                          key={index + "showProductCard"}
+                          className="d-flex align-items-center justify-content-center"
+                        >
+                          <br />
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={`data:image/png;base64 ,${element.image_data}`}
+                          />
+                          <Card.Body className="text-center">
+                            <Card.Title>{element.name}</Card.Title>
+                            <Card.Text>
+                              <FaEthereum className="FaEthereumIcon" />{" "}
+                              {element.price}
+                            </Card.Text>
 
-                          <div className="container">
-                            <div className="row">
-                              <div className="col-8">
-                                {element.stock === 0 ? (
-                                  <>
+                            <div className="container">
+                              <div className="row">
+                                <div className="col-8">
+                                  {element.stock === 0 ? (
+                                    <>
+                                      <Alert
+                                        className="text-center alertStockProduct"
+                                        variant="danger"
+                                      >
+                                        Out of stock
+                                      </Alert>
+                                    </>
+                                  ) : element.stock < 10 ? (
                                     <Alert
                                       className="text-center alertStockProduct"
-                                      variant="danger"
+                                      variant="warning"
                                     >
-                                      Out of stock
+                                      Limited quantity
                                     </Alert>
-                                  </>
-                                ) : element.stock < 10 ? (
-                                  <Alert
-                                    className="text-center alertStockProduct"
-                                    variant="warning"
-                                  >
-                                    Limited quantity
-                                  </Alert>
-                                ) : (
-                                  <Alert
-                                    className="text-center alertStockProduct"
-                                    variant="success"
-                                  >
-                                    Large stock
-                                  </Alert>
-                                )}
-                              </div>
+                                  ) : (
+                                    <Alert
+                                      className="text-center alertStockProduct"
+                                      variant="success"
+                                    >
+                                      Large stock
+                                    </Alert>
+                                  )}
+                                </div>
 
-                              <div className="col-4">
-                                {/* Add cart btn */}
-                                {element.stock == 0 ? (
-                                  <Button
-                                    id="showServiceAddCartBtn"
-                                    onClick={() => handleAddCartBtn(element)}
-                                    variant="outline-primary"
-                                    disabled
-                                  >
-                                    <BsCartPlus />
-                                  </Button>
-                                ) : (
-                                  <Button
-                                    id="showServiceAddCartBtn"
-                                    onClick={() => handleAddCartBtn(element)}
-                                    variant="outline-primary"
-                                  >
-                                    <BsCartPlus />
-                                  </Button>
-                                )}
+                                <div className="col-4">
+                                  {/* Add cart btn */}
+                                  {element.stock == 0 ? (
+                                    <Button
+                                      id="showServiceAddCartBtn"
+                                      onClick={() => handleAddCartBtn(element)}
+                                      variant="outline-primary"
+                                      disabled
+                                    >
+                                      <BsCartPlus />
+                                    </Button>
+                                  ) : (
+                                    <Button
+                                      id="showServiceAddCartBtn"
+                                      onClick={() => handleAddCartBtn(element)}
+                                      variant="outline-primary"
+                                    >
+                                      <BsCartPlus />
+                                    </Button>
+                                  )}
 
-                                {/* Descrition Btn */}
-                                <Link
-                                  to={"/customer/show_product/" + element.id}
-                                >
-                                  <Button variant="outline-warning">
-                                    {" "}
-                                    <HiOutlineInformationCircle />
-                                  </Button>
-                                </Link>
+                                  {/* Descrition Btn */}
+                                  <Link
+                                    to={"/customer/show_product/" + element.id}
+                                  >
+                                    <Button variant="outline-warning">
+                                      {" "}
+                                      <HiOutlineInformationCircle />
+                                    </Button>
+                                  </Link>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    </div>
-                  </>
-                ))}
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    </>
+                  ))}
             </div>
           </div>
         </div>

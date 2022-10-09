@@ -30,13 +30,13 @@ function toBase64(arr) {
   );
 }
 
-export const showServiceThunk = () => async (dispatch) => {
+export const showServiceThunk = (sort) => async (dispatch) => {
   const token = localStorage.getItem("TOKENCUS");
   console.log(token);
-  const response = await axios.get(`${process.env.REACT_APP_BACKEND}/customer/show_service`, {
+  const response = await axios.post(`${process.env.REACT_APP_BACKEND}/customer/show_service`, {
     headers: {
       Authorization: `Bearer ${token}`,
-    },
+    }, sort
   });
 
   // change image from Buffer to base64

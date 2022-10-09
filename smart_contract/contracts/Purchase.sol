@@ -62,10 +62,6 @@ contract Purchase {
         return balancesOfCustomer[msg.sender].refund;
     }
 
-    // function moneyBackTransaction()
-
-    //   payable(msg.sender).transfer(moneyPercentage);
-
     function random(uint256 number) private view returns (uint256) {
         return
             uint256(

@@ -28,21 +28,57 @@ class CustomerService {
   }
 
   // Show Product
-  async showProduct(token) {
-    let data = await this.knex
-      .select(
-        "id",
-        "name",
-        "description",
-        "stock",
-        "price",
-        "tag",
-        "type",
-        "image_data"
-      )
-      .from("company_product")
-      .where("type", "Product")
-      .orderBy("id", "desc");
+  async showProduct(token, sort) {
+    let data;
+    if (sort == "lowest") {
+      data = await this.knex
+        .select(
+          "id",
+          "name",
+          "description",
+          "stock",
+          "price",
+          "tag",
+          "type",
+          "image_data"
+        )
+        .from("company_product")
+        .where("type", "Product")
+        .orderBy("price");
+      return data;
+    } else if (sort == "highest") {
+      data = await this.knex
+        .select(
+          "id",
+          "name",
+          "description",
+          "stock",
+          "price",
+          "tag",
+          "type",
+          "image_data"
+        )
+        .from("company_product")
+        .where("type", "Product")
+        .orderBy("price", "desc");
+      return data;
+    } else {
+      data = await this.knex
+        .select(
+          "id",
+          "name",
+          "description",
+          "stock",
+          "price",
+          "tag",
+          "type",
+          "image_data"
+        )
+        .from("company_product")
+        .where("type", "Product")
+        .orderBy("id", "desc");
+      return data;
+    }
     return data;
   }
 
@@ -173,21 +209,55 @@ class CustomerService {
   }
 
   // Show Service
-  async showService(token) {
-    let data = await this.knex
-      .select(
-        "id",
-        "name",
-        "description",
-        "stock",
-        "price",
-        "tag",
-        "type",
-        "image_data"
-      )
-      .from("company_product")
-      .where("type", "Service")
-      .orderBy("id", "desc");
+  async showService(token, sort) {
+    let data;
+
+    if (sort == "lowest") {
+      data = await this.knex
+        .select(
+          "id",
+          "name",
+          "description",
+          "stock",
+          "price",
+          "tag",
+          "type",
+          "image_data"
+        )
+        .from("company_product")
+        .where("type", "Service")
+        .orderBy("price");
+    } else if (sort == "highest") {
+      data = await this.knex
+        .select(
+          "id",
+          "name",
+          "description",
+          "stock",
+          "price",
+          "tag",
+          "type",
+          "image_data"
+        )
+        .from("company_product")
+        .where("type", "Service")
+        .orderBy("price", "desc");
+    } else {
+      data = await this.knex
+        .select(
+          "id",
+          "name",
+          "description",
+          "stock",
+          "price",
+          "tag",
+          "type",
+          "image_data"
+        )
+        .from("company_product")
+        .where("type", "Service")
+        .orderBy("id", "desc");
+    }
     return data;
   }
 

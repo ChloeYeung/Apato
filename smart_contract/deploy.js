@@ -3,7 +3,9 @@ const Web3 = require('web3');
 const { abi, evm } = require('./compile');
 
 const provider = new HDWalletProvider(
+  //replace with your Mnemonic (12-word phrase)
   "sting guitar reject tiger loyal museum bonus fatigue radio fever wool base",
+  // replace with your blockchain APIs (can generate from infura)
   "https://goerli.infura.io/v3/6ba05ddd9f244a5d9d526e8708b084ed"
 );
 
@@ -24,4 +26,4 @@ const deploy = async () => {
 };
 deploy();
 
-//deploy address: 0xD9279a79a78e491D17A574001be204A90062e771
+//current deploy address: 0xD9279a79a78e491D17A574001be204A90062e771
