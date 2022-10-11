@@ -1,6 +1,6 @@
 # E-Commerce with Crypto - Apato :moneybag:
 
-- e-commerce with crypto payment (MetaMask, ETH)
+- E-Commerce with crypto payment (MetaMask, ETH)
 
 - Functionailities
 
@@ -18,14 +18,14 @@
 `cd backend`
 ` npm install bcrypt body-parser cors dotenv express express-fileupload file-type jsonwebtoken jwt-decode knex morgan passport passport-jwt pg socket.io`
 
-### setup frontend login & backend connect 
+### setup frontend .env
 - 3 variables in .env
 `REACT_APP_BACKEND = http://localhost:8000` 
 `REACT_APP_FACEBOOK_ID = (YOUR FACEBOOK ID)`
 `REACT_APP_GOOGLE_ID=(YOUR GOOGLE ID)`
 `HTTPS = true`
 
-### setup for backend DB connect
+### setup for backend .env
 - 4 variables in .env
   `DB_NAME, DB_USERNAME, DB_PASSWORD, JWT_SECRET`
 
