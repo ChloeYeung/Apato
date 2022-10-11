@@ -18,14 +18,14 @@
 `cd backend`
 ` npm install bcrypt body-parser cors dotenv express express-fileupload file-type jsonwebtoken jwt-decode knex morgan passport passport-jwt pg socket.io`
 
-### setup frontend .env
+### Setup frontend .env
 - 3 variables in .env
 `REACT_APP_BACKEND = http://localhost:8000` 
 `REACT_APP_FACEBOOK_ID = (YOUR FACEBOOK ID)`
 `REACT_APP_GOOGLE_ID=(YOUR GOOGLE ID)`
 `HTTPS = true`
 
-### setup for backend .env
+### Setup for backend .env
 - 4 variables in .env
   `DB_NAME, DB_USERNAME, DB_PASSWORD, JWT_SECRET`
 
@@ -33,7 +33,7 @@
   `knex migrate:latest`
   `knex seed:run`
 
-### setup for smart contract connect
+### Setup for smart contract connect
 - change direction to: 
 `/smart_contract/deploy.js'`
 
@@ -119,7 +119,7 @@
 
 
 
-## Example Company side
+## Examples Company side
 
 - Sales History Page
 
