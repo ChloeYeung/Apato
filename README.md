@@ -69,6 +69,11 @@
 
 <img width="776" alt="apato_login" src="https://user-images.githubusercontent.com/106992258/195073141-f99485dd-1af8-4468-8140-e33890df80f4.png">
 
+-Error Page
+
+<img width="655" alt="error" src="https://user-images.githubusercontent.com/106992258/195089062-b80f4c1e-5da2-4038-8666-5d0cabaede64.png">
+
+
 ### Examples Customer side
 
 - Show Service Page
@@ -99,6 +104,14 @@
 - Purchase Page
 
 <img width="1113" alt="purchase" src="https://user-images.githubusercontent.com/106992258/195073837-72810e03-ab63-463c-a598-816eaac8aec1.png">
+
+- Successful Payment Page
+
+<img width="890" alt="success_payment" src="https://user-images.githubusercontent.com/106992258/195089140-ef471f72-4443-434c-8c58-39350eae4f32.png">
+
+- Failure Payment Page
+
+<img width="947" alt="fail_payment" src="https://user-images.githubusercontent.com/106992258/195089230-e95d37d9-2361-4531-a0b7-aea2e5844512.png">
 
 - Order Hisory Page
 
