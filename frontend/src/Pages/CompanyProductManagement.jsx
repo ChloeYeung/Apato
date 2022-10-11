@@ -76,6 +76,7 @@ export default function CompanyProductManagement() {
         companyName={companynavinfo.name}
       />
       <br />
+
       {/* table */}
       <div className="container">
         <Table striped bordered hover className="text-center">

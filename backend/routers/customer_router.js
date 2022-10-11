@@ -13,15 +13,12 @@ class CustomerRouter {
     router.post("/add_cart", this.addCart.bind(this));
     //Show Product Detail
     router.post("/show_product/:productId", this.showProductDetail.bind(this));
-
     //Show Service
     router.post("/show_service", this.showService.bind(this));
     router.post("/add_cart_ser", this.addCartService.bind(this));
-
     //Show Company
     router.get("/show_company", this.showCompany.bind(this));
     router.post("/show_company/:companyId", this.showCompanyDetail.bind(this));
-
     // Cart
     router.get("/show_cart", this.showCart.bind(this));
     router.post("/add_cart_unit", this.addCartUnit.bind(this));
@@ -224,7 +221,6 @@ class CustomerRouter {
   async showOrderHistory(req, res) {
     let token = req.body.token;
     let response = await this.CustomerService.showOrderHistory(token);
-    console.log(response);
     return res.send(response);
   }
 }

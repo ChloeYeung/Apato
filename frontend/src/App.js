@@ -9,14 +9,12 @@ import AboutUs from "./Pages/AboutUs";
 import CompanyLogin from "./Pages/CompanyLogin";
 import CompanyProductManagement from "./Pages/CompanyProductManagement";
 import CompanyProductManagementAdd from "./Pages/CompanyProductManagementAdd";
-import CompanyProductManagementEdit from "./Pages/CompanyProductManagementEdit";
 import CompanySalesSummary from "./Pages/CompanySalesSummary";
 import CompanySalesHistory from "./Pages/CompanySalesHistory";
 import CompanySignup from "./Pages/CompanySignUp";
 import CustomerCart from "./Pages/CustomerCart";
 import CustomerLogin from "./Pages/CustomerLogin";
 import CustomerSignUp from "./Pages/CustomerSignUp";
-import CustomerOrderDetail from "./Pages/CustomerOrderDetail";
 import CustomerOrderHistory from "./Pages/CustomerOrderHistory";
 import CustomerPaymentSuccess from "./Pages/CustomerPaymentSuccess";
 import CustomerPaymentSuccessWithoutLuckyDraw from "./Pages/CustomerPaymentSuccessWithoutLuckyDraw";
@@ -24,11 +22,9 @@ import CustomerPaymentFail from "./Pages/CustomerPaymentFail";
 import CustomerRefundFail from "./Pages/CustomerRefundFail";
 import CustomerPurchase from "./Pages/CustomerPurchase";
 import CustomerShowProduct from "./Pages/CustomerShowProduct";
-import CustomerShowProductPublic from "./Pages/CustomerShowProductPublic";
 import CustomerShowProductDetail from "./Pages/CustomerShowProductDetail";
 import CustomerShowService from "./Pages/CustomerShowService";
 import CustomerShowServiceDetail from "./Pages/CustomerShowServiceDetail";
-import CompanySalesDetail from "./Pages/CompanySalesDetail";
 import CustomerShowAllCompany from "./Pages/CustomerShowAllCompany";
 import CustomerCompanyDetail from "./Pages/CustomerCompanyDetail";
 import CustomerShowProductDetailCom from "./Pages/CustomerShowProductDetailCom";
@@ -60,12 +56,10 @@ function App() {
           path="/company/sales_history"
           element={
             <RequireAuthCom>
-              {" "}
-              <CompanySalesHistory />{" "}
+              <CompanySalesHistory />
             </RequireAuthCom>
           }
         >
-          <Route path=":id" element={<CompanySalesDetail />} />
         </Route>
         <Route
           path="/company/product_management"
@@ -76,7 +70,6 @@ function App() {
           }
         >
           <Route path="add" element={<CompanyProductManagementAdd />} />
-          <Route path="edit" element={<CompanyProductManagementEdit />} />
         </Route>
 
         {/*  Customer */}
@@ -173,7 +166,6 @@ function App() {
             </RequireAuthCus>
           }
         >
-          <Route path=":id" element={<CustomerOrderDetail />} />
         </Route>
 
         {/* Error */}

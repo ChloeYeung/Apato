@@ -1,11 +1,9 @@
 // company/sales_summary
 import React from "react";
-
 //bootstrap
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
-
 //file
 import CompanyNavbar from "../Components/CompanyNavbar";
 import cusNavNoPic from "../images/cusNavNoPic.jpg";
@@ -14,15 +12,13 @@ import {
   showSalesSummaryThunk,
   showSalesSummaryDetailThunk,
 } from "../redux/company_summarySlice";
-
 //react icon
 import { FaEthereum } from "react-icons/fa";
-
 //state
 import { useState, useEffect } from "react";
-
 //redux
 import { useDispatch, useSelector } from "react-redux";
+
 
 export default function CompanySalesSummary() {
   const companynavinfo = useSelector(
@@ -39,8 +35,6 @@ export default function CompanySalesSummary() {
 
   console.log(showsalessummarydetail);
 
-  // console.log(showsalessummary);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,6 +45,7 @@ export default function CompanySalesSummary() {
 
   return (
     <div>
+      
       {/* Navbar */}
       <CompanyNavbar
         companyImage={

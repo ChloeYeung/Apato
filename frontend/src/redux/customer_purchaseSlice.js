@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { showSalesHistoryThunk } from "../redux/company_historySlice";
+import {
+  showSalesSummaryThunk,
+  showSalesSummaryDetailThunk,
+} from "../redux/company_summarySlice";
 
 const initialState = {
   showordertotalpurchase: [],
@@ -30,6 +35,7 @@ export const {
 } = customer_purchaseSlice.actions;
 
 export default customer_purchaseSlice.reducer;
+
 
 export const showOrderTotalPurchaseThunk = () => async (dispatch) => {
   const token = localStorage.getItem("TOKENCUS");

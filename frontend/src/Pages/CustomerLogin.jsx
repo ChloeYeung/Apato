@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 //facebook login
-// import FacebookLogin from "react-facebook-login";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 //decode
 import jwt_decoded from "jwt-decode";
@@ -86,14 +85,15 @@ export default function CustomerLogin() {
                     <Link to="/customer/login" style={{ color: 'black', textDecoration: "none" }}>Login</Link>
                 </Nav>
             </Navbar>
+            <br />
+
             <h1 className='text-center'>Login</h1>
+            <br />
 
             <div className='row d-flex justify-content-center'>
                 {/* Login info box */}
                 <Card className="text-center" style={{ width: '18rem' }}>
-                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
-                        {/* <Card.Title>Card Title</Card.Title> */}
                         <div> <p>Email: </p>
                             <input
                                 type="text"
@@ -144,7 +144,6 @@ export default function CustomerLogin() {
 
                 {/* Register box */}
                 <Card className='text-center' style={{ width: '18rem' }}>
-                    {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
                     <Card.Body>
                         <Card.Title>New to Apato?</Card.Title>
                         <Card.Text>Create an account now</Card.Text>

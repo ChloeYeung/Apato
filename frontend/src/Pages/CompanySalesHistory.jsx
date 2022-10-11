@@ -14,6 +14,7 @@ import {
   showSalesHistoryThunk,
   editSalesHistoryStatusThunk,
 } from "../redux/company_historySlice";
+import salesHistoryEmpty from "../images/salesHistoryEmpty.jpg"
 //state
 import { useState, useEffect } from "react";
 //redux
@@ -76,7 +77,23 @@ export default function CompanySalesHistory() {
         }
         companyName={companynavinfo.name}
       />
-
+      {/* empty showsaleshistory will render */}
+      {Object.entries(showsaleshistory) == "" ? (
+        <>
+          <div className=" ">
+            <div
+              className="d-flex  row  text-center justify-content-center align-items-center"
+              style={{ margin: "150px" }}
+            >
+              <img className="" src={salesHistoryEmpty} id="emptyCartPic" />
+              <h5 className=" ">No history order</h5>
+              <p className=" ">Add more product or discount your price</p>
+            </div>
+          </div>
+        </>
+      ) : (
+        console.log("showsaleshistory is not empty")
+      )}
       {showsaleshistory &&
         Object.entries(showsaleshistory).map((element, index) => {
           return (
@@ -107,9 +124,6 @@ export default function CompanySalesHistory() {
                               onChange={(e) =>
                                 handleSelectComHistoryChange(element[0], e)
                               }
-                              // value={options.find(function (option) {
-                              //   return option.value === element[1][0].status;
-                              // })}
                               placeholder={element[1][0].status}
                             />
                           </div>
@@ -141,7 +155,6 @@ export default function CompanySalesHistory() {
                       <br />
 
                       {/* Product & Service info */}
-
                       {element[1] &&
                         element[1].map((element2) => (
                           <>
@@ -171,6 +184,7 @@ export default function CompanySalesHistory() {
                             <br />
                           </>
                         ))}
+
                       {/* Order Total */}
                       <div className="container">
                         <div className="row">

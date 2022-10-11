@@ -1,5 +1,4 @@
 // /customer/cart/purchase
-
 import React from "react";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
@@ -11,6 +10,13 @@ import {
 } from "../redux/customer_purchaseSlice";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
+import {
+  showSalesSummaryThunk,
+  showSalesSummaryDetailThunk,
+} from "../redux/company_summarySlice";
+import {
+  showSalesHistoryThunk
+} from "../redux/company_historySlice";
 //bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -51,6 +57,7 @@ export default function CustomerPurchase() {
     value: "",
     message: "Please click COMFIRM to process payment",
   });
+  console.log(payment);
 
   let showOrderTotalPurchase = useSelector(
     (state) => state.purchaseReducer.showordertotalpurchase
@@ -104,6 +111,13 @@ export default function CustomerPurchase() {
 
       dispatch(delOrderTotalPurchaseThunk());
 
+      dispatch(showSalesSummaryThunk());
+
+      dispatch(showSalesSummaryDetailThunk());  
+
+      dispatch(showSalesHistoryThunk());
+
+
       setPayment((prevValue) => ({
         ...prevValue,
         message: "Transaction success",
@@ -153,12 +167,8 @@ export default function CustomerPurchase() {
                   id="button-addon2"
                   onClick={handlePaymentAccountSubmit}
                 >
-                  {/* <Link to="/customer/payment_status" className="rmLinkStyle">
-                      {" "} */}
                   Confirm <TiTick />
-                  {/* </Link> */}
                 </Button>
-                {/* </InputGroup> */}
                 <br />
                 <br />
                 <div className="container">
@@ -166,10 +176,9 @@ export default function CustomerPurchase() {
                     <div className="col-2">
                       <input
                         type="checkbox"
-                        // id="chooseLuckyDraw"
                         name="chooseLuckyDraw"
                         value="lucky"
-                        checked={checkedornot}
+                        defaultChecked={checkedornot}
                         onClick={() => toggleChecked(!checkedornot)}
                       />
                     </div>
@@ -186,35 +195,34 @@ export default function CustomerPurchase() {
       <br />
 
       <div className="text-center text-secondary">
-        {(payment.message == "Waiting on transaction success") ? (
-          <p>
-            {" "}
-            {payment.message} <Spinner animation="border" variant="warning" />{" "}
-          </p>
-        ) : (payment.message == "Transaction success" && checkedornot) ? (
-          <p>
-            {" "}
-            {payment.message} <AiOutlineCheck />
+        {payment.message == "Waiting on transaction success" ? (
+          <span>
+            <p>{payment.message}</p>
+            <Spinner animation="border" variant="warning" />
+          </span>
+        ) : payment.message == "Transaction success" && checkedornot ? (
+          <span>
+            <p>{payment.message}</p>
+            <AiOutlineCheck />
             <Navigate to="/customer/payment_success" />
-          </p>
-        ) : (payment.message == "Transaction success") &&
+          </span>
+        ) : payment.message == "Transaction success" &&
           checkedornot == false ? (
-          <p>
-            {" "}
-            {payment.message} <AiOutlineCheck />
+          <span>
+            <p> {payment.message}</p>
+            <AiOutlineCheck />
             <Navigate to="/customer/payment_success/withoutLuckDraw" />
-          </p>
-        ) : (payment.message == "Please click CONFIRM to process payment") ? (
-          <p>{payment.message}</p>
-        ) : (
-          <p>
-            {" "}
-            {payment.message} <MdOutlineSmsFailed />
+          </span>
+        ) : payment.message == "Transaction fail" ? (
+          <span>
+            <p> {payment.message}</p>
+            <MdOutlineSmsFailed />
             <Navigate to="/customer/payment_fail" />
-          </p>
+          </span>
+        ) : (
+          <p>{payment.message}</p>
         )}
       </div>
-
 
       <br />
       <br />

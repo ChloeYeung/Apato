@@ -36,17 +36,14 @@ export default function CustomerShowProduct() {
   const customernavinfo = useSelector(
     (state) => state.navbarCusReducer.customernavinfo
   );
-  // console.log(customernavinfo);
 
   const showproduct = useSelector(
     (state) => state.showProductReducer.showproduct
   );
-  // console.log(showproduct);
 
   const addcartmessage = useSelector(
     (state) => state.showProductReducer.addcartmessage
   );
-  // console.log(addcartmessage);
 
   const dispatch = useDispatch();
 

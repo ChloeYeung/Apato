@@ -28,7 +28,7 @@ export default function CustomerNavbar(props) {
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Container>
           <Navbar.Brand as={Link} to="/">
-            ApaTo
+            Apato
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -86,7 +86,6 @@ export default function CustomerNavbar(props) {
                       aria-label="Search"
                       onChange={handleSearchChange}
                     />
-                    {/* <Button variant="outline-success">Search</Button> */}
                   </Form>
                 </>
               ) : (

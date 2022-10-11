@@ -1,5 +1,7 @@
 import React from "react";
+// File
 import errorImg from "../images/error.png";
+//react reveal
 import RubberBand from "react-reveal/RubberBand";
 
 export default function Error() {

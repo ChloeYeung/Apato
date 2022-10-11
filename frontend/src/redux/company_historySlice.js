@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { showOrderHistory } from "./customer_orderHistory";
 
 const initialState = {
   showsaleshistory: [],
@@ -58,4 +59,5 @@ export const editSalesHistoryStatusThunk = (sendObject) => async (dispatch) => {
   );
 
   dispatch(showSalesHistoryThunk());
+  dispatch(showOrderHistory());
 };

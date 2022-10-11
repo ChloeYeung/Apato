@@ -1,12 +1,10 @@
 import React from "react";
-
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
 import { showProductDetailThunk } from "../redux/customer_showProductDetailSlice";
 import GoBack from "../Components/Back";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-
 //react icon
 import { BsReverseBackspaceReverse } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/ai";
@@ -18,17 +16,16 @@ import { BsBoxSeam } from "react-icons/bs";
 //bootstrap
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
-
 //react-router-dom
 import { Link } from "react-router-dom";
 //state
 import { useState, useEffect } from "react";
 
+
 export default function CustomerShowProductDetail() {
   const showproductdetail = useSelector(
     (state) => state.showProductDetailReducer.showproductdetail
   );
-  console.log(showproductdetail);
 
   const dispatch = useDispatch();
 

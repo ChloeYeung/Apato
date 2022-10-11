@@ -1,30 +1,25 @@
 // /company/product_management/add
-
 //bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import CloseButton from "react-bootstrap/CloseButton";
-
 //react icon
 import { TiTickOutline } from "react-icons/ti";
 import { TiTick } from "react-icons/ti";
-
 //file
 import { showpmThunk, addpmThunk } from "../redux/company_pmSlice";
-
 //state
 import { useState, useEffect } from "react";
-
 //redux
 import { useDispatch, useSelector } from "react-redux";
+//axios
 import axios from "axios";
-
 //jquery
 import $ from "jquery";
 //react select
-import chroma from 'chroma-js';
-import Select, { StylesConfig } from 'react-select';
+import chroma from "chroma-js";
+import Select, { StylesConfig } from "react-select";
 
 export default function CompanyProductManagementAdd() {
   const dispatch = useDispatch();
@@ -56,7 +51,6 @@ export default function CompanyProductManagementAdd() {
     document.getElementById("pmAddHideCard").style.visibility = "hidden";
   };
 
-
   return (
     <div id="pmAddHideCard">
       <div className="d-flex justify-content-center">
@@ -66,7 +60,7 @@ export default function CompanyProductManagementAdd() {
               <Card.Title>
                 <div className="container">
                   <div className="row">
-                  <div className="col-4"> </div>
+                    <div className="col-4"> </div>
                     <div className="col-4"> Add Product</div>
                     <div className="col-3"> </div>
                     <div className="col-1">
@@ -140,7 +134,6 @@ export default function CompanyProductManagementAdd() {
                 />
               </div>
 
-          
               <br />
 
               <div className="row">

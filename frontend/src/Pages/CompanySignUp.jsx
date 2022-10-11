@@ -1,23 +1,18 @@
 // company/signup
 import React, { useState, useEffect } from "react";
-
 //Bootstrap
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
 //react icon
 import { TiTickOutline } from "react-icons/ti";
-
 //react-router-dom
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 //redux
 import { useDispatch, useSelector } from "react-redux";
-
 //file
 import { signupComThunk } from "../redux/company_authSlice";
 
@@ -52,7 +47,6 @@ export default function CompanySignUp() {
 
   return (
     <div>
-
       {/* sign up navbar */}
       <Navbar bg="light" variant="light">
         <Navbar.Brand as={Link} to="/">Apato</Navbar.Brand>
@@ -61,7 +55,10 @@ export default function CompanySignUp() {
           <Link to="/company/login" style={{ color: 'black', textDecoration: "none" }}>Login</Link>
         </Nav>
       </Navbar>
+      <br />
+
       <h1 className='text-center'>SignUp</h1>
+      <br />
 
       {/* sign up card */}
       <div className='d-flex justify-content-center'>
@@ -119,21 +116,12 @@ export default function CompanySignUp() {
             </div>
             <br />
 
-            {/* <Form.Group controlId="formFileSm" className="mb-3">
-              <Form.Label>Company image</Form.Label>
-              <Form.Control type="file" />
-
-            </Form.Group> */}
 
             <div className='row'>
               <label >Image: </label>
               <input type="file" accept='image/png, image/gif, image/jpeg' id="signUpFormImageCom" name="image" />
             </div>
 
-            {/* <div className='row'>
-                        <label >Image: </label>
-                        <input type="file" />
-                    </div> */}
             <br />
             <Button onClick={() =>
               dispatch(signupComThunk(credential)).then(() => navigate("/company/login"))

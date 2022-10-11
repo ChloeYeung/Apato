@@ -1,5 +1,4 @@
 // /customer/payment_status
-
 import React from "react";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
@@ -60,16 +59,6 @@ export default function CustomerPayment() {
           <HeadShake>
             <img src={paymentStatusSuccess} className="paymentStatusImg" />
           </HeadShake>
-
-          {/* condition 2 - clicked the img & drawing */}
-          {/* <img
-            src={paymentStatusSuccess}
-            className="paymentStatusImg"
-            id="paymentSuccessImg"
-          
-          /> */}
-          {/* condition 3 - after lucky draw */}
-          {/* <img src={paymentStatusSuccess} className="paymentStatusImg" /> */}
         </div>
         <br />
 

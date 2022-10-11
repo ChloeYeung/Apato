@@ -15,7 +15,6 @@ import cusShowSerCarousel3 from "../images/cusShowSerCarousel3.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 import SortDropdown from "../Components/SortDropdown";
-
 //react icon
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineInformationCircle } from "react-icons/hi";
@@ -32,6 +31,7 @@ import {
 } from "../redux/customer_showServiceSlice";
 //react-router-dom
 import { Link, NavLink } from "react-router-dom";
+
 
 export default function CustomerShowService() {
   const customernavinfo = useSelector(
@@ -56,7 +56,6 @@ export default function CustomerShowService() {
   let handleOnSortValue = function (e) {
     setSort(e);
   };
-  console.log(sort);
 
   useEffect(() => {
     dispatch(showServiceThunk());
@@ -96,6 +95,7 @@ export default function CustomerShowService() {
     <>
       <div id="cusShowServiceContainer">
         <div id="cusShowServiceBottomLayer">
+          
           {/* Customer Navbar */}
           <CustomerNavbar
             showSearch={true}

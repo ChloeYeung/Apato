@@ -1,5 +1,4 @@
 // /customer/payment_status
-
 import React from "react";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
@@ -24,6 +23,7 @@ import web3 from "../smart_contract/web3";
 import purchase from "../smart_contract/purchase";
 //bootstrap
 import Spinner from "react-bootstrap/Spinner";
+
 
 export default function CustomerPayment() {
   const [payment, setPayment] = useState({
@@ -147,16 +147,6 @@ export default function CustomerPayment() {
               />
             </div>
           )}
-
-          {/* condition 2 - clicked the img & drawing */}
-          {/* <img
-            src={paymentStatusSuccess}
-            className="paymentStatusImg"
-            id="paymentSuccessImg"
-          
-          /> */}
-          {/* condition 3 - after lucky draw */}
-          {/* <img src={paymentStatusSuccess} className="paymentStatusImg" /> */}
         </div>
         <br />
 

@@ -19,7 +19,6 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Card from "react-bootstrap/Card";
 import Toast from "react-bootstrap/Toast";
-
 //react icon
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrConsole, GrFormAdd } from "react-icons/gr";
@@ -90,7 +89,6 @@ export default function CustomerCart() {
     <div>
       <>
         {/* navbar */}
-        {/* <CustomerNavbar /> */}
         <CustomerNavbar
           customerImage={
             customernavinfo.image_data === null
@@ -119,7 +117,6 @@ export default function CustomerCart() {
         )}
 
         {/* product cart */}
-
         {showcart &&
           showcart.map((element1, index) => (
             <>
@@ -145,7 +142,6 @@ export default function CustomerCart() {
                         <div className="col" style={{ padding: "15px" }}>
                           {/* container - base info */}
                           <Card.Text>
-                            {/* <p>{element2.image_data}</p> */}
                             <h4>{element2.product_name}</h4>
                             <p>
                               <FaEthereum className="FaEthereumIcon" />{" "}

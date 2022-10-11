@@ -2,14 +2,12 @@
 //bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 //react icon
 import { BsShop } from "react-icons/bs";
-
 //state
 import React, { useState, useEffect } from "react";
 //redux
@@ -21,6 +19,7 @@ import {
 import { showCompanyThunk } from "../redux/customer_showCompanySlice";
 //react-router-dom
 import { Link, NavLink, useParams } from "react-router-dom";
+
 
 export default function CustomerShowAllCompany() {
   const customernavinfo = useSelector(
@@ -55,6 +54,7 @@ export default function CustomerShowAllCompany() {
     <>
       <div id="cusShowProductContainer">
         <div id="cusShowProductBottomLayer">
+          
           {/* Customer Navbar */}
           <CustomerNavbar
             showSearch={true}

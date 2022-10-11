@@ -29,57 +29,62 @@ class CustomerService {
 
   // Show Product
   async showProduct(token, sort) {
-    let data;
-    if (sort == "lowest") {
-      data = await this.knex
-        .select(
-          "id",
-          "name",
-          "description",
-          "stock",
-          "price",
-          "tag",
-          "type",
-          "image_data"
-        )
-        .from("company_product")
-        .where("type", "Product")
-        .orderBy("price");
+    try {
+      let data;
+      if (sort == "lowest") {
+        data = await this.knex
+          .select(
+            "id",
+            "name",
+            "description",
+            "stock",
+            "price",
+            "tag",
+            "type",
+            "image_data"
+          )
+          .from("company_product")
+          .where("type", "Product")
+          .orderBy("price");
+        return data;
+      } else if (sort == "highest") {
+        data = await this.knex
+          .select(
+            "id",
+            "name",
+            "description",
+            "stock",
+            "price",
+            "tag",
+            "type",
+            "image_data"
+          )
+          .from("company_product")
+          .where("type", "Product")
+          .orderBy("price", "desc");
+        return data;
+      } else {
+        data = await this.knex
+          .select(
+            "id",
+            "name",
+            "description",
+            "stock",
+            "price",
+            "tag",
+            "type",
+            "image_data"
+          )
+          .from("company_product")
+          .where("type", "Product")
+          .orderBy("id", "desc");
+        return data;
+      }
       return data;
-    } else if (sort == "highest") {
-      data = await this.knex
-        .select(
-          "id",
-          "name",
-          "description",
-          "stock",
-          "price",
-          "tag",
-          "type",
-          "image_data"
-        )
-        .from("company_product")
-        .where("type", "Product")
-        .orderBy("price", "desc");
-      return data;
-    } else {
-      data = await this.knex
-        .select(
-          "id",
-          "name",
-          "description",
-          "stock",
-          "price",
-          "tag",
-          "type",
-          "image_data"
-        )
-        .from("company_product")
-        .where("type", "Product")
-        .orderBy("id", "desc");
-      return data;
+    } catch (error) {
+      console.log("Error Service customer showProduct ");
+      console.log(error);
     }
-    return data;
   }
 
   async addCart(
@@ -149,7 +154,6 @@ class CustomerService {
       } else if (verify) {
         // 3. token is verified and selected product dose not exit
         console.log("in Service add cart -> have token, no exit product");
-        // let decoded = this.jwt_decode(token);
         // token = token.replace("Bearer ", "");
         let product_image = await this.knex
           .select("image_data")
@@ -210,55 +214,59 @@ class CustomerService {
 
   // Show Service
   async showService(token, sort) {
-    let data;
-
-    if (sort == "lowest") {
-      data = await this.knex
-        .select(
-          "id",
-          "name",
-          "description",
-          "stock",
-          "price",
-          "tag",
-          "type",
-          "image_data"
-        )
-        .from("company_product")
-        .where("type", "Service")
-        .orderBy("price");
-    } else if (sort == "highest") {
-      data = await this.knex
-        .select(
-          "id",
-          "name",
-          "description",
-          "stock",
-          "price",
-          "tag",
-          "type",
-          "image_data"
-        )
-        .from("company_product")
-        .where("type", "Service")
-        .orderBy("price", "desc");
-    } else {
-      data = await this.knex
-        .select(
-          "id",
-          "name",
-          "description",
-          "stock",
-          "price",
-          "tag",
-          "type",
-          "image_data"
-        )
-        .from("company_product")
-        .where("type", "Service")
-        .orderBy("id", "desc");
+    try {
+      let data;
+      if (sort == "lowest") {
+        data = await this.knex
+          .select(
+            "id",
+            "name",
+            "description",
+            "stock",
+            "price",
+            "tag",
+            "type",
+            "image_data"
+          )
+          .from("company_product")
+          .where("type", "Service")
+          .orderBy("price");
+      } else if (sort == "highest") {
+        data = await this.knex
+          .select(
+            "id",
+            "name",
+            "description",
+            "stock",
+            "price",
+            "tag",
+            "type",
+            "image_data"
+          )
+          .from("company_product")
+          .where("type", "Service")
+          .orderBy("price", "desc");
+      } else {
+        data = await this.knex
+          .select(
+            "id",
+            "name",
+            "description",
+            "stock",
+            "price",
+            "tag",
+            "type",
+            "image_data"
+          )
+          .from("company_product")
+          .where("type", "Service")
+          .orderBy("id", "desc");
+      }
+      return data;
+    } catch (error) {
+      console.log("Error Service customer showService ");
+      console.log(error);
     }
-    return data;
   }
 
   async addCartService(
@@ -330,8 +338,6 @@ class CustomerService {
       } else if (verify) {
         // 3. token is verified and selected product dose not exit
         console.log("in Service add cart -> have token, no exit product");
-        // let decoded = this.jwt_decode(token);
-        // token = token.replace("Bearer ", "");
         let service_image = await this.knex
           .select("image_data")
           .from("company_product")
@@ -372,7 +378,6 @@ class CustomerService {
   async showCompany() {
     try {
       let data = await this.knex("company_users").select("*").orderBy("name");
-      console.log(data);
       return data;
     } catch (error) {
       console.log("Error Service customer showCompany");
@@ -422,7 +427,6 @@ class CustomerService {
   //Cart
   async showCart(token) {
     let decoded = this.jwt_decode(token);
-    // let data = await this.knex.select("id", "customer_id", "product_id", "unit", "company_id", "name", "description", "price", "tag", "stock", "type", "image_name", "image_data").from('customer_cart').where('customer_id', `${decoded.id}`).orderBy('id', 'desc');
     let data = await this.knex("customer_cart")
       .select(
         "customer_cart.id",
@@ -447,7 +451,6 @@ class CustomerService {
       )
       .where("customer_cart.customer_id", `${decoded.id}`)
       .orderBy("customer_cart.id", "desc");
-    console.log(data);
     return data;
   }
 
@@ -548,9 +551,6 @@ class CustomerService {
         let haveProduct = await this.knex("customer_cart").where({
           id: decoded.id,
         });
-        // .first();
-        console.log("have Product");
-        console.log(haveProduct);
 
         if (!haveProduct) {
           return "0";
@@ -569,9 +569,9 @@ class CustomerService {
           (previousValue, currentValue) => previousValue + currentValue,
           0
         );
-        console.log("++++++++");
+
         console.log("orderTotal: " + orderTotal);
-        console.log("++++++++");
+
         return orderTotal;
       } else {
         res.sendStatus(401);
@@ -586,7 +586,6 @@ class CustomerService {
   async showOrderTotalPurchase(token) {
     try {
       let decoded = this.jwt_decode(token);
-      console.log(decoded);
       token = token.replace("Bearer ", "");
       let verify = this.jwt.verify(token, process.env.JWT_SECRET);
       console.log(verify);
@@ -594,7 +593,6 @@ class CustomerService {
         let haveProduct = await this.knex("customer_cart").where({
           id: decoded.id,
         });
-        // .first();
 
         if (!haveProduct) {
           return "0";
@@ -742,9 +740,6 @@ class CustomerService {
           data[i].image_data = dataImage[i].image_data;
         }
 
-        console.log("+++++++++++++==========");
-        console.log(data);
-        console.log("+++++++++++++==========");
         return data;
       } else {
         res.sendStatus(401);

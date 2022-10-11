@@ -1,5 +1,4 @@
 const express = require("express");
-// const { default: CompanySalesHistory } = require("../../frontend/src/Pages/CompanySalesHistory");
 
 class CompanyRouter {
   constructor(CompanyService) {

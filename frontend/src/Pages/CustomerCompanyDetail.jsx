@@ -1,12 +1,10 @@
 import React from "react";
-
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
 import { showCompanyDetailThunk } from "../redux/customer_showCompanyDetailSlice";
 import { addCartThunk } from "../redux/customer_showProductSlice";
 import GoBack from "../Components/Back";
 import comNavNoPic from "../images/comNavNoPic.jpg";
-
 //redux
 import { useDispatch, useSelector } from "react-redux";
 //react icon
@@ -19,17 +17,16 @@ import { BsCartPlus } from "react-icons/bs";
 import { FiAlertCircle } from "react-icons/fi";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { BiCheckCircle } from "react-icons/bi";
-
 //bootstrap
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import Card from "react-bootstrap/Card";
 import Toast from "react-bootstrap/Toast";
-
 //react-router-dom
 import { Link } from "react-router-dom";
 //state
 import { useState, useEffect } from "react";
+
 
 export default function CustomerCompanyDetail() {
   const showcompanydetail = useSelector(

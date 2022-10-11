@@ -4,7 +4,6 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 export default function SortDropdown(props) {
   let handleSortChange = function (e) {
-    console.log(e.target.value);
     props.onSortValue(e.target.value);
   };
   return (

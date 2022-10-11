@@ -1,5 +1,4 @@
 //customer/order_history
-
 import React from "react";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";

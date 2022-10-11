@@ -1,12 +1,10 @@
 import React from "react";
-
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
 import { showProductDetailThunk } from "../redux/customer_showProductDetailSlice";
 import GoBack from "../Components/Back";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-
 //react icon
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
@@ -17,7 +15,6 @@ import { BsBoxSeam } from "react-icons/bs";
 //bootstrap
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
-
 //react-router-dom
 import { Link } from "react-router-dom";
 //state
@@ -27,7 +24,6 @@ export default function CustomerShowProductDetailCom() {
   const showproductdetail = useSelector(
     (state) => state.showProductDetailReducer.showproductdetail
   );
-  console.log(showproductdetail);
 
   const dispatch = useDispatch();
 
@@ -46,11 +42,9 @@ export default function CustomerShowProductDetailCom() {
         <div className="container">
           <div className="row">
             <div className="col-11">
-
               <Link className="rmLinkStyleClose" to="/">
-              <AiOutlineHome /> 
+                <AiOutlineHome />
               </Link>
-              
               &nbsp; <AiOutlineRight />
               &nbsp;
               <Link className="rmLinkStyleClose" to="/customer/show_company">
@@ -65,12 +59,12 @@ export default function CustomerShowProductDetailCom() {
               </Link>
               &nbsp;
               <AiOutlineRight /> &nbsp;
-
               <Link
                 className="rmLinkStyleClose"
                 to={
                   "/customer/show_company/" +
-                  showproductdetail.company_id + "/" +
+                  showproductdetail.company_id +
+                  "/" +
                   showproductdetail.id
                 }
               >
@@ -84,6 +78,8 @@ export default function CustomerShowProductDetailCom() {
         </div>
       </Alert>
 
+
+      {/* Information */}
       <div className="container">
         <div className="text-center">
           <img
@@ -91,7 +87,6 @@ export default function CustomerShowProductDetailCom() {
             className="showProductDetailImg"
           />
         </div>
-
         <br />
         <br />
         <span>
@@ -100,10 +95,8 @@ export default function CustomerShowProductDetailCom() {
             <FaEthereum className="FaEthereumIcon" /> {showproductdetail.price}{" "}
           </h5>
         </span>
-
         <br />
         <hr />
-
         <div className="containerComNameAndImage">
           <h5>{showproductdetail.company_name}</h5>
           <img
@@ -111,8 +104,9 @@ export default function CustomerShowProductDetailCom() {
             className="showProductDetailComImg"
           />
         </div>
-
         <br />
+
+        {/* Detail Information */}
         <p>
           <TbInfoCircle />
           &nbsp; Description: {showproductdetail.description}
@@ -125,7 +119,6 @@ export default function CustomerShowProductDetailCom() {
           <BsBoxSeam />
           &nbsp; Stock: {showproductdetail.stock}
         </p>
-
         <br />
       </div>
     </div>

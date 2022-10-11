@@ -1,5 +1,14 @@
-# Apato 
-- e-commerce with cypto payment (MetaMask, ETH)
+# E-Commerce with Crypto - Apato :moneybag:
+
+- e-commerce with crypto payment (MetaMask, ETH)
+
+- Functionailities
+
+:cloud: Auth: Basic Login, Facebook Login, Google Login, Logout, Signup
+
+:cloud: Customer Side: Show Product/Service/Company, Sort by price and latest, Search Bar, Purchase with test Ethereum, Lucky Draw, Order History
+
+:cloud: Company Side: Product Management, Order History, Order Summary
 
 ### Install frontend Packages
 `cd frontend`
@@ -40,3 +49,8 @@
 
 ### Start the App:
 `npm start`
+
+### Login Account
+- Company: :bust_in_silhouette: ac: com1@com1 :key: pw:com1
+- Customer: :bust_in_silhouette: ac: cus1@cus1 :key: pw:cus1
+- (more accounts please find on /backend/seeds)

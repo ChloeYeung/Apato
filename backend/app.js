@@ -47,9 +47,9 @@ app.post("/company/signup", async (req, res) => {
   let query = await knex("company_users").where({ email }).first();
   const hashed = await bcrypt.hash(password, 10);
   if (query == undefined) {
-    let data = await knex.select("id").from("company_users").orderBy("id");
+    // let data = await knex.select("id").from("company_users").orderBy("id");
     await knex("company_users").insert({
-      id: `${data.length + 1}`,
+      // id: `${data.length + 1}`,
       email: email,
       password: hashed,
       name: name,
@@ -92,9 +92,9 @@ app.post("/customer/signup", async (req, res) => {
   let query = await knex("customer_users").where({ email }).first();
   const hashed = await bcrypt.hash(password, 10);
   if (query == undefined) {
-    let data = await knex.select("id").from("customer_users").orderBy("id");
+    // let data = await knex.select("id").from("customer_users").orderBy("id");
     await knex("customer_users").insert({
-      id: `${data.length + 1}`,
+      // id: `${data.length + 1}`,
       email: email,
       password: hashed,
       name: name,
@@ -159,11 +159,11 @@ app.post("/auth/facebook", async (req, res) => {
     .first();
 
   if (!user) {
-    let data = await knex.select("id").from("customer_users").orderBy("id");
+    // let data = await knex.select("id").from("customer_users").orderBy("id");
 
     let id = await knex("customer_users")
       .insert({
-        id: data.length + 1,
+        // id: data.length + 1,
         facebook_id: userInfo.id,
         name: userInfo.name,
         email: userInfo.email,
@@ -200,11 +200,11 @@ app.post("/auth/google", async (req, res) => {
     .first();
 
   if (!user) {
-    let data = await knex.select("id").from("customer_users").orderBy("id");
+    // let data = await knex.select("id").from("customer_users").orderBy("id");
 
     let id = await knex("customer_users")
       .insert({
-        id: data.length + 1,
+        // id: data.length + 1,
         google_id: userInfo.sub,
         name: userInfo.name,
         email: userInfo.email,

@@ -1,24 +1,18 @@
 // customer/signup
 import React, { useState, useEffect } from "react";
-
 //Bootstrap
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
 //react icon
 import { TiTickOutline } from "react-icons/ti";
-
-
 //react-router-dom
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 //redux
 import { useDispatch, useSelector } from "react-redux";
-
 //file
 import { signupCusThunk } from "../redux/customer_authSlice";
 
@@ -62,7 +56,10 @@ export default function CustomerSignUp() {
           <Link to="/customer/login" style={{ color: 'black', textDecoration: "none" }}>Login</Link>
         </Nav>
       </Navbar>
+      <br />
+
       <h1 className='text-center'>SignUp</h1>
+      <br />
 
       {/* sign up card */}
       <div className='d-flex justify-content-center'>

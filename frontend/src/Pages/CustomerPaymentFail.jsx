@@ -1,5 +1,4 @@
 // /customer/payment_status
-
 import React from 'react'
 //file
 import CustomerNavbar from '../Components/CustomerNavbar';
@@ -31,20 +30,6 @@ export default function CustomerPayment() {
 
       {/* Success Fail */}
       <br />
-
-      {/* <div>
-        <h3 className='text-center'> Transaction Success </h3>
-
-        <div className='d-flex align-items-center justify-content-center'>
-          <img src={paymentStatusSuccess} className="paymentStatusImg" />
-        </div>
-        <br />
-        <p className='text-center'>Thank you for your patronage, {" "}
-          <Link to="/customer/order_history" className='paymentRedirect'>
-            click here
-          </Link>
-          {" "} to view your order history.</p>
-      </div> */}
 
       <div>
         <h3 className='text-center'> Transaction Failed </h3>
