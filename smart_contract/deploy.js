@@ -2,8 +2,8 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 const Web3 = require("web3");
 const { abi, evm } = require("./compile");
 const provider = new HDWalletProvider(
-  //replace with your Mnemonic (12-word phrase)
-  "sting guitar reject tiger fish museum bonus fatigue radio fever wool nut",
+  //replace with your Mnemonic (12-words phrase)
+  "magic guitar reject tiger fish museum plus fatigue radio fever wool nut",
   // replace with your blockchain APIs (can generate from infura)
   "https://goerli.infura.io/v3/6ba05ddd9f2449d526e8708b04ed"
 );

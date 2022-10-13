@@ -111,7 +111,7 @@ export default function CompanyLogin() {
         {/* Register box */}
         <Card className="text-center" style={{ width: "18rem" }}>
           <Card.Body>
-            <Card.Title>New to Bripto?</Card.Title>
+            <Card.Title>New to Apato?</Card.Title>
             <Card.Text>Create an account now</Card.Text>
             <br />
 

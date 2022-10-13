@@ -56,6 +56,7 @@ export const addCartThunk = (add) => async (dispatch) => {
     add, token
   });
   let tmp = [];
+  console.log(response);
   tmp.push(response.data)
   dispatch(addCartMessage(tmp[0]));
 };

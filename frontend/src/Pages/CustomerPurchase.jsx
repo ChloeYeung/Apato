@@ -147,7 +147,7 @@ export default function CustomerPurchase() {
 
       <div className="text-center">
         <h1 className="purchasePageFont">Payment</h1>
-        <p>Check your order total and check CONFIRM to process payment</p>
+        <p>Check your order total and click CONFIRM to process payment</p>
       </div>
 
       {/* summary card */}

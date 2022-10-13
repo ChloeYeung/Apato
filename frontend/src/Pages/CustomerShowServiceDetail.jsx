@@ -102,7 +102,8 @@ export default function CustomerShowProductDetail() {
 
         <br />
         <p>
-          <TbInfoCircle /> &nbsp; Description: {showproductdetail.description}
+          <TbInfoCircle /> 
+          &nbsp; Description: {showproductdetail.description}
         </p>
         <p>
           <BiCategoryAlt />
