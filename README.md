@@ -1,5 +1,7 @@
 # E-Commerce with Crypto - Apato :moneybag:
 
+- YouTube video that explaining the application: :point_right: https://www.youtube.com/watch?v=41yJwrfiR50
+
 - E-Commerce with crypto payment (MetaMask, ETH)
 
 - Functionailities
