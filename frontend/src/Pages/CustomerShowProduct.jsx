@@ -15,6 +15,10 @@ import cusShowProCarousel3 from "../images/cusShowProCarousel3.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 import SortDropdown from "../Components/SortDropdown";
+import snowWhite from "../images/database/snowWhite.jpg";
+import joker from "../images/database/joker.jpg";
+import Strawberry from "../images/database/Strawberry.jpg";
+import Apple from "../images/database/Apple.jpg";
 //react icon
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineInformationCircle } from "react-icons/hi";
@@ -52,8 +56,7 @@ export default function CustomerShowProduct() {
   let handleOnSortValue = function (e) {
     setSort(e);
   };
-  console.log(sort)
-
+  console.log(sort);
 
   useEffect(() => {
     dispatch(showProductThunk());
@@ -88,8 +91,6 @@ export default function CustomerShowProduct() {
     console.log(search);
   };
 
-
-
   return (
     <>
       <div id="cusShowProductContainer">
@@ -98,6 +99,10 @@ export default function CustomerShowProduct() {
           <CustomerNavbar
             showSearch={true}
             customerImage={
+              customernavinfo.name === "Snow White"
+              ? snowWhite : 
+              customernavinfo.name === "Joker"
+              ? joker : 
               token === null
                 ? comNavNoPic
                 : customernavinfo.image_data === null
@@ -157,7 +162,7 @@ export default function CustomerShowProduct() {
             </Carousel.Item>
           </Carousel>
           <br />
-          
+
           {/* Sort dropdown */}
           <SortDropdown onSortValue={handleOnSortValue} />
 
@@ -188,10 +193,26 @@ export default function CustomerShowProduct() {
                           className="d-flex align-items-center justify-content-center"
                         >
                           <br />
-                          <img
+                          {element.name === "Apple" ? (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={Apple}
+                            />
+                          ) : element.name === "Strawberry" ? (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={Strawberry}
+                            />
+                          ) : (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={`data:image/png;base64 ,${element.image_data}`}
+                            />
+                          )}
+                          {/* <img
                             style={{ width: "150px", height: "150px" }}
                             src={`data:image/png;base64 ,${element.image_data}`}
-                          />
+                          /> */}
                           <Card.Body className="text-center">
                             <Card.Title>{element.name}</Card.Title>
                             <Card.Text>

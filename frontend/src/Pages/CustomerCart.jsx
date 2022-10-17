@@ -13,6 +13,9 @@ import {
   showOrderTotalThunk,
 } from "../redux/customer_cartSlice";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
+import snowWhite from "../images/database/snowWhite.jpg"
+import joker from "../images/database/joker.jpg"
+
 //bootstrap
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -45,10 +48,10 @@ export default function CustomerCart() {
     (state) => state.navbarCusReducer.customernavinfo
   );
 
-  console.log(showcart);
-  console.log(showmessagechart);
+  // console.log(showcart);
+  // console.log(showmessagechart);
   console.log(customernavinfo);
-  console.log(showordertotal);
+  // console.log(showordertotal);
 
   const dispatch = useDispatch();
 
@@ -91,9 +94,14 @@ export default function CustomerCart() {
         {/* navbar */}
         <CustomerNavbar
           customerImage={
+            customernavinfo.name === "Snow White"
+              ? snowWhite : 
+              customernavinfo.name === "Joker"
+              ? joker : 
             customernavinfo.image_data === null
               ? comNavNoPic
-              : `data:image/png;base64 ,${customernavinfo.image_data}`
+              : 
+              `data:image/png;base64 ,${customernavinfo.image_data}`
           }
           customerName={customernavinfo.name}
         />

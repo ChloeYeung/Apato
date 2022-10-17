@@ -14,9 +14,9 @@ import {
   showSalesSummaryThunk,
   showSalesSummaryDetailThunk,
 } from "../redux/company_summarySlice";
-import {
-  showSalesHistoryThunk
-} from "../redux/company_historySlice";
+import { showSalesHistoryThunk } from "../redux/company_historySlice";
+import snowWhite from "../images/database/snowWhite.jpg"
+import joker from "../images/database/joker.jpg"
 //bootstrap
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -113,10 +113,9 @@ export default function CustomerPurchase() {
 
       dispatch(showSalesSummaryThunk());
 
-      dispatch(showSalesSummaryDetailThunk());  
+      dispatch(showSalesSummaryDetailThunk());
 
       dispatch(showSalesHistoryThunk());
-
 
       setPayment((prevValue) => ({
         ...prevValue,
@@ -138,7 +137,11 @@ export default function CustomerPurchase() {
       {/* navbar */}
       <CustomerNavbar
         customerImage={
-          customernavinfo.image_data === null
+          customernavinfo.name === "Snow White"
+            ? snowWhite
+            : customernavinfo.name === "Joker"
+            ? joker
+            : customernavinfo.image_data === null
             ? comNavNoPic
             : `data:image/png;base64 ,${customernavinfo.image_data}`
         }

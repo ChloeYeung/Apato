@@ -15,6 +15,8 @@ import cusShowSerCarousel3 from "../images/cusShowSerCarousel3.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 import SortDropdown from "../Components/SortDropdown";
+import snowWhite from "../images/database/snowWhite.jpg"
+import joker from "../images/database/joker.jpg"
 //react icon
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineInformationCircle } from "react-icons/hi";
@@ -100,6 +102,10 @@ export default function CustomerShowService() {
           <CustomerNavbar
             showSearch={true}
             customerImage={
+              customernavinfo.name === "Snow White"
+              ? snowWhite : 
+              customernavinfo.name === "Joker"
+              ? joker : 
               token === null
                 ? comNavNoPic
                 : customernavinfo.image_data === null

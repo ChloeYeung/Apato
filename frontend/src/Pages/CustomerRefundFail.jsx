@@ -6,6 +6,8 @@ import paymentStatusSuccess from "../images/paymentStatusSuccess.png";
 import refundStatusFail from "../images/cusRefundStatusFail.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
+import snowWhite from "../images/database/snowWhite.jpg"
+import joker from "../images/database/joker.jpg"
 //react-router-dom
 import { Link } from "react-router-dom";
 //state
@@ -28,6 +30,10 @@ export default function CustomerPayment() {
       {/* navbar */}
       <CustomerNavbar
         customerImage={
+          customernavinfo.name === "Snow White"
+          ? snowWhite : 
+          customernavinfo.name === "Joker"
+          ? joker : 
           customernavinfo.image_data === null
             ? comNavNoPic
             : `data:image/png;base64 ,${customernavinfo.image_data}`

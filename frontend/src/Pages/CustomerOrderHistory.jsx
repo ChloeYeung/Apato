@@ -6,6 +6,8 @@ import logo from "../logo.svg";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import { showOrderHistoryThunk } from "../redux/customer_orderHistory";
+import snowWhite from "../images/database/snowWhite.jpg"
+import joker from "../images/database/joker.jpg"
 //react icon
 import { FaEthereum } from "react-icons/fa";
 //bootstrap
@@ -49,6 +51,10 @@ export default function CustomerOrderHistory() {
       {/* Navbar */}
       <CustomerNavbar
         customerImage={
+          customernavinfo.name === "Snow White"
+          ? snowWhite : 
+          customernavinfo.name === "Joker"
+          ? joker : 
           customernavinfo.image_data === null
             ? comNavNoPic
             : `data:image/png;base64 ,${customernavinfo.image_data}`

@@ -5,6 +5,8 @@ import { showCompanyDetailThunk } from "../redux/customer_showCompanyDetailSlice
 import { addCartThunk } from "../redux/customer_showProductSlice";
 import GoBack from "../Components/Back";
 import comNavNoPic from "../images/comNavNoPic.jpg";
+import snowWhite from "../images/database/snowWhite.jpg"
+import joker from "../images/database/joker.jpg"
 //redux
 import { useDispatch, useSelector } from "react-redux";
 //react icon
@@ -80,6 +82,10 @@ export default function CustomerCompanyDetail() {
       <CustomerNavbar
         showSearch={true}
         customerImage={
+          customernavinfo.name === "Snow White"
+          ? snowWhite : 
+          customernavinfo.name === "Joker"
+          ? joker : 
           token === null
             ? comNavNoPic
             : customernavinfo.image_data === null

@@ -6,6 +6,8 @@ import Card from "react-bootstrap/Card";
 import CustomerNavbar from "../Components/CustomerNavbar";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
+import snowWhite from "../images/database/snowWhite.jpg";
+import joker from "../images/database/joker.jpg";
 //react icon
 import { BsShop } from "react-icons/bs";
 //state
@@ -19,7 +21,6 @@ import {
 import { showCompanyThunk } from "../redux/customer_showCompanySlice";
 //react-router-dom
 import { Link, NavLink, useParams } from "react-router-dom";
-
 
 export default function CustomerShowAllCompany() {
   const customernavinfo = useSelector(
@@ -54,12 +55,15 @@ export default function CustomerShowAllCompany() {
     <>
       <div id="cusShowProductContainer">
         <div id="cusShowProductBottomLayer">
-          
           {/* Customer Navbar */}
           <CustomerNavbar
             showSearch={true}
             customerImage={
-              token === null
+              customernavinfo.name === "Snow White"
+                ? snowWhite
+                : customernavinfo.name === "Joker"
+                ? joker
+                : token === null
                 ? comNavNoPic
                 : customernavinfo.image_data === null
                 ? comNavNoPic
@@ -98,6 +102,8 @@ export default function CustomerShowAllCompany() {
                           className="d-flex align-items-center justify-content-center"
                         >
                           <br />
+
+              
                           <img
                             style={{ width: "150px", height: "150px" }}
                             src={`data:image/png;base64 ,${element.image_data}`}
