@@ -12,6 +12,16 @@ import { FaEthereum } from "react-icons/fa";
 import { TbInfoCircle } from "react-icons/tb";
 import { BiCategoryAlt } from "react-icons/bi";
 import { BsBoxSeam } from "react-icons/bs";
+import pearEvent from "../images/database/pearEvent.jpg";
+import blackberryEvent from "../images/database/blackberryEvent.jpg";
+import dance from "../images/database/dance.jpg";
+import mkt from "../images/database/mkt.jpg";
+import music from "../images/database/music.jpg";
+import Strawberry from "../images/database/Strawberry.jpg";
+import Apple from "../images/database/Apple.jpg";
+import DRInteresting from "../images/database/DRInteresting.jpg";
+import PirceOfFruit from "../images/database/PirceOfFruit.jpg";
+
 //bootstrap
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
@@ -78,14 +88,34 @@ export default function CustomerShowProductDetailCom() {
         </div>
       </Alert>
 
-
       {/* Information */}
       <div className="container">
         <div className="text-center">
-          <img
+          {showproductdetail.name === "Marketing Consultation" ? (
+            <img src={mkt} className="showProductDetailImg" />
+          ) : showproductdetail.name === "Piano Tutorial" ? (
+            <img src={music} className="showProductDetailImg" />
+          ) : showproductdetail.name === "Ballet Tutorial" ? (
+            <img src={dance} className="showProductDetailImg" />
+          ) : showproductdetail.name === "Apple" ? (
+            <img src={Apple} className="showProductDetailImg" />
+          ) : showproductdetail.name === "Strawberry" ? (
+            <img src={Strawberry} className="showProductDetailImg" />
+          ) : showproductdetail.name === "Picking Blackberry Event" ? (
+            <img src={blackberryEvent} className="showProductDetailImg" />
+          ) : showproductdetail.name === "Picking Pear Event" ? (
+            <img src={pearEvent} className="showProductDetailImg" />
+          ) : (
+            <img
+              src={`data:image/png;base64 ,${showproductdetail.image_data}`}
+              className="showProductDetailImg"
+            />
+          )}
+
+          {/* <img
             src={`data:image/png;base64 ,${showproductdetail.image_data}`}
             className="showProductDetailImg"
-          />
+          /> */}
         </div>
         <br />
         <br />
@@ -99,10 +129,21 @@ export default function CustomerShowProductDetailCom() {
         <hr />
         <div className="containerComNameAndImage">
           <h5>{showproductdetail.company_name}</h5>
-          <img
+          {showproductdetail.company_name === "Piece Of Fruit Limited" ? (
+            <img src={PirceOfFruit} className="showProductDetailComImg" />
+          ) : showproductdetail.company_name ===
+            "Doctor Interesting Limited" ? (
+            <img src={DRInteresting} className="showProductDetailComImg" />
+          ) : (
+            <img
+              src={`data:image/png;base64 ,${showproductdetail.company_image}`}
+              className="showProductDetailComImg"
+            />
+          )}
+          {/* <img
             src={`data:image/png;base64 ,${showproductdetail.company_image}`}
             className="showProductDetailComImg"
-          />
+          /> */}
         </div>
         <br />
 

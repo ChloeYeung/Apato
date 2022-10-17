@@ -5,8 +5,18 @@ import { showCompanyDetailThunk } from "../redux/customer_showCompanyDetailSlice
 import { addCartThunk } from "../redux/customer_showProductSlice";
 import GoBack from "../Components/Back";
 import comNavNoPic from "../images/comNavNoPic.jpg";
-import snowWhite from "../images/database/snowWhite.jpg"
-import joker from "../images/database/joker.jpg"
+import snowWhite from "../images/database/snowWhite.jpg";
+import joker from "../images/database/joker.jpg";
+import pearEvent from "../images/database/pearEvent.jpg";
+import blackberryEvent from "../images/database/blackberryEvent.jpg";
+import dance from "../images/database/dance.jpg";
+import mkt from "../images/database/mkt.jpg";
+import music from "../images/database/music.jpg";
+import Strawberry from "../images/database/Strawberry.jpg";
+import Apple from "../images/database/Apple.jpg";
+import DRInteresting from "../images/database/DRInteresting.jpg";
+import PirceOfFruit from "../images/database/PirceOfFruit.jpg";
+
 //redux
 import { useDispatch, useSelector } from "react-redux";
 //react icon
@@ -29,7 +39,6 @@ import { Link } from "react-router-dom";
 //state
 import { useState, useEffect } from "react";
 
-
 export default function CustomerCompanyDetail() {
   const showcompanydetail = useSelector(
     (state) => state.showCompanyDetailReducer.showcompanydetail
@@ -42,6 +51,8 @@ export default function CustomerCompanyDetail() {
   const customernavinfo = useSelector(
     (state) => state.navbarCusReducer.customernavinfo
   );
+
+  console.log(customernavinfo);
 
   const dispatch = useDispatch();
 
@@ -83,10 +94,10 @@ export default function CustomerCompanyDetail() {
         showSearch={true}
         customerImage={
           customernavinfo.name === "Snow White"
-          ? snowWhite : 
-          customernavinfo.name === "Joker"
-          ? joker : 
-          token === null
+            ? snowWhite
+            : customernavinfo.name === "Joker"
+            ? joker
+            : token === null
             ? comNavNoPic
             : customernavinfo.image_data === null
             ? comNavNoPic
@@ -150,10 +161,20 @@ export default function CustomerCompanyDetail() {
 
       <div className="container">
         <div className="containerComNameAndImage">
-          <img
+          {showcompanydetail.company_name === "Doctor Interesting Limited" ? (
+            <img src={DRInteresting} className="showProductDetailComImg" />
+          ) : showcompanydetail.company_name === "Piece Of Fruit Limited" ? (
+            <img src={PirceOfFruit} className="showProductDetailComImg" />
+          ) : (
+            <img
+              src={`data:image/png;base64 ,${showcompanydetail.image_data}`}
+              className="showProductDetailComImg"
+            />
+          )}
+          {/* <img
             src={`data:image/png;base64 ,${showcompanydetail.image_data}`}
             className="showProductDetailComImg"
-          />
+          /> */}
           <h5>{showcompanydetail.company_name}</h5>
         </div>
         <br />
@@ -199,10 +220,57 @@ export default function CustomerCompanyDetail() {
                         className="d-flex align-items-center justify-content-center"
                       >
                         <br />
-                        <img
+
+                        {element.name === "Marketing Consultation" ? (
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={mkt}
+                          />
+                        ) : element.name === "Piano Tutorial" ? (
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={music}
+                          />
+                        ) : element.name === "Piano Tutorial" ? (
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={music}
+                          />
+                        ) : element.name === "Ballet Tutorial" ? (
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={dance}
+                          />
+                        ) : element.name === "Apple" ? (
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={Apple}
+                          />
+                        ) : element.name === "Strawberry" ? (
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={Strawberry}
+                          />
+                        ) : element.name === "Picking Blackberry Event" ? (
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={blackberryEvent}
+                          />
+                        ) : element.name === "Picking Pear Event" ? (
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={pearEvent}
+                          />
+                        ) : (
+                          <img
+                            style={{ width: "150px", height: "150px" }}
+                            src={`data:image/png;base64 ,${element.image_data}`}
+                          />
+                        )}
+                        {/* <img
                           style={{ width: "150px", height: "150px" }}
                           src={`data:image/png;base64 ,${element.image_data}`}
-                        />
+                        /> */}
                         <Card.Body className="text-center">
                           <Card.Title>{element.name}</Card.Title>
                           <Card.Text>

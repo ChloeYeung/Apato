@@ -199,7 +199,7 @@ class CustomerService {
         .where("id", product_id);
 
       let company = await this.knex("company_users")
-        .select("name", "image_data")
+        .select("*")
         .where("id", data[0].company_id);
 
       data[0].company_name = company[0].name;

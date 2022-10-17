@@ -8,6 +8,8 @@ import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 import snowWhite from "../images/database/snowWhite.jpg";
 import joker from "../images/database/joker.jpg";
+import DRInteresting from "../images/database/DRInteresting.jpg";
+import PirceOfFruit from "../images/database/PirceOfFruit.jpg";
 //react icon
 import { BsShop } from "react-icons/bs";
 //state
@@ -103,11 +105,26 @@ export default function CustomerShowAllCompany() {
                         >
                           <br />
 
-              
-                          <img
+                          {element.name === "Doctor Interesting Limited" ? (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={DRInteresting}
+                            />
+                          ) : element.name === "Piece Of Fruit Limited" ? (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={PirceOfFruit}
+                            />
+                          ) : (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={`data:image/png;base64 ,${element.image_data}`}
+                            />
+                          )}
+                          {/* <img
                             style={{ width: "150px", height: "150px" }}
                             src={`data:image/png;base64 ,${element.image_data}`}
-                          />
+                          /> */}
                           <Card.Body
                             className="text-center"
                             style={{ width: "150px", height: "150px" }}

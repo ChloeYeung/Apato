@@ -3,6 +3,15 @@
 import CompanyNavbar from "../Components/CompanyNavbar";
 import cusNavNoPic from "../images/cusNavNoPic.jpg";
 import { comNavInfoThunk } from "../redux/company_navbarSlice";
+import DRInteresting from "../images/database/DRInteresting.jpg";
+import PirceOfFruit from "../images/database/PirceOfFruit.jpg";
+import pearEvent from "../images/database/pearEvent.jpg";
+import blackberryEvent from "../images/database/blackberryEvent.jpg";
+import dance from "../images/database/dance.jpg";
+import mkt from "../images/database/mkt.jpg";
+import music from "../images/database/music.jpg";
+import Strawberry from "../images/database/Strawberry.jpg";
+import Apple from "../images/database/Apple.jpg";
 //bootstrap
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
@@ -69,6 +78,10 @@ export default function CompanyProductManagement() {
       {/* Navbar */}
       <CompanyNavbar
         companyImage={
+          companynavinfo.name == "Piece Of Fruit Limited" ? 
+          PirceOfFruit :
+          companynavinfo.name == "Doctor Interesting Limited" ? 
+          PirceOfFruit :
           companynavinfo.image_data === null
             ? cusNavNoPic
             : `data:image/png;base64 ,${companynavinfo.image_data}`
@@ -328,10 +341,54 @@ export default function CompanyProductManagement() {
                     </td>
 
                     <td>
-                      <img
+
+{element.name === "Apple" ?
+<img
+style={{ width: "150px", height: "150px" }}
+src={Apple}
+/> :
+element.name === "Strawberry" ?
+<img
+style={{ width: "150px", height: "150px" }}
+src={Strawberry}
+/> :
+element.name === "Picking Pear Event" ?
+<img
+style={{ width: "150px", height: "150px" }}
+src={pearEvent}
+/> :
+element.name === "Picking Blackberry Event" ?
+<img
+style={{ width: "150px", height: "150px" }}
+src={blackberryEvent}
+/> :
+element.name === "Marketing Consultation" ?
+<img
+style={{ width: "150px", height: "150px" }}
+src={mkt}
+/> :
+element.name === "Piano Tutorial" ?
+<img
+style={{ width: "150px", height: "150px" }}
+src={music}
+/> :
+element.name === "Ballet Tutorial" ?
+<img
+style={{ width: "150px", height: "150px" }}
+src={dance}
+/> :
+
+
+<img
+style={{ width: "150px", height: "150px" }}
+src={`data:image/png;base64 ,${element.image_data}`}
+/>
+}
+
+                      {/* <img
                         style={{ width: "150px", height: "150px" }}
                         src={`data:image/png;base64 ,${element.image_data}`}
-                      />
+                      /> */}
                     </td>
 
                     <td>

@@ -2,6 +2,13 @@ import React from "react";
 //file
 import CustomerNavbar from "../Components/CustomerNavbar";
 import { showProductDetailThunk } from "../redux/customer_showProductDetailSlice";
+import pearEvent from "../images/database/pearEvent.jpg";
+import blackberryEvent from "../images/database/blackberryEvent.jpg";
+import dance from "../images/database/dance.jpg";
+import mkt from "../images/database/mkt.jpg";
+import music from "../images/database/music.jpg";
+import DRInteresting from "../images/database/DRInteresting.jpg";
+import PirceOfFruit from "../images/database/PirceOfFruit.jpg";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 //react icon
@@ -21,7 +28,6 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 //state
 import { useState, useEffect } from "react";
-
 
 export default function CustomerShowProductDetail() {
   const showproductdetail = useSelector(
@@ -74,10 +80,27 @@ export default function CustomerShowProductDetail() {
 
       <div className="container">
         <div className="text-center">
-          <img
+          {showproductdetail &&
+          showproductdetail.name === "Picking Blackberry Event" ? (
+            <img className="showProductDetailImg" src={blackberryEvent} />
+          ) : showproductdetail.name === "Picking Pear Event" ? (
+            <img className="showProductDetailImg" src={pearEvent} />
+          ) : showproductdetail.name === "Marketing Consultation" ? (
+            <img className="showProductDetailImg" src={mkt} />
+          ) : showproductdetail.name === "Piano Tutorial" ? (
+            <img className="showProductDetailImg" src={music} />
+          ) : showproductdetail.name === "Ballet Tutorial" ? (
+            <img className="showProductDetailImg" src={dance} />
+          ) : (
+            <img
+              src={`data:image/png;base64 ,${showproductdetail.image_data}`}
+              className="showProductDetailImg"
+            />
+          )}
+          {/* <img
             src={`data:image/png;base64 ,${showproductdetail.image_data}`}
             className="showProductDetailImg"
-          />
+          /> */}
         </div>
 
         <br />
@@ -94,15 +117,21 @@ export default function CustomerShowProductDetail() {
 
         <div className="containerComNameAndImage">
           <h5>{showproductdetail.company_name}</h5>
-          <img
-            src={`data:image/png;base64 ,${showproductdetail.company_image}`}
-            className="showProductDetailComImg"
-          />
+          {showproductdetail.company_name === "Doctor Interesting Limited" ? (
+            <img src={DRInteresting} className="showProductDetailComImg" />
+          ) : showproductdetail.company_name === "Piece Of Fruit Limited" ? (
+            <img src={PirceOfFruit} className="showProductDetailComImg" />
+          ) : (
+            <img
+              src={`data:image/png;base64 ,${showproductdetail.company_image}`}
+              className="showProductDetailComImg"
+            />
+          )}
         </div>
 
         <br />
         <p>
-          <TbInfoCircle /> 
+          <TbInfoCircle />
           &nbsp; Description: {showproductdetail.description}
         </p>
         <p>

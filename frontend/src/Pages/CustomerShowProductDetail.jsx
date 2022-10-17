@@ -3,6 +3,10 @@ import React from "react";
 import CustomerNavbar from "../Components/CustomerNavbar";
 import { showProductDetailThunk } from "../redux/customer_showProductDetailSlice";
 import GoBack from "../Components/Back";
+import Strawberry from "../images/database/Strawberry.jpg";
+import Apple from "../images/database/Apple.jpg";
+import DRInteresting from "../images/database/DRInteresting.jpg";
+import PirceOfFruit from "../images/database/PirceOfFruit.jpg";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 //react icon
@@ -20,7 +24,6 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 //state
 import { useState, useEffect } from "react";
-
 
 export default function CustomerShowProductDetail() {
   const showproductdetail = useSelector(
@@ -68,10 +71,16 @@ export default function CustomerShowProductDetail() {
 
       <div className="container">
         <div className="text-center">
-          <img
-            src={`data:image/png;base64 ,${showproductdetail.image_data}`}
-            className="showProductDetailImg"
-          />
+          {showproductdetail.name === "Apple" ? (
+            <img src={Apple} className="showProductDetailImg" />
+          ) : showproductdetail.name === "Strawberry" ? (
+            <img src={Strawberry} className="showProductDetailImg" />
+          ) : (
+            <img
+              src={`data:image/png;base64 ,${showproductdetail.image_data}`}
+              className="showProductDetailImg"
+            />
+          )}
         </div>
 
         <br />
@@ -92,10 +101,19 @@ export default function CustomerShowProductDetail() {
         >
           <div className="containerComNameAndImage">
             <h5>{showproductdetail.company_name} </h5>
-            <img
+
+            {showproductdetail.company_name === "Piece Of Fruit Limited" ? (
+              <img src={PirceOfFruit} className="showProductDetailComImg" />
+            ) : (
+              <img
+                src={`data:image/png;base64 ,${showproductdetail.company_image}`}
+                className="showProductDetailComImg"
+              />
+            )}
+            {/* <img
               src={`data:image/png;base64 ,${showproductdetail.company_image}`}
               className="showProductDetailComImg"
-            />
+            /> */}
           </div>
         </Link>
 

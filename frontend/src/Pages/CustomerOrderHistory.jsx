@@ -6,8 +6,15 @@ import logo from "../logo.svg";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import { showOrderHistoryThunk } from "../redux/customer_orderHistory";
-import snowWhite from "../images/database/snowWhite.jpg"
-import joker from "../images/database/joker.jpg"
+import snowWhite from "../images/database/snowWhite.jpg";
+import joker from "../images/database/joker.jpg";
+import pearEvent from "../images/database/pearEvent.jpg";
+import blackberryEvent from "../images/database/blackberryEvent.jpg";
+import dance from "../images/database/dance.jpg";
+import mkt from "../images/database/mkt.jpg";
+import music from "../images/database/music.jpg";
+import Strawberry from "../images/database/Strawberry.jpg";
+import Apple from "../images/database/Apple.jpg";
 //react icon
 import { FaEthereum } from "react-icons/fa";
 //bootstrap
@@ -28,7 +35,6 @@ export default function CustomerOrderHistory() {
   const showorderhistory = useSelector(
     (state) => state.orderHistoryReducer.showorderhistory
   );
-
 
   useEffect(() => {
     dispatch(cusNavInfoThunk());
@@ -52,10 +58,10 @@ export default function CustomerOrderHistory() {
       <CustomerNavbar
         customerImage={
           customernavinfo.name === "Snow White"
-          ? snowWhite : 
-          customernavinfo.name === "Joker"
-          ? joker : 
-          customernavinfo.image_data === null
+            ? snowWhite
+            : customernavinfo.name === "Joker"
+            ? joker
+            : customernavinfo.image_data === null
             ? comNavNoPic
             : `data:image/png;base64 ,${customernavinfo.image_data}`
         }
@@ -73,7 +79,7 @@ export default function CustomerOrderHistory() {
         Object.entries(showorderhistory).map((element, index) => {
           return (
             <>
-              <div key={"orderHistoryNo"+index} className="container">
+              <div key={"orderHistoryNo" + index} className="container">
                 <div className="d-flex  justify-content-center align-items-center">
                   <Card style={{ width: "50rem" }}>
                     <Card.Body>
@@ -102,10 +108,46 @@ export default function CustomerOrderHistory() {
                           <>
                             <div className="row">
                               <div className="col">
-                                <img
+                                {element2.product_name === "Apple" ? (
+                                  <img
+                                    src={Apple}
+                                    style={{ height: "150px", width: "150px" }}
+                                  />
+                                ) :
+                                element2.product_name === "Strawberry" ? (
+                                  <img
+                                    src={Strawberry}
+                                    style={{ height: "150px", width: "150px" }}
+                                  />
+                                ) :
+                                element2.product_name === "Picking Blackberry Event" ? (
+                                  <img
+                                    src={blackberryEvent}
+                                    style={{ height: "150px", width: "150px" }}
+                                  />
+                                ) :
+                                element2.product_name === "Picking Pear Event" ? (
+                                  <img
+                                    src={pearEvent}
+                                    style={{ height: "150px", width: "150px" }}
+                                  />
+                                ) :
+                                element2.product_name === "Music" ? (
+                                  <img
+                                    src={music}
+                                    style={{ height: "150px", width: "150px" }}
+                                  />
+                                ) :
+                                (
+                                  <img
+                                    src={`data:image/png;base64 ,${element2.image_data}`}
+                                    style={{ height: "150px", width: "150px" }}
+                                  />
+                                )}
+                                {/* <img
                                   src={`data:image/png;base64 ,${element2.image_data}`}
                                   style={{ height: "150px", width: "150px" }}
-                                />{" "}
+                                /> */}
                               </div>
                               <div className="col">
                                 <p>Name: {element2.product_name} </p>

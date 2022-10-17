@@ -15,6 +15,8 @@ import {
   editSalesHistoryStatusThunk,
 } from "../redux/company_historySlice";
 import salesHistoryEmpty from "../images/salesHistoryEmpty.jpg"
+import DRInteresting from "../images/database/DRInteresting.jpg";
+import PirceOfFruit from "../images/database/PirceOfFruit.jpg";
 //state
 import { useState, useEffect } from "react";
 //redux
@@ -71,6 +73,10 @@ export default function CompanySalesHistory() {
       {/* Navbar */}
       <CompanyNavbar
         companyImage={
+          companynavinfo.name == "Piece Of Fruit Limited" ? 
+          PirceOfFruit :
+          companynavinfo.name == "Doctor Interesting Limited" ? 
+          PirceOfFruit :
           companynavinfo.image_data === null
             ? cusNavNoPic
             : `data:image/png;base64 ,${companynavinfo.image_data}`

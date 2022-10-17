@@ -12,6 +12,8 @@ import {
   showSalesSummaryThunk,
   showSalesSummaryDetailThunk,
 } from "../redux/company_summarySlice";
+import DRInteresting from "../images/database/DRInteresting.jpg";
+import PirceOfFruit from "../images/database/PirceOfFruit.jpg";
 //react icon
 import { FaEthereum } from "react-icons/fa";
 //state
@@ -49,6 +51,10 @@ export default function CompanySalesSummary() {
       {/* Navbar */}
       <CompanyNavbar
         companyImage={
+          companynavinfo.name == "Piece Of Fruit Limited" ? 
+          PirceOfFruit :
+          companynavinfo.name == "Doctor Interesting Limited" ? 
+          PirceOfFruit :
           companynavinfo.image_data === null
             ? cusNavNoPic
             : `data:image/png;base64 ,${companynavinfo.image_data}`

@@ -15,8 +15,13 @@ import cusShowSerCarousel3 from "../images/cusShowSerCarousel3.png";
 import { cusNavInfoThunk } from "../redux/customer_navbarSlice";
 import comNavNoPic from "../images/comNavNoPic.jpg";
 import SortDropdown from "../Components/SortDropdown";
-import snowWhite from "../images/database/snowWhite.jpg"
-import joker from "../images/database/joker.jpg"
+import snowWhite from "../images/database/snowWhite.jpg";
+import joker from "../images/database/joker.jpg";
+import pearEvent from "../images/database/pearEvent.jpg";
+import blackberryEvent from "../images/database/blackberryEvent.jpg";
+import dance from "../images/database/dance.jpg";
+import mkt from "../images/database/mkt.jpg";
+import music from "../images/database/music.jpg";
 //react icon
 import { BsCartPlus } from "react-icons/bs";
 import { HiOutlineInformationCircle } from "react-icons/hi";
@@ -33,7 +38,6 @@ import {
 } from "../redux/customer_showServiceSlice";
 //react-router-dom
 import { Link, NavLink } from "react-router-dom";
-
 
 export default function CustomerShowService() {
   const customernavinfo = useSelector(
@@ -97,16 +101,15 @@ export default function CustomerShowService() {
     <>
       <div id="cusShowServiceContainer">
         <div id="cusShowServiceBottomLayer">
-          
           {/* Customer Navbar */}
           <CustomerNavbar
             showSearch={true}
             customerImage={
               customernavinfo.name === "Snow White"
-              ? snowWhite : 
-              customernavinfo.name === "Joker"
-              ? joker : 
-              token === null
+                ? snowWhite
+                : customernavinfo.name === "Joker"
+                ? joker
+                : token === null
                 ? comNavNoPic
                 : customernavinfo.image_data === null
                 ? comNavNoPic
@@ -169,7 +172,7 @@ export default function CustomerShowService() {
           {/* Sort dropdown */}
           <SortDropdown onSortValue={handleOnSortValue} />
           <br />
-          
+
           {/* Product card */}
           <div className="container">
             <div className="row">
@@ -197,10 +200,41 @@ export default function CustomerShowService() {
                           className="d-flex align-items-center justify-content-center"
                         >
                           <br />
-                          <img
+                          {element.name === "Picking Blackberry Event" ? (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={blackberryEvent}
+                            />
+                          ) : element.name === "Picking Pear Event" ? (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={pearEvent}
+                            />
+                          ) : element.name === "Marketing Consultation" ? (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={mkt}
+                            />
+                          ) : element.name === "Piano Tutorial" ? (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={music}
+                            />
+                          ) : element.name === "Ballet Tutorial" ? (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={dance}
+                            />
+                          ) : (
+                            <img
+                              style={{ width: "150px", height: "150px" }}
+                              src={`data:image/png;base64 ,${element.image_data}`}
+                            />
+                          )}
+                          {/* <img
                             style={{ width: "150px", height: "150px" }}
                             src={`data:image/png;base64 ,${element.image_data}`}
-                          />
+                          /> */}
 
                           <Card.Body className="text-center">
                             <Card.Title>{element.name}</Card.Title>
