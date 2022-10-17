@@ -161,6 +161,9 @@ export default function CompanyProductManagementAdd() {
                     name="image"
                   />
                 </Form.Group>
+                <Form.Text className="text-muted">
+                  Please upload an image that is less than 100KB
+                </Form.Text>
               </div>
 
               <Button
